@@ -52,7 +52,7 @@ $user = unserialize(urldecode($_GET['user']));
 
           <td valign="top" align="center" colspan="1" width="5em">
             <h3>News</h3>
-        		<p><marquee behavior="scroll" direction="down">
+        		<p><marquee behavior="scroll" direction="up" scrollamount="1" scrolldelay="35" truespeed="truespeed">
               Software Development Project A2 has been submitted!
             </marquee></p>
           </td>
