@@ -20,7 +20,7 @@ $user = unserialize(urldecode($_GET['user']));
 <title>Book.trade</title>
 </head>
 <body style="background-color:#ccc;">
-  <table style="margin:0px 100px 0px 100px;">
+  <table>
 
       <tr>
         <td align="center" colspan="6"><a style="color:black;text-decoration:none;" href="index.html"><h1>Book.trade</h1></a></td>
