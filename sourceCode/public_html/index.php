@@ -1,10 +1,4 @@
 <?php include 'defaultStyle.php'; ?>
-<?php
-$user = unserialize(urldecode($_GET['user']));
-?>
-
-
-<!DOCTYPE html>
 <html>
 <head>
 <title>Book.trade</title>
@@ -17,7 +11,7 @@ $user = unserialize(urldecode($_GET['user']));
       </tr>
 
       <tr>
-          <td  valign="top" align="left" colspan="1" style="text-decoration:none;">
+          <td  valign="top" align="left" colspan="1">
             <h3 align="center">Operations</h3>
         		<ul>
         			<li><a href="#">Donate</a></li>
@@ -31,19 +25,21 @@ $user = unserialize(urldecode($_GET['user']));
 						<br>
         		<h3>Account</h3>
         		<ul>
-        			<li><a href="index.html">Log out</a></li>
+        			<li><a href="register.php">Register</a></li>
+        			<li><a href="login.php">Login</a></li>
+        			<li><a href="test2.php">test</a></li>
         		</ul>
           </td>
 
           <td valign ="top" colspan="4">
-            <h2 align="center">Welcome <?php echo $user; ?></h2>
+            <h2 align="center">Welcome</h2>
         		<p align="justify" style="margin:20px;"></t>I'm pleased to meet you! Well not really, it doesn't matter. By the way this is prototype for booktrade.com. please feel free to roam around until you fed up. Only User account link is working.Check out register and login layout.</p>
           </td>
 
           <td valign="top" align="center" colspan="1" width="5em">
             <h3>News</h3>
-						<p><marquee behavior="scroll" direction="up" scrollamount="1" scrolldelay="35" truespeed="truespeed">
-              1. Project Initial Completed!
+        		<p><marquee behavior="scroll" direction="up" scrollamount="1" scrolldelay="35" truespeed="truespeed">
+							1. Project Initial Completed!
 							<br><br>
 							2. Project LifeCycle Objecive Milestone Complete!
 							<br><br>
