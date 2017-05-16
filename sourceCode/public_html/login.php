@@ -1,5 +1,6 @@
   <?php
-  $success=0;
+  session_start();
+  $success=1;
   // Same as error_reporting(E_ALL);
   ini_set('error_reporting', E_ALL);
   // Same as error_reporting(E_ALL);
@@ -13,7 +14,6 @@
   if (!$select_db){
       die("Database Selection Failed" . mysqli_error($connection));
   }
-  $success=1;
 
     //3. If the form is submitted or not.
     //3.1 If the form is submitted
@@ -28,8 +28,8 @@
     $count = mysqli_num_rows($result);
     //3.1.2 If the posted values are equal to the database values, then session will be created for the user.
     if ($count == 1){
-      session_start();
       $_SESSION["activeuser"]=$username;
+      header('location: /#home');
     }elseif ($count ==0) {
       $success = 0;
     }

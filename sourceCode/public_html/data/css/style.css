@@ -11,10 +11,64 @@
   src: url('fonts/umpush/umpush.ttf');
 }
 
-/*Global Box size hack*/
-*,a {
-  text-decoration: none;
+*{
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+  background-color: lightgray;
+  overflow: hidden;
+}
+
+#topBarWrap{
+  position: fixed;
+  display: block;
+  height:60px;
+  width:100%;
+}
+
+#topBar ul li{
+  display:inline-block;
+  position: relative;
+}
+
+
+#topbar ul{
+  text-align: center;
+  display: block;
+  margin:0;
+  padding:0;
+  height:60px;
+  background-color: black;
+  width:100%;
+}
+
+#topBar ul li a{
+  text-decoration: none;
+  color: white;
+}
+
+#content{
+  overflow: auto;
+  position: relative;
+  top:80px;
+  display: block;
+}
+
+#content div{
+    padding-top: 150px;
+    display: none;
+}
+
+#content div:target{
+  position: relative;
+  width:100%;
+  display: block;
+  padding-left: 10%;
+  overflow: auto;
 }
