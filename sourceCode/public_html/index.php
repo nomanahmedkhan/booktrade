@@ -1,5 +1,7 @@
 <?php
-include 'login.php';
+include_once 'globalVars.php';
+include_once 'functions.php';
+include_once 'login.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
