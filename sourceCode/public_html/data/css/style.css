@@ -21,9 +21,27 @@ input {
   font-family: monospace;
 }
 
+#bookTradeCondition {
+  word-wrap: break-word;
+  word-break: break-all;
+  height: auto;
+
+}
+
 input:hover, input:focus {
   box-shadow: 1px 0.5px 2px black;
   background-color: #fff;
+}
+
+#booklist tr td button {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}
+
+#booklist tr td button:hover {
+    background-color: #555555;
+    color: white;
 }
 
 a {
@@ -162,4 +180,29 @@ body {
     -o-transition: opacity 0.5s;
     transition: opacity 0.5s;
 
+}
+
+/*booklist Table*/
+#booklist table, #libraryContent table {
+  width: 100%;
+  background: #666;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+}
+#booklist th, #libraryContent th {
+  border-bottom: 1px solid #364043;
+  color: #E2B842;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+#booklist td, #libraryContent td {
+  color: #fff;
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+#booklist tbody tr, #libraryContent tbody tr {
+  transition: background 0.25s ease;
 }

@@ -13,7 +13,13 @@ and !is_null($_POST['password'])) {
   $rowCount = $loginQuery -> rowCount();
 
   if($rowCount === 1){
-    echo "login successful";
+    SESSION_START();
+    $_SESSION["username"] = $username;
+    abortDatabaseConnection();
+    goToHomePage();
+  }else{
+    $loginFailed = TRUE;
   }
+
 }
 ?>

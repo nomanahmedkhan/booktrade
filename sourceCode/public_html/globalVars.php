@@ -1,5 +1,10 @@
 <?php
 
-$connectionToDatabase = null;
-
+$connectionToDatabase = NULL;
+$loginFailed = FALSE;
+$emptyRegisterFields = NULL;
+$emailExists = NULL;
+$userNameExists = NULL;
+$passwordMatched = NULL;
+$registrationSuccessful = NULL;
  ?>

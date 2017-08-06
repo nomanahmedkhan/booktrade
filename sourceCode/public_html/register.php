@@ -1,27 +1,49 @@
 <?php
 if( isset($_POST['usernamesignup'])
 and isset($_POST['passwordsignup'])
-and isset($_POAT['emailsignup'])
+and isset($_POST['passwordsignup_confirm'])
+and isset($_POST['emailsignup'])
 and !is_null($_POST['usernamesignup'])
 and !is_null($_POST['passwordsignup'])
+and !is_null($_POST['passwordsignup_confirm'])
 and !is_null($_POST['emailsignup'])) {
 
   $usernamesignup = $_POST['usernamesignup'];
-  $passwordsignup = $_POST['passwordsignup'];
   $emailsignup = $_POST['emailsignup'];
+  $passwordsignup = $_POST['passwordsignup'];
+  $passwordsignup_confirm = $_POST['passwordsignup_confirm'];
 
   connectToDatabase();
 
-  $registerQuery = $connectionToDatabase->query("SELECT * FROM `user` WHERE userName = '$usernamesignup'");
-  $rowCount1 = $registerQuery -> rowCount();
-  if($rowCount1 === 1){
-    echo "Username already exists.";
+  $registerQuery1 = $connectionToDatabase->query("SELECT * FROM `user` WHERE userName = '$usernamesignup'");
+  $rowCount1 = $registerQuery1 -> rowCount();
+  if ($rowCount1 === 1){
+    $userNameExists = TRUE;
+  }else{
+    $userNameExists = FALSE;
   }
 
-  $registerQuery = $connectionToDatabase->query("SELECT * FROM `user` WHERE userEmail = '$emailsignup'");
-  $rowCount2 = $registerQuery -> rowCount();
-  if($rowCount2 === 1){
-    echo "Email already exists.";
+  $registerQuery2 = $connectionToDatabase->query("SELECT * FROM `user` WHERE userEmail = '$emailsignup'");
+  $rowCount2 = $registerQuery2 -> rowCount();
+  if ($rowCount2 === 1){
+    $emailExists = TRUE;
+  }else{
+    $emailExists = FALSE;
   }
+
+  if(strcmp($passwordsignup, $passwordsignup_confirm) === 0){
+    $passwordMatched = TRUE;
+  }else{
+    $passwordMatched = FALSE;
+  }
+
+  if($userNameExists === FALSE and $emailExists === FALSE and $passwordMatched === TRUE){
+  $registrationSuccessful = TRUE;
+  }
+
+  abortDatabaseConnection();
+
+}else{
+  $emptyRegisterFields = TRUE;
 }
 ?>

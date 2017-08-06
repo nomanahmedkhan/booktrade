@@ -2,6 +2,14 @@
 include_once 'globalVars.php';
 include_once 'functions.php';
 include_once 'login.php';
+include_once 'register.php';
+include_once 'logout.php';
+include_once 'booklist.php';
+include_once 'addbooks.php';
+include_once 'deletebook.php';
+include_once 'library.php';
+
+SESSION_START();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -13,7 +21,7 @@ error_reporting(E_ALL);
 <head>
 
   <meta charset="utf-8">
-  <meta name = "viewport" content = "user-scalable = yes, width = device-width, maximum-scale = 1, initial-scale = 1" />
+  <meta name = "viewport" content = "user-scalable = yes, width = device-width, maximum-scale = 2, initial-scale = 1" />
   <meta name = "apple-mobile-web-app-capable" content = "yes" />
   <meta name = "description" content = "Book trading platform for students, book-lovers and bookworms. Trading books are in physical form, not an E-Book.">
   <meta name = "keywords" content = "Book, trade, book trade, Physical Books, Buy Books, Sell Books, Trade Books">
@@ -33,14 +41,6 @@ error_reporting(E_ALL);
 
         <ul>
           <li><a href="#bookList">Book List</a></li>
-          <li><a href="#">Books</a>
-
-            <ul>
-              <li><a href="#bookList">Book List</a></li>
-              <li><a href="#newBooks">New Books</a></li>
-            </ul>
-
-          </li>
           <li><a href="#newBooks">New Books</a></li>
         </ul>
 
@@ -70,38 +70,62 @@ error_reporting(E_ALL);
 
     <!--Welcome Page-->
     <div id="home" class="home">
-      <p>Welcome!</p><br>
+      <p>Welcome!
+        <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
+    </div>
+
+
+    <!--Library Content-->
+    <div id="libraryContent" class="libraryContent">
+      <table>
+        <thead>
+        <tr>
+          <th >User</th>
+          <th >Book Name</th>
+          <th >Book Price</th>
+          <th >Trade Condition</th>
+        </tr>
+      </thead>
+      <form>
+      <tbody>
+        <?php foreach ($libraryQuery as $library){ ?>
+        <tr>
+          <td ><?php echo $library['userName'];?></td>
+          <td ><?php echo $library['bookName'];?></td>
+          <td ><?php echo $library['bookPrice'];?></td>
+          <td ><?php echo $library['tradeCondition'];?></td>
+        </tr>
+        <?php }?>
+      </tbody>
+    </form>
+      </table>
     </div>
 
 
     <!--Adding New Books-->
     <div id="newBooks" class="newBooks">
       <form id="newBooks" class="newBooks" method="post">
-
+        <h2>Add New Books</h2>
         <table>
           <tr>
             <td align="right">Book Name:</td>
-            <td align="left"><input id="newbookname"type="text" name="newbookname" /></td>
+            <td align="left"><input id="newBookName"type="text" name="newBookName" /></td>
           </tr>
 
           <tr>
-            <td align="right">Book Auther:</td>
-            <td align="left"> <input id="newbookauther"type="text" name="newbookauther" /></td>
+            <td align="right">Book Price:</td>
+            <td align="left"> <input id="newBookPrice"type="text" name="newBookPrice" /></td>
           </tr>
 
-          <tr>
-            <td align="right">ISBN:</td>
-            <td align="left"><input id="newbookisbn" type="text" name="newbookosbn" /></td>
-          </tr>
 
           <tr>
-            <td align="right">Book Condition:</td>
-            <td align="left"><input id="bookcondition" type="text" name="bookcondition" /></td>
+            <td align="right">Book Trade Condition:</td>
+            <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
           </tr>
 
           <tr>
             <td align="right"></td>
-            <td align="left"><input type="submit" name="addbook" value="Add Book" /></td>
+            <td align="left"><input id="addbook" type="submit" name="addbook" value="Add Book" /></td>
           </tr>
         </table>
 
@@ -114,7 +138,7 @@ error_reporting(E_ALL);
     <div id="loginContent" class="loginContent">
       <form method="post">
         <h2>Login</h2>
-        <p class = "warning">Invalid credentials!</p>
+        <?php if($loginFailed===true):?><p class = "warning">Invalid credentials!</p><?php endif;?>
 
         <table>
           <tr>
@@ -144,28 +168,41 @@ error_reporting(E_ALL);
       <form method="post">
         <h2>Register</h2>
 
-        <p class = "warning">All fields required!</p>
-        <p class = "warning">
+        <?php if($emptyRegisterFields === TRUE):?><p class = "warning">All fields required!</p><?php endif;?>
+
+        <?php if(1===2):?><p class = "warning">
           Username must be between 4 to 12 characters!<br>
           Username should not start with a number nor with a space!
-        </p>
-        <p class = "warning">
+        </p><?php endif;?>
+
+        <?php if($passwordMatched === FALSE):?>
+          <p class = "warning">
           Password did not match!
-        </p>
+        </p><?php endif;?>
+
+
+        <?php if(1===2):?>
         <p class = "warning">
           Password invalid!<br>
           Password must be alphanumeric containing at least one symbol!<br>
           Password must be between 6 to 12 characters!
-        </p>
+        </p><?php endif;?>
+
+        <?php if($userNameExists === TRUE):?>
         <p class = "warning">
           Given username already exists!<br>
-        </p>
+        </p><?php endif;?>
+
+        <?php if($emailExists === TRUE):?>
         <p class = "warning">
           Given email already exists!<br>
-        </p>
+        </p><?php endif;?>
+
+
+        <?php if($registrationSuccessful === TRUE):?>
         <p style="color:darkgreen;">
           Regisrtation successful!!!<br>
-        </p>
+        </p><?php endif;?>
 
         <table>
           <tr>
@@ -203,45 +240,38 @@ error_reporting(E_ALL);
     <div id="logoutContent" class="logoutContent">
 
       <form method="post">
+        <h2>Log Out</h2>
         <p>Do you really wanna logout??</p>
-        <input type="submit" name="logoutYes" value="Yes!" />
-        <input type="submit" name="logoutNo" value="No I wanna Stay!" />
+        <input type="submit" id="logoutYes" name="logoutYes" value="Yes!" />
+        <input type="submit" id="logoutNo" name="logoutNo" value="No I wanna Stay!" />
       </form>
 
     </div>
 
     <!--Current Books-->
     <div id="bookList" class="bookList">
-      <form method="post" id="bookList" class="bookList">
-
-        <table>
-          <tr>
-            <td align="right">List Name:</td>
-            <td align="left"><input id="newlistname"type="text" name="newlistname" /></td>
-          </tr>
-
-          <tr>
-            <td align="right"></td>
-            <td align="left"> <input id="emailsignup" type="text" name="emailsignup" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Password:</td>
-            <td align="left"><input id="passwordsignup" type="password" name="passwordsignup" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Confirm Password:</td>
-            <td align="left"><input id="passwordsignup_confirm" type="password" name="passwordsignup_confirm" /></td>
-          </tr>
-
-          <tr>
-            <td align="right"></td>
-            <td align="left"><input type="submit" name="submit" value="Register!" /></td>
-          </tr>
-        </table>
-
-      </form>
+      <table>
+        <thead>
+        <tr>
+          <th >Book Name</th>
+          <th >Book Price</th>
+          <th >Trade Condition</th>
+          <th >Action</th>
+        </tr>
+      </thead>
+      <form method="post">
+      <tbody>
+        <?php foreach ($bookList as $book) {?>
+        <tr>
+          <td ><?php echo $book['bookName'];?></td>
+          <td ><?php echo $book['bookPrice'];?></td>
+          <td ><?php echo $book['tradeCondition'];?></td>
+          <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count)?>'>Delete!</button></td>
+        </tr>
+        <?php $count=$count+1;}?>
+      </tbody>
+    </form>
+      </table>
     </div>
 
   </div>
