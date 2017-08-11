@@ -88,12 +88,12 @@ error_reporting(E_ALL);
       </thead>
       <form>
       <tbody>
-        <?php foreach ($libraryQuery as $library){ ?>
+        <?php foreach ($library as $library1){ ?>
         <tr>
-          <td ><?php echo $library['userName'];?></td>
-          <td ><?php echo $library['bookName'];?></td>
-          <td ><?php echo $library['bookPrice'];?></td>
-          <td ><?php echo $library['tradeCondition'];?></td>
+          <td ><?php echo $library1['userName'];?></td>
+          <td ><?php echo $library1['bookName'];?></td>
+          <td ><?php echo $library1['bookPrice'];?></td>
+          <td ><?php echo $library1['tradeCondition'];?></td>
         </tr>
         <?php }?>
       </tbody>

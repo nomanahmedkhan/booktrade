@@ -41,7 +41,15 @@ and !is_null($_POST['emailsignup'])) {
   $registrationSuccessful = TRUE;
   }
 
-  abortDatabaseConnection();
+  try{
+    $addUserQuery = "INSERT INTO user (userName, userPassword, userEmail) VALUES ('$usernamesignup','$passwordsignup','$emailsignup')";
+    $connectionToDatabase->exec($addUserQuery);
+    abortDatabaseConnection();
+    header('Location: #loginContent');
+  }catch(PDOException $e){
+    echo "something wrong";
+
+  }
 
 }else{
   $emptyRegisterFields = TRUE;

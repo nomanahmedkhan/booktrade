@@ -8,7 +8,7 @@ try{
   $temp = $_SESSION["username"];
   $bookListQuery = $connectionToDatabase->prepare ("SELECT bookName, bookPrice, tradeCondition FROM bookList WHERE userName= '$temp' ");
   $bookListQuery->execute();
-  $bookList = $bookListQuery->fetchAll();
+  $bookList = $bookListQuery->fetchall(PDO::FETCH_ASSOC);
   abortDatabaseConnection();
 }catch (PDOException $e) {
   echo "HAHAHAHAHA";
