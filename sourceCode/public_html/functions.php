@@ -2,7 +2,7 @@
   function connectToDatabase(){
     try {
       global $connectionToDatabase;
-      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'root');
+      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'Godonly1');
       $connectionToDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $connectionToDatabase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
@@ -18,11 +18,6 @@
 
   function goToHomePage(){
     header('Location: #home');
-  }
-
-  function setUserLogin($bool){
-    global $userLoggedin;
-    $userLoggedin = $bool;
   }
 
   function doesUserNameExists($userName){
@@ -83,13 +78,23 @@
   }
 
   function isPasswordValid($password){
-    $check = ctype_alnum($password);
-    echo "$check";
-    if(preg_match('/^[a-zA-Z0-9]+$/', $password) || strlen($password) < 6){
-     return FALSE;
-   }else{
+    $alnumCheck = preg_match('/^[a-zA-Z0-9]+$/', $password);
+    $sybmbolCheck = preg_match('/[^a-zA-Z\d]/', $password);
+
+    if($alnumCheck === TRUE && $sybmbolCheck === TRUE){
      return TRUE;
-   }
+    }else{
+     return FALSE;
+    }
+  }
+
+  function isPAsswordLengthValid($password){
+    $length = strlen($password);
+    if($length > 5 && $length < 13){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
   }
 
   function addUserIntoDatabase($userName, $password, $email){

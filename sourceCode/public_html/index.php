@@ -37,19 +37,12 @@ error_reporting(E_ALL);
 
     <ul>
       <li><a href="#libraryContent">Library</a></li>
+      <?php if(isset($_SESSION["userLoggedin"])):?>
       <li><a href="#">Books</a>
 
         <ul>
           <li><a href="#bookList">Book List</a></li>
           <li><a href="#newBooks">New Books</a></li>
-        </ul>
-
-      </li>
-      <li><a>Account</a>
-
-        <ul>
-          <li><a href="#registerContent">Register</a></li>
-          <li><a href="#loginContent">Login</a></li>
         </ul>
 
       </li>
@@ -60,6 +53,16 @@ error_reporting(E_ALL);
         </ul>
 
       </li>
+    <?php else:?>
+      <li><a>Account</a>
+
+        <ul>
+          <li><a href="#registerContent">Register</a></li>
+          <li><a href="#loginContent">Login</a></li>
+        </ul>
+
+      </li>
+    <?php endif;?>
     </ul>
 
   </div>
@@ -84,6 +87,11 @@ error_reporting(E_ALL);
           <th >Book Name</th>
           <th >Book Price</th>
           <th >Trade Condition</th>
+          <?php if(isset($_SESSION["username"])):?>
+            <?php if($_SESSION["username"] === "noman"):?>
+              <th >Action</th>
+            <?php endif; ?>
+          <?php endif; ?>
         </tr>
       </thead>
       <form>
@@ -96,9 +104,9 @@ error_reporting(E_ALL);
           <td ><?php echo $library1['tradeCondition'];?></td>
           <?php if(isset($_SESSION["username"])):?>
             <?php if($_SESSION["username"] === "noman"):?>
-          <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count1)?>'>Delete!</button></td>
-        <?php endif; ?>
-      <?php endif; ?>
+              <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count1)?>'>Delete!</button></td>
+            <?php endif; ?>
+          <?php endif; ?>
         </tr>
         <?php $count1 = $count1 + 1; }?>
       </tbody>
@@ -191,8 +199,11 @@ error_reporting(E_ALL);
 
         <?php if($passwordValid === FALSE):?>
         <p class = "warning">
-          Password invalid!<br>
           Password must be alphanumeric containing at least one symbol!<br>
+        </p><?php endif;?>
+
+        <?php if($passwordLengthValid === FALSE):?>
+        <p class = "warning">
           Password must be between 6 to 12 characters!
         </p><?php endif;?>
 

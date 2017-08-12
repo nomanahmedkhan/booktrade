@@ -21,14 +21,17 @@ and isset($_POST['emailsignup'])) {
     $userNameLengthValid =  isUserNameLengthValid($usernamesignup);
     $userFirstCharValid = isUserNameFirstCharacterValid($usernamesignup);
     $passwordValid = isPasswordValid($passwordsignup);
+    $passwordLengthValid = isPAsswordLengthValid($passwordsignup);
+
     if($userNameExists === FALSE
     and $emailExists === FALSE
     and $passwordMatched === TRUE
     and $userNameLengthValid === TRUE
     and $userFirstCharValid === TRUE
-    and $passwordValid === TRUE){
+    and $passwordValid === TRUE
+    and $passwordLengthValid === TRUE){
 
-      //addUserIntoDatabase($usernamesignup, $passwordsignup, $emailsignup);
+      addUserIntoDatabase($usernamesignup, $passwordsignup, $emailsignup);
 
     }
   }else{

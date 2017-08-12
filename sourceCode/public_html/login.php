@@ -15,6 +15,7 @@ and !is_null($_POST['password'])) {
   if($rowCount === 1){
     SESSION_START();
     $_SESSION["username"] = $username;
+    $_SESSION["userLoggedin"] = TRUE;
     abortDatabaseConnection();
     goToHomePage();
   }else{

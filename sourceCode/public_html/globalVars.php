@@ -1,8 +1,10 @@
 <?php
 
 $connectionToDatabase = NULL;
-$loginFailed = FALSE;
 $emptyRegisterFields = NULL;
+
+//Login Variables
+$loginFailed = FALSE;
 
 //Register Error Variables
 $userNameExists = NULL;
@@ -12,5 +14,5 @@ $userNameLengthValid = NULL;
 $userFirstCharValid = NULL;
 $registrationSuccessful = NULL;
 $passwordValid = NULL;
-
+$passwordLengthValid = NULL;
  ?>
