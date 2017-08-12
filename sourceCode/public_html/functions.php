@@ -2,7 +2,7 @@
   function connectToDatabase(){
     try {
       global $connectionToDatabase;
-      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'root');
+      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'Godonly1');
       $connectionToDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $connectionToDatabase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
@@ -22,21 +22,76 @@
 
   function setUserLogin($bool){
     global $userLoggedin;
-    $userLoggedin = TRUE;
-  }
-  /*
-  function userNameExistance($temp){
-    global $rowCount1;
-    connectToDatabase();
-    $registerQuery1 = $connectionToDatabase->query("SELECT * FROM `user` WHERE userName = '$temp'");
-    $rowCount1 = $registerQuery1 -> rowCount();
-
+    $userLoggedin = $bool;
   }
 
-  function emailExistance($temp){
-    global $rowCount2;
+  function doesUserNameExists($userName){
     connectToDatabase();
-    $registerQuery2 = $connectionToDatabase->query("SELECT * FROM `user` WHERE userEmail = '$temp'");
-    $rowCount2 = $registerQuery2 -> rowCount();
-  }*/
+    global $connectionToDatabase;
+
+    $registerQuery = $connectionToDatabase->query("SELECT * FROM `user` WHERE userName = '$userName'");
+    $rowCount = $registerQuery -> rowCount();
+
+    abortDatabaseConnection();
+    if($rowCount === 1){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+
+  function isUserNameLengthValid($userName){
+    $length = strlen($userName);
+    if ($length > 3 && $length < 13){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+
+  function isUserNameFirstCharacterValid($userName){
+    $firstChar = substr($userName, 0, 1);
+
+    if ($firstChar === " " || ctype_digit($firstChar) === TRUE){
+        return FALSE;
+      }else{
+        return TRUE;
+      }
+  }
+
+  function doesEmailExists($email){
+    connectToDatabase();
+    global $connectionToDatabase;
+
+    $registerQuery = $connectionToDatabase->query("SELECT * FROM `user` WHERE userEmail = '$email'");
+    $rowCount = $registerQuery -> rowCount();
+
+    abortDatabaseConnection();
+    if ($rowCount === 1){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+
+  function doesPasswordMatch($password, $password_confirm){
+    if(strcmp($password, $password_confirm) === 0){
+      return TRUE;
+    }else{
+      return FALSE;
+    }
+  }
+
+  function addUserIntoDatabase($userName, $password, $email){
+    connectToDatabase();
+    global $connectionToDatabase;
+
+    try{
+      $addUserQuery = "INSERT INTO user (userName, userPassword, userEmail) VALUES ('$userName','$password','$email')";
+      $connectionToDatabase->exec($addUserQuery);
+      abortDatabaseConnection();
+    }catch(PDOException $e){
+      echo "Registration Failed!";
+      }
+  }
  ?>

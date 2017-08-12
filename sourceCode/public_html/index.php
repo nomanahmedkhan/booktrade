@@ -168,22 +168,21 @@ error_reporting(E_ALL);
       <form method="post">
         <h2>Register</h2>
 
-        <?php if($emptyRegisterFields === TRUE):?><p class = "warning">All fields required!</p><?php endif;?>
+        <?php if($emptyRegisterFields === TRUE):?>
+          <p class = "warning">All fields required!</p>
+        <?php endif;?>
 
-        <?php if($userNameLength === FALSE):?><p class = "warning">
-          Username must be between 4 to 12 characters!<br>
+        <?php if($userNameLengthValid === FALSE):?>
+          <p class = "warning">Username must be between 4 to 12 characters!<br></p>
+        <?php endif;?>
 
-        </p><?php endif;?>
-
-        <?php if($userError === TRUE):?><p class = "warning">
-         Username should not start with a number nor with a space!
-        </p><?php endif;?>
+        <?php if($userFirstCharValid === FALSE):?>
+          <p class = "warning">Username should not start with a number nor with a space!</p>
+        <?php endif;?>
 
         <?php if($passwordMatched === FALSE):?>
-          <p class = "warning">
-          Password did not match!
-        </p><?php endif;?>
-
+          <p class = "warning">Password did not match!</p>
+        <?php endif;?>
 
         <?php if(1===2):?>
         <p class = "warning">
@@ -193,20 +192,16 @@ error_reporting(E_ALL);
         </p><?php endif;?>
 
         <?php if($userNameExists === TRUE):?>
-        <p class = "warning">
-          Given username already exists!<br>
-        </p><?php endif;?>
+        <p class = "warning">Given username already exists!<br></p>
+        <?php endif;?>
 
         <?php if($emailExists === TRUE):?>
-        <p class = "warning">
-          Given email already exists!<br>
-        </p><?php endif;?>
-
+        <p class = "warning">Given email already exists!<br></p>
+        <?php endif;?>
 
         <?php if($registrationSuccessful === TRUE):?>
-        <p style="color:darkgreen;">
-          Regisrtation successful!!!<br>
-        </p><?php endif;?>
+        <p style="color:darkgreen;">Regisrtation successful!!!<br></p>
+        <?php endif;?>
 
         <table>
           <tr>

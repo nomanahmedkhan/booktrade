@@ -3,10 +3,13 @@
 $connectionToDatabase = NULL;
 $loginFailed = FALSE;
 $emptyRegisterFields = NULL;
-$emailExists = NULL;
+
+//Register Error Variables
 $userNameExists = NULL;
+$emailExists = NULL;
 $passwordMatched = NULL;
+$userNameLengthValid = NULL;
+$userFirstCharValid = NULL;
 $registrationSuccessful = NULL;
-$userNameLength = NULL;
-$userError = NULL;
+
  ?>
