@@ -7,4 +7,6 @@ $emailExists = NULL;
 $userNameExists = NULL;
 $passwordMatched = NULL;
 $registrationSuccessful = NULL;
+$userNameLength = NULL;
+$userError = NULL;
  ?>

@@ -12,17 +12,35 @@ and !is_null($_POST['emailsignup'])) {
   $emailsignup = $_POST['emailsignup'];
   $passwordsignup = $_POST['passwordsignup'];
   $passwordsignup_confirm = $_POST['passwordsignup_confirm'];
+//  $rowCount1 = 0;
+//  $rowCount2 = 0;
 
+  //userNameExistance($usernamesignup);
   connectToDatabase();
-
   $registerQuery1 = $connectionToDatabase->query("SELECT * FROM `user` WHERE userName = '$usernamesignup'");
   $rowCount1 = $registerQuery1 -> rowCount();
+
+  if (strlen($usernamesignup) > 3 && strlen($usernamesignup) < 13){
+    $userNameLength =TRUE;
+  }else{
+    $userNameLength = FALSE;
+  }
+  $rest = substr($usernamesignup, 0, 1);
+  echo "$rest";
+
+if ($rest !== " " || $rest !== "~[0-9]~"){
+    $userError = TRUE;
+  }else{
+    $userError = FALSE;
+  }
+
   if ($rowCount1 === 1){
     $userNameExists = TRUE;
   }else{
     $userNameExists = FALSE;
   }
 
+  //emailExistance($emailsignup);
   $registerQuery2 = $connectionToDatabase->query("SELECT * FROM `user` WHERE userEmail = '$emailsignup'");
   $rowCount2 = $registerQuery2 -> rowCount();
   if ($rowCount2 === 1){
@@ -37,10 +55,8 @@ and !is_null($_POST['emailsignup'])) {
     $passwordMatched = FALSE;
   }
 
-  if($userNameExists === FALSE and $emailExists === FALSE and $passwordMatched === TRUE){
+  if($userNameExists === FALSE and $emailExists === FALSE and $passwordMatched === TRUE and $userNameLength === TRUE and $userError = FALSE){
   $registrationSuccessful = TRUE;
-  }
-
   try{
     $addUserQuery = "INSERT INTO user (userName, userPassword, userEmail) VALUES ('$usernamesignup','$passwordsignup','$emailsignup')";
     $connectionToDatabase->exec($addUserQuery);
@@ -50,6 +66,9 @@ and !is_null($_POST['emailsignup'])) {
     echo "something wrong";
 
   }
+  }
+
+
 
 }else{
   $emptyRegisterFields = TRUE;

@@ -170,9 +170,13 @@ error_reporting(E_ALL);
 
         <?php if($emptyRegisterFields === TRUE):?><p class = "warning">All fields required!</p><?php endif;?>
 
-        <?php if(1===2):?><p class = "warning">
+        <?php if($userNameLength === FALSE):?><p class = "warning">
           Username must be between 4 to 12 characters!<br>
-          Username should not start with a number nor with a space!
+
+        </p><?php endif;?>
+
+        <?php if($userError === TRUE):?><p class = "warning">
+         Username should not start with a number nor with a space!
         </p><?php endif;?>
 
         <?php if($passwordMatched === FALSE):?>
