@@ -94,8 +94,13 @@ error_reporting(E_ALL);
           <td ><?php echo $library1['bookName'];?></td>
           <td ><?php echo $library1['bookPrice'];?></td>
           <td ><?php echo $library1['tradeCondition'];?></td>
+          <?php if(isset($_SESSION["username"])):?>
+            <?php if($_SESSION["username"] === "noman"):?>
+          <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count1)?>'>Delete!</button></td>
+        <?php endif; ?>
+      <?php endif; ?>
         </tr>
-        <?php }?>
+        <?php $count1 = $count1 + 1; }?>
       </tbody>
     </form>
       </table>
