@@ -2,7 +2,7 @@
   function connectToDatabase(){
     try {
       global $connectionToDatabase;
-      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'Godonly1');
+      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'root');
       $connectionToDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $connectionToDatabase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
@@ -80,6 +80,16 @@
     }else{
       return FALSE;
     }
+  }
+
+  function isPasswordValid($password){
+    $check = ctype_alnum($password);
+    echo "$check";
+    if(preg_match('/^[a-zA-Z0-9]+$/', $password) || strlen($password) < 6){
+     return FALSE;
+   }else{
+     return TRUE;
+   }
   }
 
   function addUserIntoDatabase($userName, $password, $email){

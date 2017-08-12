@@ -11,5 +11,6 @@ $passwordMatched = NULL;
 $userNameLengthValid = NULL;
 $userFirstCharValid = NULL;
 $registrationSuccessful = NULL;
+$passwordValid = NULL;
 
  ?>

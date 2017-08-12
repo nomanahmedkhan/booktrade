@@ -184,7 +184,7 @@ error_reporting(E_ALL);
           <p class = "warning">Password did not match!</p>
         <?php endif;?>
 
-        <?php if(1===2):?>
+        <?php if($passwordValid === FALSE):?>
         <p class = "warning">
           Password invalid!<br>
           Password must be alphanumeric containing at least one symbol!<br>

@@ -20,12 +20,13 @@ and isset($_POST['emailsignup'])) {
     $passwordMatched = doesPasswordMatch($passwordsignup, $passwordsignup_confirm);
     $userNameLengthValid =  isUserNameLengthValid($usernamesignup);
     $userFirstCharValid = isUserNameFirstCharacterValid($usernamesignup);
-
+    $passwordValid = isPasswordValid($passwordsignup);
     if($userNameExists === FALSE
     and $emailExists === FALSE
     and $passwordMatched === TRUE
     and $userNameLengthValid === TRUE
-    and $userFirstCharValid === TRUE){
+    and $userFirstCharValid === TRUE
+    and $passwordValid === TRUE){
 
       //addUserIntoDatabase($usernamesignup, $passwordsignup, $emailsignup);
 
