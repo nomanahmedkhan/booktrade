@@ -50,19 +50,18 @@ error_reporting(E_ALL);
         </ul>
 
       </li>
-      <li><a>user</a>
+      <li><a>User</a>
 
         <ul>
           <li><a href="#logoutContent">Logout</a></li>
+          <?php if(isset($_SESSION["username"])):?>
+            <?php if($_SESSION["username"] === "noman"):?>
+              <li><a href ="#UsersAdmin">Admin Tosol</a></li>
+          <?php endif; ?>
+         <?php endif; ?>
         </ul>
 
       </li>
-      <?php if(isset($_SESSION["username"])):?>
-        <?php if($_SESSION["username"] === "noman"):?>
-          <li><a href ="#UsersAdmin">USERS</a></li>
-      <?php endif; ?>
-     <?php endif; ?>  
-
 
     <?php else:?>
       <li><a>Account</a>
