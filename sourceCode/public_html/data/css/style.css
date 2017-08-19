@@ -192,7 +192,7 @@ table {
 }
 th {
   border-bottom: 1px solid #364043;
-  color: #E2B842;
+  color: #ccc;
   font-size: 0.85em;
   font-weight: 600;
   padding: 0.5em 1em;
@@ -206,3 +206,6 @@ td {
 tbody tr {
   transition: background 0.25s ease;
 }
+
+
+/* Filter library */

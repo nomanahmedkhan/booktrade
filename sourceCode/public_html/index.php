@@ -119,6 +119,14 @@ error_reporting(E_ALL);
 
     <!--Library Content-->
     <div id="libraryContent" class="libraryContent">
+
+      <form id="filter" method = "post">
+        <input type="radio" name="allBooks" checked="checked" value="all"> All books
+        <input type="radio" name="tradeBooks" value="trade"> Books for trade
+        <input type="radio" name="buyBooks" value="buy"> Books for purchase
+        <input type="submit" name="submitFilter" value="Update Books" />
+      </form>
+
       <table>
         <thead>
         <tr>

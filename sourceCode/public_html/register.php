@@ -32,6 +32,7 @@ and isset($_POST['emailsignup'])) {
     and $passwordLengthValid === TRUE){
 
       addUserIntoDatabase($usernamesignup, $passwordsignup, $emailsignup);
+      header('Location: #loginContent');
 
     }
   }else{

@@ -8,7 +8,7 @@ try{
 
   $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList");
   $libraryQuery->execute();
-  $library = $libraryQuery->fetchall(PDO::FETCH_ASSOC);
+  $library = $libraryQuery->fetchall();
   abortDatabaseConnection();
 }catch (PDOException $e) {
   echo "HAHAHAHAHA";
