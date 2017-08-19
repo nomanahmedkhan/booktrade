@@ -10,6 +10,7 @@ include_once 'deletebook.php';
 include_once 'library.php';
 include_once 'adminusers.php';
 include_once 'deleteuser.php';
+include_once 'deletelibrary.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -57,7 +58,7 @@ error_reporting(E_ALL);
           <li><a href="#logoutContent">Logout</a></li>
           <?php if(isset($_SESSION["username"])):?>
             <?php if($_SESSION["username"] === "noman"):?>
-              <li><a href ="#usersAdmin">Admin Tosol</a></li>
+              <li><a href ="#usersAdmin">Admin Tool</a></li>
           <?php endif; ?>
          <?php endif; ?>
         </ul>
@@ -119,15 +120,15 @@ error_reporting(E_ALL);
 
     <!--Library Content-->
     <div id="libraryContent" class="libraryContent">
-
-      <form id="filter" method = "post">
-        <input type="radio" name="allBooks" checked="checked" value="all"> All books
-        <input type="radio" name="tradeBooks" value="trade"> Books for trade
-        <input type="radio" name="buyBooks" value="buy"> Books for purchase
+      
+	  <form id="filter" method = "post">
+        <input type="radio" name="filterLibrary"  value="all"> All books
+        <input type="radio" name="filterLibrary" value="trade"> Books for trade
+        <input type="radio" name="filterLibrary" value="buy"> Books for purchase
         <input type="submit" name="submitFilter" value="Update Books" />
       </form>
 
-      <table>
+	<table>
         <thead>
         <tr>
           <th >User</th>
@@ -141,7 +142,7 @@ error_reporting(E_ALL);
           <?php endif; ?>
         </tr>
       </thead>
-      <form>
+      <form method="post">
       <tbody>
         <?php foreach ($library as $library1){ ?>
         <tr>
@@ -339,3 +340,4 @@ error_reporting(E_ALL);
   </div>
 </body>
 </html>
+
