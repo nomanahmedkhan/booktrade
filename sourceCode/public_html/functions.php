@@ -78,10 +78,13 @@
   }
 
   function isPasswordValid($password){
-    $alnumCheck = preg_match('/^[a-zA-Z0-9]+$/', $password);
+    $smallCheck = preg_match('/[a-z]/', $password);
+    $numCheck = preg_match('/[0-9]/', $password);
+    $bigCheck = preg_match('/[A-Z]/', $password);
     $sybmbolCheck = preg_match('/[^a-zA-Z\d]/', $password);
 
-    if($alnumCheck === TRUE && $sybmbolCheck === TRUE){
+
+    if($numCheck === 1 && $smallCheck === 1 && $bigCheck === 1 && $sybmbolCheck === 1){
      return TRUE;
     }else{
      return FALSE;

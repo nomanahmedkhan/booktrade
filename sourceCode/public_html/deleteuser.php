@@ -7,8 +7,12 @@ if(isset($_POST['deleteUser'])){
 
   connectToDatabase();
 
-  $deleteUserQuery = "DELETE FROM user WHERE userName = '$username'";
+  $deleteUserQuery = "DELETE FROM bookList WHERE userName = '$username'";
   $connectionToDatabase -> exec($deleteUserQuery);
+
+  $deleteUserQuery2 = "DELETE FROM user WHERE userName = '$username'";
+  $connectionToDatabase -> exec($deleteUserQuery2);
+
   abortDatabaseConnection();
   header("Refresh:0; url=index.php#UsersAdmin");
 }
