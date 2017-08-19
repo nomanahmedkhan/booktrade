@@ -9,6 +9,7 @@ include_once 'addbooks.php';
 include_once 'deletebook.php';
 include_once 'library.php';
 include_once 'adminusers.php';
+include_once 'deleteuser.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -56,7 +57,7 @@ error_reporting(E_ALL);
           <li><a href="#logoutContent">Logout</a></li>
           <?php if(isset($_SESSION["username"])):?>
             <?php if($_SESSION["username"] === "noman"):?>
-              <li><a href ="#UsersAdmin">Admin Tosol</a></li>
+              <li><a href ="#usersAdmin">Admin Tosol</a></li>
           <?php endif; ?>
          <?php endif; ?>
         </ul>
@@ -92,34 +93,24 @@ error_reporting(E_ALL);
 
 
     <!--Users for Admin-->
-    <div id="UsersAdmin" class="UsersAdmin">
+    <div id="usersAdmin" class="usersAdmin">
       <table>
         <thead>
         <tr>
           <th >Username</th>
-
-          <?php if(isset($_SESSION["username"])):?>
-            <?php if($_SESSION["username"] === "noman"):?>
-              <th >Action</th>
-            <?php endif; ?>
-          <?php endif; ?>
+            <th >Action</th>
         </tr>
       </thead>
-      <form>
       <tbody>
-        <?php foreach ($users as $users1){ ?>
+        <form method = "post" >
+        <?php foreach ($users as $user){ ?>
         <tr>
-          <td ><?php echo $users1['userName'];?></td>
-
-              <?php if(isset($_SESSION["username"])):?>
-            <?php if($_SESSION["username"] === "noman"):?>
-              <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
-            <?php endif; ?>
-          <?php endif; ?>
+          <td ><?php echo $user['userName'];?></td>
+          <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
         </tr>
         <?php $count2 = $count2 + 1; }?>
+      </form>
       </tbody>
-    </form>
       </table>
     </div>
 
@@ -152,11 +143,11 @@ error_reporting(E_ALL);
           <td ><?php echo $library1['tradeCondition'];?></td>
           <?php if(isset($_SESSION["username"])):?>
             <?php if($_SESSION["username"] === "noman"):?>
-              <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count1)?>'>Delete!</button></td>
+              <td ><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
             <?php endif; ?>
           <?php endif; ?>
         </tr>
-        <?php $count1 = $count1 + 1; }?>
+        <?php $count3 = $count3 + 1; }?>
       </tbody>
     </form>
       </table>

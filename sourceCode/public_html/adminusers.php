@@ -9,7 +9,7 @@ try{
   if($admin === 'noman'){
   $usersQuery = $connectionToDatabase->prepare ("SELECT userName FROM user");
   $usersQuery->execute();
-  $users = $usersQuery->fetchall(PDO::FETCH_ASSOC);
+  $users = $usersQuery->fetchall();
 }
   abortDatabaseConnection();
 }catch (PDOException $e) {

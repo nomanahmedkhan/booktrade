@@ -1,6 +1,7 @@
 <?php
 
 $count1 = 0;
+$count3 = 0;
 connectToDatabase();
 
 try{

@@ -183,14 +183,14 @@ body {
 }
 
 /*booklist Table*/
-#booklist table, #libraryContent table {
+table {
   width: 100%;
   background: #666;
   border-radius: 0.25em;
   border-collapse: collapse;
   margin: 1em;
 }
-#booklist th, #libraryContent th {
+th {
   border-bottom: 1px solid #364043;
   color: #E2B842;
   font-size: 0.85em;
@@ -198,11 +198,11 @@ body {
   padding: 0.5em 1em;
   text-align: left;
 }
-#booklist td, #libraryContent td {
+td {
   color: #fff;
   font-weight: 400;
   padding: 0.65em 1em;
 }
-#booklist tbody tr, #libraryContent tbody tr {
+tbody tr {
   transition: background 0.25s ease;
 }
