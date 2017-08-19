@@ -8,7 +8,7 @@ include_once 'booklist.php';
 include_once 'addbooks.php';
 include_once 'deletebook.php';
 include_once 'library.php';
-
+include_once 'adminusers.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -36,8 +36,12 @@ error_reporting(E_ALL);
     <a id="title" href="#home">Book.trade</a>
 
     <ul>
+
+
+
       <li><a href="#libraryContent">Library</a></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
+
       <li><a href="#">Books</a>
 
         <ul>
@@ -53,6 +57,13 @@ error_reporting(E_ALL);
         </ul>
 
       </li>
+      <?php if(isset($_SESSION["username"])):?>
+        <?php if($_SESSION["username"] === "noman"):?>
+          <li><a href ="#UsersAdmin">USERS</a></li>
+      <?php endif; ?>
+     <?php endif; ?>  
+
+
     <?php else:?>
       <li><a>Account</a>
 
@@ -76,6 +87,44 @@ error_reporting(E_ALL);
       <p>Welcome!
         <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
     </div>
+
+
+
+
+
+    <!--Users for Admin-->
+    <div id="UsersAdmin" class="UsersAdmin">
+      <table>
+        <thead>
+        <tr>
+          <th >Username</th>
+
+          <?php if(isset($_SESSION["username"])):?>
+            <?php if($_SESSION["username"] === "noman"):?>
+              <th >Action</th>
+            <?php endif; ?>
+          <?php endif; ?>
+        </tr>
+      </thead>
+      <form>
+      <tbody>
+        <?php foreach ($users as $users1){ ?>
+        <tr>
+          <td ><?php echo $users1['userName'];?></td>
+
+              <?php if(isset($_SESSION["username"])):?>
+            <?php if($_SESSION["username"] === "noman"):?>
+              <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
+            <?php endif; ?>
+          <?php endif; ?>
+        </tr>
+        <?php $count2 = $count2 + 1; }?>
+      </tbody>
+    </form>
+      </table>
+    </div>
+
+
 
 
     <!--Library Content-->

@@ -3,6 +3,8 @@
 $connectionToDatabase = NULL;
 $emptyRegisterFields = NULL;
 
+
+
 //Login Variables
 $loginFailed = FALSE;
 
