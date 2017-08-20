@@ -17,4 +17,6 @@ $userFirstCharValid = NULL;
 $registrationSuccessful = NULL;
 $passwordValid = NULL;
 $passwordLengthValid = NULL;
+$isMailSent = NULL;
+$isMailDone = NULL;
  ?>

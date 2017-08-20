@@ -31,9 +31,11 @@ and isset($_POST['emailsignup'])) {
     and $passwordValid === TRUE
     and $passwordLengthValid === TRUE){
 
-      addUserIntoDatabase($usernamesignup, $passwordsignup, $emailsignup);
-      header('Location: #loginContent');
+        $isMailDone = sendEmailTo($emailsignup);
 
+        if($isMailDone === TRUE){
+          addUserIntoDatabase($usernamesignup, $passwordsignup, $emailsignup);
+        }
     }
   }else{
     $emptyRegisterFields = TRUE;

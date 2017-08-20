@@ -125,4 +125,11 @@
       echo "HAHAHAHAHA";
     }
   }
+
+  function sendEmailTo($email){
+    $msg = "Welcome to Book.Trade!\n\n Please verify your account by clicking the link below \n Link";
+    $sendMail = mail($email, "Booktrade Verification", $msg, "From: booktradedotcom@gmail.com");
+    return $sendMail;
+
+  }
  ?>

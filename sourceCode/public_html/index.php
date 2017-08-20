@@ -35,7 +35,7 @@ error_reporting(E_ALL);
 
   <!--Fixed Top Bar-->
   <div id="topBar" class="topBar">
-    <a id="title" href="#home">Book.trade</a>
+    <a id="title" href="test.php">Book.trade</a>
 
     <ul>
 
@@ -259,20 +259,25 @@ error_reporting(E_ALL);
         </p><?php endif;?>
 
         <?php if($passwordLengthValid === FALSE):?>
-        <p class = "warning">
-          Password must be between 6 to 12 characters!
-        </p><?php endif;?>
+          <p class = "warning">Password must be between 6 to 12 characters!</p>
+        <?php endif;?>
 
         <?php if($userNameExists === TRUE):?>
-        <p class = "warning">Given username already exists!<br></p>
+          <p class = "warning">Given username already exists!<br></p>
         <?php endif;?>
 
         <?php if($emailExists === TRUE):?>
-        <p class = "warning">Given email already exists!<br></p>
+          <p class = "warning">Given email already exists!<br></p>
         <?php endif;?>
 
         <?php if($registrationSuccessful === TRUE):?>
-        <p style="color:darkgreen;">Regisrtation successful!!!<br></p>
+          <p style="color:darkgreen;">Regisrtation successful!!!<br></p>
+        <?php endif;?>
+
+        <?php if($isMailDone === TRUE):?>
+          <p style="color:darkgreen;">An email is sent to your account please check to verify your registration.<br></p>
+        <?php elseif($isMailDone === FALSE):?>
+          <p class = "warning">Email not valid!<br></p>
         <?php endif;?>
 
         <table>
