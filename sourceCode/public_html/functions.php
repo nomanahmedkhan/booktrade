@@ -112,4 +112,17 @@
       echo "Registration Failed!";
       }
   }
+
+  function showLibrary(){
+    connectToDatabase();
+    try{
+      global $connectionToDatabase;
+      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList");
+      $libraryQuery->execute();
+      return $library = $libraryQuery->fetchall();
+      abortDatabaseConnection();
+    }catch (PDOException $e) {
+      echo "HAHAHAHAHA";
+    }
+  }
  ?>

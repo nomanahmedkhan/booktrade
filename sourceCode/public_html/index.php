@@ -120,7 +120,7 @@ error_reporting(E_ALL);
 
     <!--Library Content-->
     <div id="libraryContent" class="libraryContent">
-      
+
 	  <form id="filter" method = "post">
         <input type="radio" name="filterLibrary"  value="all"> All books
         <input type="radio" name="filterLibrary" value="trade"> Books for trade
@@ -135,11 +135,9 @@ error_reporting(E_ALL);
           <th >Book Name</th>
           <th >Book Price</th>
           <th >Trade Condition</th>
-          <?php if(isset($_SESSION["username"])):?>
-            <?php if($_SESSION["username"] === "noman"):?>
+
               <th >Action</th>
-            <?php endif; ?>
-          <?php endif; ?>
+
         </tr>
       </thead>
       <form method="post">
@@ -155,6 +153,16 @@ error_reporting(E_ALL);
               <td ><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
             <?php endif; ?>
           <?php endif; ?>
+
+          <?php if($library1['tradeCondition'] === ''):?>
+            <td ><button type="submit" name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>BUY!</button></td>
+          <?php endif; ?>
+
+
+          <?php if($library1['bookPrice'] === '0' || $library1['bookPrice'] === '' ):?>
+            <td ><button type="submit" name="tradeBook" id="tradeBook" value='<?php echo htmlspecialchars($count3)?>'>TRADE!</button></td>
+          <?php endif; ?>
+
         </tr>
         <?php $count3 = $count3 + 1; }?>
       </tbody>
@@ -340,4 +348,3 @@ error_reporting(E_ALL);
   </div>
 </body>
 </html>
-

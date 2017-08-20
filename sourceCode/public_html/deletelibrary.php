@@ -2,9 +2,9 @@
 
 if(isset($_POST['adminDeleteBook'])){
 
-  echo $temp1 = $_POST['adminDeleteBook'];
-echo $username = $library[$temp1][0];
-echo $bookname = $library[$temp1][1];
+    $temp1 = $_POST['adminDeleteBook'];
+    $username = $library[$temp1][0];
+    $bookname = $library[$temp1][1];
 
   connectToDatabase();
 
