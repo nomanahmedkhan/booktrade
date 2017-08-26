@@ -149,6 +149,7 @@ error_reporting(E_ALL);
           <td ><?php echo $library1['bookName'];?></td>
           <td ><?php echo $library1['bookPrice'];?></td>
           <td ><?php echo $library1['tradeCondition'];?></td>
+
           <?php if(isset($_SESSION["username"])):?>
             <?php if($_SESSION["username"] === "noman"):?>
               <td ><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
@@ -165,10 +166,11 @@ error_reporting(E_ALL);
           <?php if($library1['bookPrice'] === '0' || $library1['bookPrice'] === '' ):?>
             <td >
               <a class="tradeButton"><p>Trade!</p></a>
-              <br>
-              <textarea name="proposalBox" id="proposalBox" class="proposalBox" cols="45" rows="5"></textarea>
+              <form method="post">
+              <textarea name="<?php echo htmlspecialchars($count3)?>" id="<?php echo htmlspecialchars($count3)?>" class="proposalBox" cols="45" rows="5"></textarea>
               <br>
               <button type="submit" name="proposalButton" id="proposalButton" class="proposalButton" value='<?php echo htmlspecialchars($count3)?>'>Submit</button>
+              </form>
             </td>
           <?php endif; ?>
 

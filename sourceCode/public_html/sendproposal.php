@@ -2,12 +2,12 @@
 SESSION_START();
 
 if(isset($_POST["proposalButton"])){
-   echo "hi";
   $temp = $_POST['proposalButton'];
   $toUsername = $library[$temp][0];
   $fromUsername = $_SESSION['username'];
-  $message = $_POST["proposalBox"];
-  echo $_POST["proposalBox"];
+  $tempString = "proposalBox"+$temp;
+  $message = $_POST["$tempString"];
+
 
   connectToDatabase();
   try{
@@ -16,7 +16,8 @@ if(isset($_POST["proposalButton"])){
     VALUES ('$toUsername','$fromUsername','$message')";
     $connectionToDatabase->exec($addMessageQuery);
     abortDatabaseConnection();
-    header('Location: #libraryContent');
+    header("Refresh:0; url=index.php#libraryContent");
+
   }catch(PDOException $e){
     echo "something wrong";
 
