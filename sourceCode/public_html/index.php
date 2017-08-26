@@ -11,6 +11,7 @@ include_once 'library.php';
 include_once 'adminusers.php';
 include_once 'deleteuser.php';
 include_once 'deletelibrary.php';
+include_once 'sendproposal.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -155,12 +156,20 @@ error_reporting(E_ALL);
           <?php endif; ?>
 
           <?php if($library1['tradeCondition'] === ''):?>
-            <td ><button type="submit" name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>BUY!</button></td>
+            <td >
+              <button type="submit" name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>BUY!</button>
+            </td>
           <?php endif; ?>
 
 
           <?php if($library1['bookPrice'] === '0' || $library1['bookPrice'] === '' ):?>
-            <td ><button type="submit" name="tradeBook" id="tradeBook" value='<?php echo htmlspecialchars($count3)?>'>TRADE!</button></td>
+            <td >
+              <a class="tradeButton"><p>Trade!</p></a>
+              <br>
+              <textarea name="proposalBox" id="proposalBox" class="proposalBox" cols="45" rows="5"></textarea>
+              <br>
+              <button type="submit" name="proposalButton" id="proposalButton" class="proposalButton" value='<?php echo htmlspecialchars($count3)?>'>Submit</button>
+            </td>
           <?php endif; ?>
 
         </tr>
@@ -349,6 +358,10 @@ error_reporting(E_ALL);
     </form>
       </table>
     </div>
+
+
+
+
 
   </div>
 </body>
