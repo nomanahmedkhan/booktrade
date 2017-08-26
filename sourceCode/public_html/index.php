@@ -45,37 +45,37 @@ error_reporting(E_ALL);
       <li><a href="#libraryContent">Library</a></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
 
-      <li><a href="#">Books</a>
+        <li><a href="#">Books</a>
 
-        <ul>
-          <li><a href="#bookList">Book List</a></li>
-          <li><a href="#newBooks">New Books</a></li>
-        </ul>
+          <ul>
+            <li><a href="#bookList">Book List</a></li>
+            <li><a href="#newBooks">New Books</a></li>
+          </ul>
 
-      </li>
-      <li><a>User</a>
+        </li>
+        <li><a>User</a>
 
-        <ul>
-          <li><a href="#logoutContent">Logout</a></li>
-          <?php if(isset($_SESSION["username"])):?>
-            <?php if($_SESSION["username"] === "noman"):?>
-              <li><a href ="#usersAdmin">Admin Tool</a></li>
-          <?php endif; ?>
-         <?php endif; ?>
-        </ul>
+          <ul>
+            <li><a href="#logoutContent">Logout</a></li>
+            <?php if(isset($_SESSION["username"])):?>
+              <?php if($_SESSION["username"] === "noman"):?>
+                <li><a href ="#usersAdmin">Admin Tool</a></li>
+              <?php endif; ?>
+            <?php endif; ?>
+          </ul>
 
-      </li>
+        </li>
 
-    <?php else:?>
-      <li><a>Account</a>
+      <?php else:?>
+        <li><a>Account</a>
 
-        <ul>
-          <li><a href="#registerContent">Register</a></li>
-          <li><a href="#loginContent">Login</a></li>
-        </ul>
+          <ul>
+            <li><a href="#registerContent">Register</a></li>
+            <li><a href="#loginContent">Login</a></li>
+          </ul>
 
-      </li>
-    <?php endif;?>
+        </li>
+      <?php endif;?>
     </ul>
 
   </div>
@@ -88,283 +88,282 @@ error_reporting(E_ALL);
     <div id="home" class="home">
       <p>Welcome!
         <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
-    </div>
+      </div>
 
 
 
 
 
-    <!--Users for Admin-->
-    <div id="usersAdmin" class="usersAdmin">
-      <table>
-        <thead>
-        <tr>
-          <th >Username</th>
-            <th >Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <form method = "post" >
-        <?php foreach ($users as $user){ ?>
-        <tr>
-          <td ><?php echo $user['userName'];?></td>
-          <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
-        </tr>
-        <?php $count2 = $count2 + 1; }?>
-      </form>
-      </tbody>
-      </table>
-    </div>
-
-
-
-
-    <!--Library Content-->
-    <div id="libraryContent" class="libraryContent">
-
-	  <form id="filter" method = "post">
-        <input type="radio" name="filterLibrary"  value="all"> All books
-        <input type="radio" name="filterLibrary" value="trade"> Books for trade
-        <input type="radio" name="filterLibrary" value="buy"> Books for purchase
-        <input type="submit" name="submitFilter" value="Update Books" />
-      </form>
-
-	<table>
-        <thead>
-        <tr>
-          <th >User</th>
-          <th >Book Name</th>
-          <th >Book Price</th>
-          <th >Trade Condition</th>
-
+      <!--Users for Admin-->
+      <div id="usersAdmin" class="usersAdmin">
+        <table>
+          <thead>
+            <tr>
+              <th >Username</th>
               <th >Action</th>
-
-        </tr>
-      </thead>
-      <form method="post">
-      <tbody>
-        <?php foreach ($library as $library1){ ?>
-        <tr>
-          <td ><?php echo $library1['userName'];?></td>
-          <td ><?php echo $library1['bookName'];?></td>
-          <td ><?php echo $library1['bookPrice'];?></td>
-          <td ><?php echo $library1['tradeCondition'];?></td>
-
-          <?php if(isset($_SESSION["username"])):?>
-            <?php if($_SESSION["username"] === "noman"):?>
-              <td ><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
-            <?php endif; ?>
-          <?php endif; ?>
-
-          <?php if($library1['tradeCondition'] === ''):?>
-            <td >
-              <button type="submit" name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>BUY!</button>
-            </td>
-          <?php endif; ?>
-
-
-          <?php if($library1['bookPrice'] === '0' || $library1['bookPrice'] === '' ):?>
-            <td >
-              <a class="tradeButton"><p>Trade!</p></a>
-              <form method="post">
-              <textarea name="<?php echo htmlspecialchars($count3)?>" id="<?php echo htmlspecialchars($count3)?>" class="proposalBox" cols="45" rows="5"></textarea>
-              <br>
-              <button type="submit" name="proposalButton" id="proposalButton" class="proposalButton" value='<?php echo htmlspecialchars($count3)?>'>Submit</button>
+            </tr>
+          </thead>
+          <tbody>
+            <form method = "post" >
+              <?php foreach ($users as $user){ ?>
+                <tr>
+                  <td ><?php echo $user['userName'];?></td>
+                  <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
+                </tr>
+                <?php $count2 = $count2 + 1; }?>
               </form>
-            </td>
-          <?php endif; ?>
-
-        </tr>
-        <?php $count3 = $count3 + 1; }?>
-      </tbody>
-    </form>
-      </table>
-    </div>
-
-
-    <!--Adding New Books-->
-    <div id="newBooks" class="newBooks">
-      <form id="newBooks" class="newBooks" method="post">
-        <h2>Add New Books</h2>
-        <table>
-          <tr>
-            <td align="right">Book Name:</td>
-            <td align="left"><input id="newBookName"type="text" name="newBookName" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Book Price:</td>
-            <td align="left"> <input id="newBookPrice"type="text" name="newBookPrice" /></td>
-          </tr>
-
-
-          <tr>
-            <td align="right">Book Trade Condition:</td>
-            <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
-          </tr>
-
-          <tr>
-            <td align="right"></td>
-            <td align="left"><input id="addbook" type="submit" name="addbook" value="Add Book" /></td>
-          </tr>
-        </table>
-
-      </form>
-    </div>
-
-
-
-    <!--Login-->
-    <div id="loginContent" class="loginContent">
-      <form method="post">
-        <h2>Login</h2>
-        <?php if($loginFailed===true):?><p class = "warning">Invalid credentials!</p><?php endif;?>
-
-        <table>
-          <tr>
-            <td align="right">Username:</td>
-            <td align="left"><input id="username"type="text" name="username" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Password:</td>
-            <td align="left"><input id="password" type="password" name="password" /></td>
-          </tr>
-
-          <tr>
-            <td align="right"></td>
-            <td align="left"><input type="submit" name="submit" value="Submit" /></td>
-          </tr>
-        </table>
-
-      </form>
-    </div>
+            </tbody>
+          </table>
+        </div>
 
 
 
 
-    <!--register content-->
-    <div id="registerContent" class="registerContent" >
-      <form method="post">
-        <h2>Register</h2>
+        <!--Library Content-->
+        <div id="libraryContent" class="libraryContent">
 
-        <?php if($emptyRegisterFields === TRUE):?>
-          <p class = "warning">All fields required!</p>
-        <?php endif;?>
+          <form id="filter" method = "post">
+            <input type="radio" name="filterLibrary"  value="all"> All books
+            <input type="radio" name="filterLibrary" value="trade"> Books for trade
+            <input type="radio" name="filterLibrary" value="buy"> Books for purchase
+            <input type="submit" name="submitFilter" value="Update Books" />
+          </form>
 
-        <?php if($userNameLengthValid === FALSE):?>
-          <p class = "warning">Username must be between 4 to 12 characters!<br></p>
-        <?php endif;?>
+          <table>
+            <thead>
+              <tr>
+                <th >User</th>
+                <th >Book Name</th>
+                <th >Book Price</th>
+                <th >Trade Condition</th>
+                <th >Action</th>
+              </tr>
+            </thead>
 
-        <?php if($userFirstCharValid === FALSE):?>
-          <p class = "warning">Username should not start with a number nor with a space!</p>
-        <?php endif;?>
+            <tbody>
+              <form method="post">
+                <?php foreach ($library as $library1){ ?>
+                  <tr>
+                    <td ><?php echo $library1['userName'];?></td>
+                    <td ><?php echo $library1['bookName'];?></td>
+                    <td ><?php echo $library1['bookPrice'];?></td>
+                    <td ><?php echo $library1['tradeCondition'];?></td>
 
-        <?php if($passwordMatched === FALSE):?>
-          <p class = "warning">Password did not match!</p>
-        <?php endif;?>
+                    <?php if(isset($_SESSION["username"])):?>
+                      <?php if($_SESSION["username"] === "noman"):?>
+                        <td ><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
+                      <?php endif; ?>
+                    <?php endif; ?>
 
-        <?php if($passwordValid === FALSE):?>
-        <p class = "warning">
-          Password must be alphanumeric containing at least one symbol!<br>
-        </p><?php endif;?>
-
-        <?php if($passwordLengthValid === FALSE):?>
-          <p class = "warning">Password must be between 6 to 12 characters!</p>
-        <?php endif;?>
-
-        <?php if($userNameExists === TRUE):?>
-          <p class = "warning">Given username already exists!<br></p>
-        <?php endif;?>
-
-        <?php if($emailExists === TRUE):?>
-          <p class = "warning">Given email already exists!<br></p>
-        <?php endif;?>
-
-        <?php if($registrationSuccessful === TRUE):?>
-          <p style="color:darkgreen;">Regisrtation successful!!!<br></p>
-        <?php endif;?>
-
-        <?php if($isMailDone === TRUE):?>
-          <p style="color:darkgreen;">An email is sent to your account please check to verify your registration.<br></p>
-        <?php elseif($isMailDone === FALSE):?>
-          <p class = "warning">Email not valid!<br></p>
-        <?php endif;?>
-
-        <table>
-          <tr>
-            <td align="right">Username:</td>
-            <td align="left"><input id="usernamesignup"type="text" name="usernamesignup" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Email:</td>
-            <td align="left"> <input id="emailsignup"type="text" name="emailsignup" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Password:</td>
-            <td align="left"><input id="passwordsignup" type="password" name="passwordsignup" /></td>
-          </tr>
-
-          <tr>
-            <td align="right">Confirm Password:</td>
-            <td align="left"><input id="passwordsignup_confirm" type="password" name="passwordsignup_confirm" /></td>
-          </tr>
-
-          <tr>
-            <td align="right"></td>
-            <td align="left"><input type="submit" name="submit" value="Register!" /></td>
-          </tr>
-        </table>
-
-      </form>
-    </div>
+                    <?php if($library1['tradeCondition'] === ''):?>
+                      <td >
+                        <button type="submit" name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>BUY!</button>
+                      </td>
+                    <?php endif; ?>
 
 
+                    <?php if($library1['bookPrice'] === '0' || $library1['bookPrice'] === '' ):?>
+                      <td id="proposalDiv" >
+                        <p>Trade!</p>
+                        <form id="tradeForm" method="post">
+                          <textarea name="<?php echo htmlspecialchars($count3)?>" id="<?php echo htmlspecialchars($count3)?>" class="proposalBox" cols="45" rows="1"></textarea>
+                          <br>
+                          <button type="submit" name="proposalButton" value='<?php echo htmlspecialchars($count3)?>'>Submit</button>
+                        </form>
+                      </td>
+                    <?php endif; ?>
 
-    <!--Logout-->
-    <div id="logoutContent" class="logoutContent">
+                  </tr>
+                  <?php $count3 = $count3 + 1; }?>
+                </form>
+              </tbody>
+            </table>
+          </div>
 
-      <form method="post">
-        <h2>Log Out</h2>
-        <p>Do you really wanna logout??</p>
-        <input type="submit" id="logoutYes" name="logoutYes" value="Yes!" />
-        <input type="submit" id="logoutNo" name="logoutNo" value="No I wanna Stay!" />
-      </form>
 
-    </div>
+          <!--Adding New Books-->
+          <div id="newBooks" class="newBooks">
+            <form id="newBooks" class="newBooks" method="post">
+              <h2>Add New Books</h2>
+              <table>
+                <tr>
+                  <td align="right">Book Name:</td>
+                  <td align="left"><input id="newBookName"type="text" name="newBookName" /></td>
+                </tr>
 
-    <!--Current Books-->
-    <div id="bookList" class="bookList">
-      <table>
-        <thead>
-        <tr>
-          <th >Book Name</th>
-          <th >Book Price</th>
-          <th >Trade Condition</th>
-          <th >Action</th>
-        </tr>
-      </thead>
-      <form method="post">
-      <tbody>
-        <?php foreach ($bookList as $book) {?>
-        <tr>
-          <td ><?php echo $book['bookName'];?></td>
-          <td ><?php echo $book['bookPrice'];?></td>
-          <td ><?php echo $book['tradeCondition'];?></td>
-          <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count)?>'>Delete!</button></td>
-        </tr>
-        <?php $count=$count+1;}?>
-      </tbody>
-    </form>
-      </table>
-    </div>
+                <tr>
+                  <td align="right">Book Price:</td>
+                  <td align="left"> <input id="newBookPrice"type="text" name="newBookPrice" /></td>
+                </tr>
+
+
+                <tr>
+                  <td align="right">Book Trade Condition:</td>
+                  <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
+                </tr>
+
+                <tr>
+                  <td align="right"></td>
+                  <td align="left"><input id="addbook" type="submit" name="addbook" value="Add Book" /></td>
+                </tr>
+              </table>
+
+            </form>
+          </div>
 
 
 
+          <!--Login-->
+          <div id="loginContent" class="loginContent">
+            <form method="post">
+              <h2>Login</h2>
+              <?php if($loginFailed===true):?><p class = "warning">Invalid credentials!</p><?php endif;?>
+
+              <table>
+                <tr>
+                  <td align="right">Username:</td>
+                  <td align="left"><input id="username"type="text" name="username" /></td>
+                </tr>
+
+                <tr>
+                  <td align="right">Password:</td>
+                  <td align="left"><input id="password" type="password" name="password" /></td>
+                </tr>
+
+                <tr>
+                  <td align="right"></td>
+                  <td align="left"><input type="submit" name="submit" value="Submit" /></td>
+                </tr>
+              </table>
+
+            </form>
+          </div>
 
 
-  </div>
-</body>
-</html>
+
+
+          <!--register content-->
+          <div id="registerContent" class="registerContent" >
+            <form method="post">
+              <h2>Register</h2>
+
+              <?php if($emptyRegisterFields === TRUE):?>
+                <p class = "warning">All fields required!</p>
+              <?php endif;?>
+
+              <?php if($userNameLengthValid === FALSE):?>
+                <p class = "warning">Username must be between 4 to 12 characters!<br></p>
+              <?php endif;?>
+
+              <?php if($userFirstCharValid === FALSE):?>
+                <p class = "warning">Username should not start with a number nor with a space!</p>
+              <?php endif;?>
+
+              <?php if($passwordMatched === FALSE):?>
+                <p class = "warning">Password did not match!</p>
+              <?php endif;?>
+
+              <?php if($passwordValid === FALSE):?>
+                <p class = "warning">
+                  Password must be alphanumeric containing at least one symbol!<br>
+                </p><?php endif;?>
+
+                <?php if($passwordLengthValid === FALSE):?>
+                  <p class = "warning">Password must be between 6 to 12 characters!</p>
+                <?php endif;?>
+
+                <?php if($userNameExists === TRUE):?>
+                  <p class = "warning">Given username already exists!<br></p>
+                <?php endif;?>
+
+                <?php if($emailExists === TRUE):?>
+                  <p class = "warning">Given email already exists!<br></p>
+                <?php endif;?>
+
+                <?php if($registrationSuccessful === TRUE):?>
+                  <p style="color:darkgreen;">Regisrtation successful!!!<br></p>
+                <?php endif;?>
+
+                <?php if($isMailDone === TRUE):?>
+                  <p style="color:darkgreen;">An email is sent to your account please check to verify your registration.<br></p>
+                <?php elseif($isMailDone === FALSE):?>
+                  <p class = "warning">Email not valid!<br></p>
+                <?php endif;?>
+
+                <table>
+                  <tr>
+                    <td align="right">Username:</td>
+                    <td align="left"><input id="usernamesignup"type="text" name="usernamesignup" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right">Email:</td>
+                    <td align="left"> <input id="emailsignup"type="text" name="emailsignup" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right">Password:</td>
+                    <td align="left"><input id="passwordsignup" type="password" name="passwordsignup" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right">Confirm Password:</td>
+                    <td align="left"><input id="passwordsignup_confirm" type="password" name="passwordsignup_confirm" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right"></td>
+                    <td align="left"><input type="submit" name="submit" value="Register!" /></td>
+                  </tr>
+                </table>
+
+              </form>
+            </div>
+
+
+
+            <!--Logout-->
+            <div id="logoutContent" class="logoutContent">
+
+              <form method="post">
+                <h2>Log Out</h2>
+                <p>Do you really wanna logout??</p>
+                <input type="submit" id="logoutYes" name="logoutYes" value="Yes!" />
+                <input type="submit" id="logoutNo" name="logoutNo" value="No I wanna Stay!" />
+              </form>
+
+            </div>
+
+            <!--Current Books-->
+            <div id="bookList" class="bookList">
+              <table>
+                <thead>
+                  <tr>
+                    <th >Book Name</th>
+                    <th >Book Price</th>
+                    <th >Trade Condition</th>
+                    <th >Action</th>
+                  </tr>
+                </thead>
+                <form method="post">
+                  <tbody>
+                    <?php foreach ($bookList as $book) {?>
+                      <tr>
+                        <td ><?php echo $book['bookName'];?></td>
+                        <td ><?php echo $book['bookPrice'];?></td>
+                        <td ><?php echo $book['tradeCondition'];?></td>
+                        <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count)?>'>Delete!</button></td>
+                      </tr>
+                      <?php $count=$count+1;}?>
+                    </tbody>
+                  </form>
+                </table>
+              </div>
+
+
+
+
+
+            </div>
+          </body>
+          </html>

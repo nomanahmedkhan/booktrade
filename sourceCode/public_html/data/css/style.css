@@ -55,7 +55,6 @@ a {
 
 
 body {
-  display: block;
   overflow: hidden;
   margin: 0px;
   padding: 0px;
@@ -148,7 +147,6 @@ body {
 
 #content {
   position: absolute;
-  display: block;
   overflow: auto;
   top: 45px;
   left: 0;
@@ -203,9 +201,13 @@ td {
   font-weight: 400;
   padding: 0.65em 1em;
 }
-tbody tr {
-  transition: background 0.25s ease;
+
+
+/* library */
+#tradeForm{
+  display: none;
 }
 
-
-/* Filter library */
+#libraryContent td:hover form{
+  display: block;
+}
