@@ -21,7 +21,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 ?>
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -38,12 +38,8 @@ error_reporting(E_ALL);
 
   <!--Fixed Top Bar-->
   <div id="topBar" class="topBar">
-    <a id="title" href="test.php">Book.trade</a>
-
+    <a id="title" href="index.php">Book.trade</a>
     <ul>
-
-
-
       <li><a href="#libraryContent">Library</a></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
 
@@ -83,8 +79,71 @@ error_reporting(E_ALL);
   </div>
 
 
+  <!--SideBar-->
+  <div id="sideBar" class="sideBar">
+
+    <!--Library filter-->
+    <div id="libraryFilter" class="libraryFilter">
+    <form id="filter" method = "post">
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+      <table align="center">
+          <tr><td><h3>Filter Books</h3></td></tr>
+          <tr><td><button type="submit" name="filterLibrary"  value="all"> All</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="trade"> Trade</button></td></tr>
+          <tr><td><button type="submit" name="filterLibrary" value="buy"> Purchase</button></td></tr>
+      </table>
+    </form>
+    </div>
+
+
+
+
+  </div>
+
   <!--Scrollable Page-->
   <div id="content" class="content">
+
 
     <!--Welcome Page-->
     <div id="home" class="home">
@@ -98,6 +157,7 @@ error_reporting(E_ALL);
 
       <!--Users for Admin-->
       <div id="usersAdmin" class="usersAdmin">
+        <form method = "post" >
         <table>
           <thead>
             <tr>
@@ -106,16 +166,15 @@ error_reporting(E_ALL);
             </tr>
           </thead>
           <tbody>
-            <form method = "post" >
               <?php foreach ($users as $user){ ?>
                 <tr>
                   <td ><?php echo $user['userName'];?></td>
                   <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
                 </tr>
                 <?php $count2 = $count2 + 1; }?>
-              </form>
             </tbody>
           </table>
+        </form>
         </div>
 
 
@@ -123,13 +182,6 @@ error_reporting(E_ALL);
 
         <!--Library Content-->
         <div id="libraryContent" class="libraryContent">
-
-          <form id="filter" method = "post">
-            <input type="radio" name="filterLibrary"  value="all"> All books
-            <input type="radio" name="filterLibrary" value="trade"> Books for trade
-            <input type="radio" name="filterLibrary" value="buy"> Books for purchase
-            <input type="submit" name="submitFilter" value="Update Books" />
-          </form>
 
           <table>
             <thead>
@@ -181,6 +233,33 @@ error_reporting(E_ALL);
               </tbody>
             </table>
           </div>
+
+
+          <!-- Retrieve Proposal -->
+<div id="profile" class="profile">
+  <h1>Inbox</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>From</th>
+      <th>Message</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <form method="post">
+  <tbody>
+    <?php foreach ($messages as $msg) {?>
+    <tr>
+      <td ><?php echo $msg['fromUsername'];?></td>
+      <td ><?php echo $msg['message'];?></td>
+      <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
+      <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
+    </tr>
+    <?php $count5=$count5+1;}?>
+  </tbody>
+</form>
+  </table>
+</div>
 
 
           <!--Adding New Books-->
@@ -321,32 +400,6 @@ error_reporting(E_ALL);
 
               </form>
             </div>
-
-<!-- Retrieve Proposal -->
-<div id="profile" class="profile">
-  <h1>Inbox</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>From</th>
-      <th>Message</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <form method="post">
-  <tbody>
-    <?php foreach ($messages as $msg) {?>
-    <tr>
-      <td ><?php echo $msg['fromUsername'];?></td>
-      <td ><?php echo $msg['message'];?></td>
-      <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
-      <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
-    </tr>
-    <?php $count5=$count5+1;}?>
-  </tbody>
-</form>
-  </table>
-</div>
 
 
 
