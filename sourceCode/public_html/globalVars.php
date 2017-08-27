@@ -19,4 +19,7 @@ $passwordValid = NULL;
 $passwordLengthValid = NULL;
 $isMailSent = NULL;
 $isMailDone = NULL;
+
+//Inbox Variables
+$messages = NULL;
  ?>

@@ -12,6 +12,8 @@ include_once 'adminusers.php';
 include_once 'deleteuser.php';
 include_once 'deletelibrary.php';
 include_once 'sendproposal.php';
+include_once 'retrieveproposal.php';
+include_once 'deleteMessage.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -319,6 +321,32 @@ error_reporting(E_ALL);
 
               </form>
             </div>
+
+<!-- Retrieve Proposal -->
+<div id="profile" class="profile">
+  <h1>Inbox</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>From</th>
+      <th>Message</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <form method="post">
+  <tbody>
+    <?php foreach ($messages as $msg) {?>
+    <tr>
+      <td ><?php echo $msg['fromUsername'];?></td>
+      <td ><?php echo $msg['message'];?></td>
+      <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
+      <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
+    </tr>
+    <?php $count5=$count5+1;}?>
+  </tbody>
+</form>
+  </table>
+</div>
 
 
 
