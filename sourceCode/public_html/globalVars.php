@@ -19,4 +19,13 @@ $passwordValid = NULL;
 $passwordLengthValid = NULL;
 $isMailSent = NULL;
 $isMailDone = NULL;
+
+//library Variables
+global $bothBookType;
+
+
+//Edit userPage variables
+$oldBookName = array();
+$oldBookPrice = array();
+$oldBookTradeCondition = array();
  ?>

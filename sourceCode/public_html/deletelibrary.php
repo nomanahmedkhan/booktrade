@@ -8,13 +8,13 @@ if(isset($_POST['adminDeleteBook'])){
 
   connectToDatabase();
 
-  $deleteLibraryQuery = "DELETE FROM bookList WHERE userName = '$username' and bookName = '$bookname' ";
+  $deleteLibraryQuery = "DELETE FROM bookList WHERE userName = '$username' and bookName = '$bookname'";
   $connectionToDatabase -> exec($deleteLibraryQuery);
 
 
 
   abortDatabaseConnection();
-  header("Refresh:0; url=index.php#libraryContent");
+  header("Location: #libraryContent");
 }
 
  ?>

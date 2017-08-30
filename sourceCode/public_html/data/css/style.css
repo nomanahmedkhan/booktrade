@@ -15,11 +15,14 @@
 /* commented backslash hack v2 \*/
 /* end hack */
 
-input, textarea {
-  border: none;
-  background-color: gray;
+input,
+textarea {
+  border: 0;
+  background-color: ghostwhite;
+  box-shadow: 0.5px 0.5px 2px black;
   font-family: monospace;
-  text-decoration-color: white;
+  margin: 0;
+
 }
 
 #bookTradeCondition {
@@ -29,20 +32,22 @@ input, textarea {
 
 }
 
-input:hover, input:focus {
-  box-shadow: 1px 0.5px 2px black;
-  background-color: #fff;
+input:hover {
+  background-color: lightcoral;
 }
 
 button {
     background-color: white;
+    box-shadow: 1px 1px 4px black;
     color: black;
-    border: 2px solid #555555;
-    width: 100px;
+    width: 150px;
+    height: auto;
+    border: 0;
+    border-radius: 20px;
 }
 
 button:hover {
-    background-color: #555555;
+    background-color: lightcoral;
     color: white;
 }
 
@@ -53,6 +58,7 @@ a {
 * {
   font-family: monospace;
   color: black;
+  font-size: 20px;
 }
 
 
@@ -60,17 +66,19 @@ body {
   overflow: hidden;
   margin: 0px;
   padding: 0px;
+  background-color: oldlace;
 }
 
 #title {
   font-family: zekton;
-  font-size: 30px;
-  line-height: 30px;
+  font-size: 60px;
+  line-height: 60px;
+  color: white;
 }
 
 #topBar ul a {
-  font-size: 15px;
-  line-height: 15px;
+  font-size: 30px;
+  line-height: 40px;
 }
 
 
@@ -79,8 +87,7 @@ body {
   position: relative;
   height: auto;
   z-index: 2;
-  box-shadow: 0px 2px 4px black;
-  background-color: white;
+  background-color:  #222 ;
 }
 
 
@@ -95,14 +102,14 @@ body {
 #topBar ul li {
   text-align: left;
   display: inline-block;
-  background-color: white;
+  background-color: #222;
 }
 
 #topBar ul li ul {
   position: absolute;
   display: block;
   height: 0;
-  width: 100px;
+  width: 200px;
   opacity: 0;
   overflow: hidden;
 }
@@ -115,22 +122,22 @@ body {
 #topBar ul li a{
   display: inline-block;
   width: 100%;
+  color: white;
 
 }
 
 #topBar li:hover{
-  box-shadow: 0px 1px 2px black;
+  background-color: white;
+}
 
-  -webkit-transition: box-shadow 0.25s;
-    -moz-transition: box-shadow 0.25s;
-    -o-transition: box-shadow 0.25s;
-    transition: box-shadow 0.25s;
+#topBar li:hover > a{
+  color: black;
 }
 
 #topBar li:hover > ul {
   height: auto;
   opacity: 1;
-  background-color: #eee;
+  background-color: #222;
   overflow: visible;
 
   -webkit-transition: opacity 0.25s;
@@ -144,13 +151,13 @@ body {
   position: absolute;
   display: inline;
   width: 100%;
-  background-color: #eee;
+  background-color: #222;
 }
 
 #sideBar {
   position: absolute;
   width: 15%;
-  top: 45px;
+  top: 100px;
   right: 99.5%;
   left: -14.5%;
   animation-name: sidebarTransitExit;
@@ -161,18 +168,22 @@ body {
   overflow: hidden;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 #sideBar div{
   position: absolute;
   height: 100%;
   width: 95%;
-  background-color: white;
+  background-color:  oldlace ;
   overflow: scroll;
 }
 
 #content {
   position: absolute;
   overflow: auto;
-  top: 45px;
+  top: 100px;
   animation-name: contentSlideEnter;
   animation-duration: 0.5s;
   left: 0.5%;
@@ -188,7 +199,8 @@ body {
   left: 0;
 }
 
-#sideBar:hover + #content, #sideBar div:hover + #content {
+#sideBar:hover + #content,
+#sideBar div:hover + #content {
   animation-name: contentSlideExit;
   animation-duration: 0.5s;
   left: 15%;
@@ -198,22 +210,21 @@ body {
 #content div {
   position: relative;
   height: 0;
+  overflow: scroll;
   opacity: 0;
   overflow: hidden;
-  padding: 0;
-  background-color: white;
+  background-color: ghsotwhite;
 }
 
 .warning {
+  text-align: center;
   color: darkred;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 #content div:target {
-  height: 100%;
   opacity: 1;
-  overflow: visible;
   -webkit-transition: opacity 0.5s;
     -moz-transition: opacity 0.5s;
     -o-transition: opacity 0.5s;
@@ -222,49 +233,165 @@ body {
 }
 
 /*booklist Table*/
-table {
-  border-radius: 10px;
-  border-collapse: collapse;
+#libraryContent:target,
+#adminPage:target,
+#userBooks:target,
+#inbox:target {
+  position: relative;
+  padding: 20px;
+  bottom: 0;
+  height: 100%;
+  overflow: scroll;
+  background-color: oldlace;
+  margin: 0px 0px;
+}
+#libraryContent table,
+#adminPage table,
+#userBooks table,
+#inbox table {
+  text-align: center;
+  line-height: 35px;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background-color: oldlace;
 }
 
-#libraryContent table {
+#libraryContent thead tr:first-child,
+#adminPage thead tr:first-child,
+#userBooks thead tr:first-child,
+#inbox thead tr:first-child {
+  background: darkcyan;
+  color: white;
+  border: none;
+}
+
+#libraryContent thead tr:last-child th,
+#adminPage thead tr:last-child th,
+#userBooks thead tr:last-child th,
+#inbox thead tr:last-child th {
+  border-bottom: 3px solid #ddd;
+}
+
+#libraryContent tbody tr:hover,
+#adminPage tbody tr:hover,
+#userBooks tbody tr:hover,
+#inbox tbody tr:hover,
+#libraryContent tbody tr:hover td,
+#adminPage tbody tr:hover td,
+#userBooks tbody tr:hover td,
+#inbox tbody tr:hover td {
+  /*background-color: rgba(263, 255, 240);*/
+  background-color: lightcoral;
+  cursor: default;
+  color: white;
+}
+
+#libraryContent tbody tr:last-child td,
+#adminPage tbody tr:last-child td,
+#userBooks tbody tr:last-child td,
+#inbox tbody tr:last-child td {
+  border: none;
+}
+
+#libraryContent tbody td,
+#adminPage tbody td,
+#userBooks tbody td,
+#inbox tbody td {
+  border-bottom: 1px solid #ddd;
+  height: 50px;
+}
+
+#libraryContent input,
+#libraryContent button,
+#adminPage button,
+#userBooks button,
+#inbox button,
+#adminPage input,
+#userBooks input,
+#inbox input {
+  height: 30px;
+  background-color: white;
+  color: black;
+}
+
+#libraryContent input:hover,
+#libraryContent button:hover,
+#adminPage button:hover,
+#userBooks button:hover,
+#inbox button:hover,
+#adminPage input:hover,
+#userBooks input:hover,
+#inbox input:hover {
+
+}
+
+#tradePage:target,
+#loginContent:target,
+#logoutContent:target ,
+#registerContent:target,
+#newBooks:target {
+  position: relative;
+  height: 700px;
+  width: 50%;
+  margin: auto;
+  margin-top: 100px;
+  background-color: oldlace;
+  box-shadow: 2px 0px 10px black;
+}
+
+#tradePage table,
+#loginContent table,
+#logoutContent table ,
+#registerContent table,
+#newBooks table{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div:target .titleLine {
+  text-align: center;
+  color: #222;
+  font-size: 50px;
+  background-color: darkcyan;
+  margin-top: 0;
+}
+
+#tradePage td,
+#loginContent td,
+#logoutContent td ,
+#registerContent td,
+#newBooks td {
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+
+#tradePage input,
+#loginContent input,
+#logoutContent input ,
+#registerContent input,
+#newBooks input {
+  height: 30px;
+  width: 400px;
+}
+
+#tradePage button,
+#loginContent button,
+#logoutContent button ,
+#registerContent button,
+#newBooks button  {
+  height: 30px;
+  width: 150px;
+}
+
+
+/* Home Page */
+#home:target {
+  height: 100%;
   width: 100%;
 }
-
-th {
-  border-bottom: 4px solid black;
-  color: black;
-  font-size: 0.85em;
-  font-weight: 600;
-  padding: 0.5em 1em;
-  text-align: left;
-}
-td {
-  color: black;
-  font-weight: 400;
-  padding: 0.65em 1em;
-}
-
-
-/* library */
-/*#tradeForm{
-  height: 0;
-  overflow: hidden;
-}
-
-#libraryContent td:hover form{
-  height: auto;
-  overflow: visible;
-}*/
-
-#tradeForm{
-  display: none;
-}
-
-#libraryContent td:hover form{
-  display: block;
-}
-
 
 /*Sidebar Transition*/
 @keyframes sidebarTransitEnter {

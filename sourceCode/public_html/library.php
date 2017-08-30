@@ -8,7 +8,7 @@ if(isset($_POST['filterLibrary'])){
   if($_POST['filterLibrary'] === 'buy'){
     connectToDatabase();
     try{
-      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList WHERE tradeCondition = '' ");
+      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList WHERE bookPrice > 0 ");
       $libraryQuery->execute();
       $library = $libraryQuery->fetchall();
       abortDatabaseConnection();
@@ -19,7 +19,7 @@ if(isset($_POST['filterLibrary'])){
   }elseif($_POST['filterLibrary'] === 'trade'){
     connectToDatabase();
     try{
-      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList WHERE bookPrice =0 ");
+      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList WHERE tradeCondition != 'none' ");
       $libraryQuery->execute();
       $library = $libraryQuery->fetchall();
       abortDatabaseConnection();

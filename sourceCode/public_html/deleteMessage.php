@@ -13,7 +13,7 @@ connectToDatabase();
 $deleteMessageQuery = "DELETE FROM messages WHERE toUsername = '$toUsername' and fromUsername = '$fromUsername' and message='$message'";
 $connectionToDatabase -> exec($deleteMessageQuery);
 abortDatabaseConnection();
-header("Refresh:0; url=index.php#profile");
+header('Location: #inbox');
 }
 
  ?>

@@ -13,7 +13,7 @@ connectToDatabase();
 $deleteQuery = "DELETE FROM bookList WHERE userName = '$userName' and bookName = '$bookName' and bookPrice='$bookPrice' and tradeCondition='$tradeCondition'";
 $connectionToDatabase -> exec($deleteQuery);
 abortDatabaseConnection();
-header("Refresh:0; url=index.php#bookList");
+header("Location: #userBooks");
 }
 
  ?>

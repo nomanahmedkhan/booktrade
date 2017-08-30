@@ -14,7 +14,7 @@ if(isset($_POST['deleteUser'])){
   $connectionToDatabase -> exec($deleteUserQuery2);
 
   abortDatabaseConnection();
-  header("Location: #UsersAdmin");
+  header("Location: #adminPage");
 }
 
  ?>

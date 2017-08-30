@@ -16,7 +16,7 @@ if(isset($_POST["proposalButton"])){
     VALUES ('$toUsername','$fromUsername','$message')";
     $connectionToDatabase->exec($addMessageQuery);
     abortDatabaseConnection();
-    header("Refresh:0; url=index.php#libraryContent");
+    header('Location: #libraryContent');
 
   }catch(PDOException $e){
     echo "something wrong";
