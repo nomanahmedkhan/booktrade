@@ -14,6 +14,7 @@ include_once 'deletelibrary.php';
 include_once 'sendproposal.php';
 include_once 'retrieveproposal.php';
 include_once 'deleteMessage.php';
+include_once 'nomanIndex.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -43,6 +44,7 @@ error_reporting(E_ALL);
       <li><a href="#libraryContent">Library</a></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
 
+
         <li><a href="#">Books</a>
 
           <ul>
@@ -63,7 +65,7 @@ error_reporting(E_ALL);
           </ul>
 
         </li>
-
+      <li><a href="#inbox">Inbox</a></li>
       <?php else:?>
         <li><a>Account</a>
 
@@ -187,33 +189,61 @@ error_reporting(E_ALL);
             </table>
           </div>
 
-
-
           <!-- Retrieve Proposal -->
           <div id="inbox" class="inbox">
-            <p class="titleLine">Inbox</p>
-            <table>
-              <thead>
+          <p class="titleLine">Inbox</p>
+          <table>
+          <thead>
+          <tr>
+          <?php if(isset($_POST['reply'])):?>
+            <th>To</th>
+            <th>Message</th>
+            <th>Action</th>
+          <?php elseif(isset($_POST['sendReply'])):?>
+            <th>From</th>
+            <th>Message</th>
+            <th colspan="2">Action</th>
+          <?php else:?>
+            <th>From</th>
+            <th>Message</th>
+            <th colspan="2">Action</th>
+          <?php endif;?>
+          </tr>
+          </thead>
+
+
+          <form method="post">
+            <tbody>
+              <?php foreach ($messages as $msg) {?>
                 <tr>
-                  <th>From</th>
-                  <th>Message</th>
-                  <th colspan="2">Action</th>
+                  <?php if(isset($_POST['reply'])):?>
+                    <?php if($_POST['reply']+1  === $count5 || $_POST['reply']  === $count5):?>
+                      <td><input type="text" name="replyToUsername" id="replyToUsername"  value='<?php echo $replyToUsername[$oldCount1] ?>'/></td>
+                      <td><input type="text" name="replyMessage" id="replyMessage"/></td>
+                      <td ><button type="submit" name="sendReply" id="sendReply" value='<?php echo htmlspecialchars($count5)?>'>Send</button></td>
+                    <?php endif;?>
+
+                  <?php elseif(isset($_POST['sendReply'])):?>
+                    <td ><?php echo $msg['fromUsername'];?></td>
+                    <td ><?php echo $msg['message'];?></td>
+                    <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
+                    <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
+
+                  <?php else:?>
+                    <td ><?php echo $msg['fromUsername'];?></td>
+                    <td ><?php echo $msg['message'];?></td>
+                    <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
+                    <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
+                  <?php endif;?>
                 </tr>
-              </thead>
-              <form method="post">
-                <tbody>
-                  <?php foreach ($messages as $msg) {?>
-                    <tr>
-                      <td ><?php echo $msg['fromUsername'];?></td>
-                      <td ><?php echo $msg['message'];?></td>
-                      <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
-                      <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
-                    </tr>
-                    <?php $count5=$count5+1;}?>
-                  </tbody>
-                </form>
-              </table>
-            </div>
+                <?php $replyToUsername[$count5] = $msg['fromUsername'] ?>
+                <?php $oldCount1 = $count5; $count5=$count5+1;}?>
+              </tbody>
+            </form>
+          </table>
+          </div>
+
+
 
             <!--Adding New Books-->
             <div id="newBooks" class="newBooks">

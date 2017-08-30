@@ -9,6 +9,7 @@ try{
   $inboxQuery = $connectionToDatabase->prepare ("SELECT fromUsername, message FROM messages WHERE toUsername= '$temp' ");
   $inboxQuery->execute();
   $messages = $inboxQuery->fetchall();
+  array_push($messages['toUsername'], NULL, $messages['fromUsername'], NULL, $messages['message'], NULL);
   abortDatabaseConnection();
 }catch (PDOException $e) {
   echo "HAHAHAHAHA";
