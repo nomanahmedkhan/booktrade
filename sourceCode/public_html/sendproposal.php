@@ -5,8 +5,7 @@ if(isset($_POST["proposalButton"])){
   $temp = $_POST['proposalButton'];
   $toUsername = $library[$temp][0];
   $fromUsername = $_SESSION['username'];
-  $tempString = "proposalBox"+$temp;
-  $message = $_POST["$tempString"];
+  $message = $_POST["proposalMessage"];
 
 
   connectToDatabase();
@@ -20,8 +19,8 @@ if(isset($_POST["proposalButton"])){
 
   }catch(PDOException $e){
     echo "something wrong";
-
   }
+
 }elseif(isset($_POST["sendReply"])){
   $temp = $_POST['sendReply'];
   $toUsername = $_POST['replyToUsername'];

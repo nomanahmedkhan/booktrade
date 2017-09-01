@@ -87,13 +87,13 @@ body {
   position: relative;
   height: auto;
   z-index: 2;
-  background-color:  #222 ;
+  margin: 0;
+  background-color: #222;
 }
 
 
 #topBar ul {
   text-align: center;
-  margin: 0;
   padding: 0;
   list-style: none;
   z-index: 3;
@@ -157,11 +157,11 @@ body {
 #sideBar {
   position: absolute;
   width: 15%;
-  top: 100px;
+  top: 120px;
   right: 99.5%;
   left: -14.5%;
   animation-name: sidebarTransitExit;
-  animation-duration: 0.5s;
+  animation-duration: 2s;
   bottom: 0;
   z-index: 1;
   background-color: black;
@@ -183,9 +183,9 @@ body {
 #content {
   position: absolute;
   overflow: auto;
-  top: 100px;
+  top: 120px;
   animation-name: contentSlideEnter;
-  animation-duration: 0.5s;
+  animation-duration: 2s;
   left: 0.5%;
   right: 0;
   bottom: 0;
@@ -237,13 +237,11 @@ body {
 #adminPage:target,
 #userBooks:target,
 #inbox:target {
-  position: relative;
-  padding: 20px;
   bottom: 0;
   height: 100%;
   overflow: scroll;
   background-color: oldlace;
-  margin: 0px 0px;
+  padding:50px 50px;
 }
 #libraryContent table,
 #adminPage table,
@@ -326,6 +324,7 @@ body {
 
 }
 
+#shoppingCart:target,
 #tradePage:target,
 #loginContent:target,
 #logoutContent:target ,
@@ -338,8 +337,10 @@ body {
   margin-top: 100px;
   background-color: oldlace;
   box-shadow: 2px 0px 10px black;
+  overflow: scroll;
 }
 
+#shoppingCart table,
 #tradePage table,
 #loginContent table,
 #logoutContent table ,
@@ -358,6 +359,7 @@ div:target .titleLine {
   margin-top: 0;
 }
 
+#shoppingCart td,
 #tradePage td,
 #loginContent td,
 #logoutContent td ,
@@ -368,6 +370,7 @@ div:target .titleLine {
   text-align: center;
 }
 
+#shoppingCart input,
 #tradePage input,
 #loginContent input,
 #logoutContent input ,
@@ -377,6 +380,7 @@ div:target .titleLine {
   width: 400px;
 }
 
+#shoppingCart button,
 #tradePage button,
 #loginContent button,
 #logoutContent button ,

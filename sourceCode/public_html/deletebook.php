@@ -4,9 +4,9 @@ if(isset($_POST['delete'])){
 
 $temp1 = $_POST['delete'];
 $userName = $_SESSION["username"];
-$bookName = $bookList[$temp1][0];
-$bookPrice = $bookList[$temp1][1];
-$tradeCondition = $bookList[$temp1][2];
+$bookName = $bookList[$temp1][1];
+$bookPrice = $bookList[$temp1][2];
+$tradeCondition = $bookList[$temp1][3];
 
 connectToDatabase();
 
