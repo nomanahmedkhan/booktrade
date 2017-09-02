@@ -354,7 +354,7 @@ error_reporting(E_ALL);
                       <th >Price</th>
                     </thead>
                     <tbody>
-                      <?php if(isset($_POST['buyBook'])): ?>
+                      <?php if(isset($_SESSION['cartArray'])): ?>
                       <?php foreach($_SESSION['cartArray'] as $cartContent){?>
                       <tr>
                         <td ><?php echo $cartContent['cartBookName']; ?></td>
@@ -368,8 +368,8 @@ error_reporting(E_ALL);
                         <td style="color:red;font-weight:bold"><?php echo $_SESSION['cartPriceCount']; ?></td>
                       </tr>
                       <tr>
-                        <td align="right"><button type="submit" name="resetCart">Reset</button></td>
-                        <td align="left"><button type="submit" name="payForCartItems"> Pay </button></td>
+                        <td align="right"><button type="submit" name="resetCart" id="resetCart" >Reset</button></td>
+                        <td align="left"><button type="submit" name="payForCartItems" id="payForCartItems"> Pay </button></td>
                       </tr>
                     </tbody>
                   </table>
