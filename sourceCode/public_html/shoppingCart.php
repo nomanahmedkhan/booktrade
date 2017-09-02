@@ -14,7 +14,7 @@ if(isset($_POST['buyBook'])){
   }
   if($_SESSION['cartArray'][count($_SESSION['cartArray'])]['cartBookPrice'] === "none"
   OR $_SESSION['cartArray'][count($_SESSION['cartArray'])]['cartBookName'] === "none"){
-    unset($_SESSION['cartArray'][count($_SESSION['cartArray'])-1]); 1`````````````````1
+    unset($_SESSION['cartArray'][count($_SESSION['cartArray'])-1]);
   }
       $_SESSION['cartArray'][] = array('cartBookName'=>$library[$cartTemp][1], 'cartBookPrice'=> $library[$cartTemp][2]);
       $_SESSION['cartArray'][] = array('cartBookName'=> "none", 'cartBookPrice'=> "none");
