@@ -21,11 +21,15 @@ $isMailSent = NULL;
 $isMailDone = NULL;
 
 //library Variables
-global $bothBookType;
-
+$bothBookType;
+$userMustLogIn = NULL;
 
 //Edit userPage variables
 $oldBookName = array();
 $oldBookPrice = array();
 $oldBookTradeCondition = array();
+
+
+//cart
+$isBookAlreadyInCart = FALSE;
  ?>

@@ -33,22 +33,21 @@ textarea {
 }
 
 input:hover {
-  background-color: lightcoral;
+  background-color: darkkhaki;
 }
 
 button {
     background-color: white;
     box-shadow: 1px 1px 4px black;
     color: black;
-    width: 150px;
+    width: 110px;
     height: auto;
     border: 0;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 button:hover {
-    background-color: lightcoral;
-    color: white;
+    background-color: darkkhaki;
 }
 
 a {
@@ -66,7 +65,9 @@ body {
   overflow: hidden;
   margin: 0px;
   padding: 0px;
-  background-color: oldlace;
+  background-image: url("/data/images/image2 blur.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 #title {
@@ -74,6 +75,11 @@ body {
   font-size: 60px;
   line-height: 60px;
   color: white;
+  padding-left: 20px;
+}
+
+#title:hover {
+  color: darkkhaki;
 }
 
 #topBar ul a {
@@ -83,26 +89,30 @@ body {
 
 
 #topBar {
-  text-align: center;
+  text-align: left;
   position: relative;
   height: auto;
   z-index: 2;
   margin: 0;
   background-color: #222;
+  opacity: 0.95;
+  box-shadow: 5px 5px 15px black ;
 }
 
 
 #topBar ul {
-  text-align: center;
-  padding: 0;
+  text-align: left;
+  padding: 0 0 0 20px;
   list-style: none;
   z-index: 3;
+  background-color: #333;
 }
 
 #topBar ul li {
+  padding: 0 5px;
   text-align: left;
   display: inline-block;
-  background-color: #222;
+  background-color: #333;
 }
 
 #topBar ul li ul {
@@ -112,6 +122,7 @@ body {
   width: 200px;
   opacity: 0;
   overflow: hidden;
+  padding: 0px;
 }
 
 #topBar ul li > ul li {
@@ -126,12 +137,8 @@ body {
 
 }
 
-#topBar li:hover{
-  background-color: white;
-}
-
 #topBar li:hover > a{
-  color: black;
+  color: darkkhaki;
 }
 
 #topBar li:hover > ul {
@@ -154,6 +161,10 @@ body {
   background-color: #222;
 }
 
+#topBar ul li a:visited{
+  background-color: white;
+}
+
 #sideBar {
   position: absolute;
   width: 15%;
@@ -165,7 +176,9 @@ body {
   bottom: 0;
   z-index: 1;
   background-color: black;
-  overflow: hidden;
+  opacity: 0.7;
+  overflow: auto;
+  box-shadow: 5px 5px 5px black ;
 }
 
 ::-webkit-scrollbar {
@@ -176,8 +189,7 @@ body {
   position: absolute;
   height: 100%;
   width: 95%;
-  background-color:  oldlace ;
-  overflow: scroll;
+  overflow: auto;
 }
 
 #content {
@@ -210,21 +222,17 @@ body {
 #content div {
   position: relative;
   height: 0;
-  overflow: scroll;
-  opacity: 0;
   overflow: hidden;
-  background-color: ghsotwhite;
 }
 
 .warning {
   text-align: center;
-  color: darkred;
+  color: red;
   font-size: 20px;
   font-weight: bold;
 }
 
 #content div:target {
-  opacity: 1;
   -webkit-transition: opacity 0.5s;
     -moz-transition: opacity 0.5s;
     -o-transition: opacity 0.5s;
@@ -239,8 +247,7 @@ body {
 #inbox:target {
   bottom: 0;
   height: 100%;
-  overflow: scroll;
-  background-color: oldlace;
+  overflow: auto;
   padding:50px 50px;
 }
 #libraryContent table,
@@ -252,17 +259,26 @@ body {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  background-color: oldlace;
+  background-color: white;
+  opacity: 0.7;
 }
 
 #libraryContent thead tr:first-child,
 #adminPage thead tr:first-child,
 #userBooks thead tr:first-child,
 #inbox thead tr:first-child {
-  background: darkcyan;
+  background: black;
   color: white;
   border: none;
 }
+
+#libraryContent thead tr th,
+#adminPage thead tr th,
+#userBooks thead tr th,
+#inbox thead tr th {
+  color: white;
+}
+
 
 #libraryContent thead tr:last-child th,
 #adminPage thead tr:last-child th,
@@ -280,9 +296,8 @@ body {
 #userBooks tbody tr:hover td,
 #inbox tbody tr:hover td {
   /*background-color: rgba(263, 255, 240);*/
-  background-color: lightcoral;
+  background-color: darkkhaki;
   cursor: default;
-  color: white;
 }
 
 #libraryContent tbody tr:last-child td,
@@ -331,13 +346,13 @@ body {
 #registerContent:target,
 #newBooks:target {
   position: relative;
-  height: 700px;
+  opacity: 0.7;
+  height: auto;
   width: 50%;
-  margin: auto;
+  margin-right: auto;
+  margin-left: auto;
   margin-top: 100px;
-  background-color: oldlace;
-  box-shadow: 2px 0px 10px black;
-  overflow: scroll;
+  background-color: black;
 }
 
 #shoppingCart table,
@@ -346,16 +361,15 @@ body {
 #logoutContent table ,
 #registerContent table,
 #newBooks table{
-  width: 100%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
 }
 
 div:target .titleLine {
   text-align: center;
-  color: #222;
+  color: white;
   font-size: 50px;
-  background-color: darkcyan;
   margin-top: 0;
 }
 
@@ -365,6 +379,7 @@ div:target .titleLine {
 #logoutContent td ,
 #registerContent td,
 #newBooks td {
+  color: white;
   height: 50px;
   font-size: 20px;
   text-align: center;
@@ -395,6 +410,7 @@ div:target .titleLine {
 #home:target {
   height: 100%;
   width: 100%;
+  padding: 20px 50px;
 }
 
 /*Sidebar Transition*/

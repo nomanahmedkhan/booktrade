@@ -1,7 +1,16 @@
 <?php
 SESSION_START();
 
+if(isset($_POST["tradeButton"])){
+  if(isset($_SESSION['username'])){
+    $userMustLogIn = FALSE;
+  }else{
+    $userMustLogIn = TRUE;
+  }
+}
+
 if(isset($_POST["proposalButton"])){
+
   $temp = $_POST['proposalButton'];
   $toUsername = $library[$temp][0];
   $fromUsername = $_SESSION['username'];
@@ -20,8 +29,11 @@ if(isset($_POST["proposalButton"])){
   }catch(PDOException $e){
     echo "something wrong";
   }
+}
 
-}elseif(isset($_POST["sendReply"])){
+
+
+if(isset($_POST["sendReply"])){
   $temp = $_POST['sendReply'];
   $toUsername = $_POST['replyToUsername'];
   $fromUsername = $_SESSION['username'];

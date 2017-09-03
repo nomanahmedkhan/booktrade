@@ -17,6 +17,7 @@ include_once 'deleteMessage.php';
 include_once 'nomanIndex.php';
 include_once 'updateCurrentBook.php';
 include_once 'shoppingCart.php';
+include_once 'home.php';
 SESSION_START();
 
 ini_set('display_errors', 1);
@@ -37,17 +38,19 @@ error_reporting(E_ALL);
   <link rel = "stylesheet" type = "text/css" href = "data/css/style.css">
   <title>Book.trade</title>
 </head>
-<body>
 
+<body <?php if($visited === FALSE):?> onload=' location.href="#home" '<?php endif; ?>>
+<?php $_SESSION['visited'] = TRUE; ?>
   <!--Fixed Top Bar-->
   <div id="topBar" class="topBar">
     <a id="title" active="active" href="#home">Book.trade</a>
     <ul>
+      <li><a href="#home">Home</a></li>
       <li><a href="#libraryContent">Library</a></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
 
 
-        <li><a href="#">Books</a>
+        <li><a href="#userBooks">Books</a>
 
           <ul>
             <li><a href="#userBooks">Book List</a></li>
@@ -55,7 +58,7 @@ error_reporting(E_ALL);
           </ul>
 
         </li>
-        <li><a>User</a>
+        <li><a href="#logoutContent">User</a>
 
           <ul>
             <li><a href="#logoutContent">Logout</a></li>
@@ -70,7 +73,7 @@ error_reporting(E_ALL);
         <li><a href="#inbox">Inbox</a></li>
         <li><a href="#shoppingCart">Cart</a></li>
       <?php else:?>
-        <li><a>Account</a>
+        <li><a href="#registerContent">Account</a>
 
           <ul>
             <li><a href="#registerContent">Register</a></li>
@@ -94,7 +97,7 @@ error_reporting(E_ALL);
           <tr><td><h3>Filter Books</h3></td></tr>
           <tr><td><button type="submit" name="filterLibraryAll"  > All</button></td></tr>
           <tr><td><button type="submit" name="filterLibraryTrade" > Trade</button></td></tr>
-          <tr><td><button type="submit" name="filterLibraryBuy" > Purchase</button></td></tr>
+          <tr><td><button type="submit" name="filterLibraryBuy" > Buy</button></td></tr>
         </table>
       </form>
     </div>
@@ -135,7 +138,12 @@ error_reporting(E_ALL);
 
       <!--Library Content-->
       <div id="libraryContent" class="libraryContent">
-
+        <?php if($isBookAlreadyInCart === TRUE):?>
+          <p class = "warning">Item Already In Cart</p>
+        <?php endif;?>
+        <?php if($userMustLogIn === TRUE):?>
+          <p class = "warning">You need to Log In in order to trade</p>
+        <?php endif;?>
         <table>
           <thead>
             <tr>
@@ -143,12 +151,6 @@ error_reporting(E_ALL);
               <th >Book Name</th>
               <th >Book Price</th>
               <th >Trade Condition</th>
-
-              <?php if(isset($_SESSION["username"])):?>
-                <?php if($_SESSION["username"] === "noman"):?>
-                  <th >Admin Action</th>
-                <?php endif; ?>
-              <?php endif; ?>
               <th colspan="2">Action</th>
 
             </tr>
@@ -159,7 +161,7 @@ error_reporting(E_ALL);
               <?php foreach ($library as $library1){ ?>
                 <tr>
 
-                  <?php if(isset($_POST['tradeButton'])): ?>
+                  <?php if(isset($_POST['tradeButton']) AND isset($_SESSION['username'])): ?>
                     <?php if($_POST['tradeButton']+1  === $count3 || $_POST['tradeButton']  === $count3):?>
                       <td ><?php echo $oldTradeUserName;?></td>
                       <td ><?php echo $oldTradeBookName;?></td>
@@ -174,12 +176,6 @@ error_reporting(E_ALL);
                       <td ><?php echo $library1['bookName'];?></td>
                       <td ><?php echo $library1['bookPrice'];?></td>
                       <td ><?php echo $library1['tradeCondition'];?></td>
-
-                      <?php if(isset($_SESSION["username"])):?>
-                        <?php if($_SESSION["username"] === "noman"):?>
-                          <td><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
-                        <?php endif; ?>
-                      <?php endif; ?>
 
                       <td>
                         <?php if($library1['bookPrice'] > 0 ):?>
@@ -198,12 +194,6 @@ error_reporting(E_ALL);
                       <td ><?php echo $library1['bookName'];?></td>
                       <td ><?php echo $library1['bookPrice'];?></td>
                       <td ><?php echo $library1['tradeCondition'];?></td>
-
-                      <?php if(isset($_SESSION["username"])):?>
-                        <?php if($_SESSION["username"] === "noman"):?>
-                          <td><button type="submit" name="adminDeleteBook" id="adminDeleteBook" value='<?php echo htmlspecialchars($count3)?>'>Delete!</button></td>
-                        <?php endif; ?>
-                      <?php endif; ?>
 
                       <td>
                         <?php if($library1['bookPrice'] > 0 ):?>
@@ -349,12 +339,12 @@ error_reporting(E_ALL);
                 <form method="post">
                   <p id="titleLine" class="titleLine">Cart</p>
                   <table>
+                    <?php if(isset($_SESSION['cartArray']) and isset($_SESSION['cartPriceCount'])): ?>
                     <thead>
                       <th >Book </th>
                       <th >Price</th>
                     </thead>
                     <tbody>
-                      <?php if(isset($_SESSION['cartArray'])): ?>
                       <?php foreach($_SESSION['cartArray'] as $cartContent){?>
                       <tr>
                         <td ><?php echo $cartContent['cartBookName']; ?></td>
@@ -362,7 +352,6 @@ error_reporting(E_ALL);
                         <td ><button type="submit" name="removeCartBook" id="removeCartBook" value='<?php echo $cartCount;?>'>Remove</button>
                       </tr>
                       <?php $cartCount = $cartCount + 1;}?>
-                      <?php endif ?>
                       <tr>
                         <td style="color:red;font-weight:bold"> Total amount:</td>
                         <td style="color:red;font-weight:bold"><?php echo $_SESSION['cartPriceCount']; ?></td>
@@ -371,6 +360,7 @@ error_reporting(E_ALL);
                         <td align="right"><button type="submit" name="resetCart" id="resetCart" >Reset</button></td>
                         <td align="left"><button type="submit" name="payForCartItems" id="payForCartItems"> Pay </button></td>
                       </tr>
+                    <?php endif;?>
                     </tbody>
                   </table>
 
@@ -423,7 +413,7 @@ error_reporting(E_ALL);
                     <?php endif;?>
 
                     <?php if($isMailDone === TRUE):?>
-                      <p style="color:darkgreen;">An email is sent to your account please check to verify your registration.<br></p>
+                      <p style="color:lightgreen;text-align:center;">An email is sent to your account please check to verify your registration.<br></p>
                     <?php elseif($isMailDone === FALSE):?>
                       <p class = "warning">Email not valid!<br></p>
                     <?php endif;?>

@@ -19,6 +19,7 @@ and !is_null($_POST['password'])) {
     abortDatabaseConnection();
     goToHomePage();
   }else{
+    $_SESSION["userLoggedin"] = FALSE;
     $loginFailed = TRUE;
   }
 
