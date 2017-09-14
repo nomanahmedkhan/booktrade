@@ -30,7 +30,7 @@ error_reporting(E_ALL);
 <head>
 
   <meta charset="utf-8">
-  <meta name = "viewport" content = "user-scalable = yes, width = device-width, maximum-scale = 2, initial-scale = 1" />
+  <meta name = "viewport" content = "user-scalable = yes, width = device-width, maximum-scale = 2" />
   <meta name = "apple-mobile-web-app-capable" content = "yes" />
   <meta name = "description" content = "Book trading platform for students, book-lovers and bookworms. Trading books are in physical form, not an E-Book.">
   <meta name = "keywords" content = "Book, trade, book trade, Physical Books, Buy Books, Sell Books, Trade Books">
@@ -81,6 +81,7 @@ error_reporting(E_ALL);
           </ul>
 
         </li>
+        <li><a href="#shoppingCart">Cart</a></li>
       <?php endif;?>
     </ul>
 
@@ -122,12 +123,14 @@ error_reporting(E_ALL);
             </tr>
           </thead>
           <tbody>
+            <?php if($_SESSION['username'] === "noman"):?>
             <?php foreach ($users as $user){ ?>
               <tr>
                 <td ><?php echo $user['userName'];?></td>
                 <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
               </tr>
               <?php $count2 = $count2 + 1; }?>
+            <?php endif;?>
             </tbody>
           </table>
         </form>
@@ -185,7 +188,7 @@ error_reporting(E_ALL);
 
                       <td>
                         <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
-                          <button type="submit" name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
+                          <button <?php if($_SESSION['userLoggedin']): ?> type="submit" <?php endif; ?> name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
                         <?php endif; ?>
                       </td>
 
@@ -296,7 +299,7 @@ error_reporting(E_ALL);
 
                       <tr>
                         <td align="right"></td>
-                        <td align="left"><button id="addbook" type="submit" name="addbook" />Add Book</button></td>
+                        <td align="left"><button id="addBook" type="submit" name="addBook" />Add Book</button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -346,11 +349,13 @@ error_reporting(E_ALL);
                     </thead>
                     <tbody>
                       <?php foreach($_SESSION['cartArray'] as $cartContent){?>
+                        <?php if(!empty($cartContent['cartBookName']) AND !empty($cartContent['cartBookPrice'])): ?>
                       <tr>
                         <td ><?php echo $cartContent['cartBookName']; ?></td>
                         <td ><?php echo $cartContent['cartBookPrice']; ?></td>
                         <td ><button type="submit" name="removeCartBook" id="removeCartBook" value='<?php echo $cartCount;?>'>Remove</button>
                       </tr>
+                      <?php endif; ?>
                       <?php $cartCount = $cartCount + 1;}?>
                       <tr>
                         <td style="color:red;font-weight:bold"> Total amount:</td>
@@ -359,8 +364,8 @@ error_reporting(E_ALL);
                       <tr>
                         <td align="right"><button type="submit" name="resetCart" id="resetCart" >Reset</button></td>
                         <td align="left"><button type="submit" name="payForCartItems" id="payForCartItems"> Pay </button></td>
+                      <?php endif;?>
                       </tr>
-                    <?php endif;?>
                     </tbody>
                   </table>
 
@@ -376,40 +381,44 @@ error_reporting(E_ALL);
                   <p class="titleLine">Register</p>
 
                   <?php if($emptyRegisterFields === TRUE):?>
-                    <p class = "warning">All fields required!</p>
+                    <p class = "warning">All fields are required</p>
                   <?php endif;?>
 
                   <?php if($userNameLengthValid === FALSE):?>
-                    <p class = "warning">Username must be between 4 to 12 characters!<br></p>
+                    <p class = "warning">Username must be between 4 to 12 characters<br></p>
                   <?php endif;?>
 
                   <?php if($userFirstCharValid === FALSE):?>
-                    <p class = "warning">Username should not start with a number nor with a space!</p>
+                    <p class = "warning">Username should not start with a number nor with a space</p>
                   <?php endif;?>
 
                   <?php if($passwordMatched === FALSE):?>
-                    <p class = "warning">Password did not match!</p>
+                    <p class = "warning">Password did not match</p>
                   <?php endif;?>
 
                   <?php if($passwordValid === FALSE):?>
                     <p class = "warning">
-                      Password must be alphanumeric containing at least one symbol!<br>
+                      Password must be alphanumeric containing at least one symbol<br>
                     </p><?php endif;?>
 
                     <?php if($passwordLengthValid === FALSE):?>
-                      <p class = "warning">Password must be between 6 to 12 characters!</p>
+                      <p class = "warning">Password must be between 6 to 12 characters</p>
                     <?php endif;?>
 
                     <?php if($userNameExists === TRUE):?>
-                      <p class = "warning">Given username already exists!<br></p>
+                      <p class = "warning">Username already exists<br></p>
+                    <?php endif;?>
+
+                    <?php if($userNameInvalid === TRUE):?>
+                      <p class = "warning">Invalid Username: Spcial characters not allowed<br></p>
                     <?php endif;?>
 
                     <?php if($emailExists === TRUE):?>
-                      <p class = "warning">Given email already exists!<br></p>
+                      <p class = "warning">Email already exists<br></p>
                     <?php endif;?>
 
                     <?php if($registrationSuccessful === TRUE):?>
-                      <p style="color:darkgreen;">Regisrtation successful!!!<br></p>
+                      <p style="color:darkgreen;">Regisrtation successful!<br></p>
                     <?php endif;?>
 
                     <?php if($isMailDone === TRUE):?>
@@ -443,7 +452,7 @@ error_reporting(E_ALL);
 
                         <tr>
                           <td align="right"></td>
-                          <td align="left"><button type="submit" name="submit"/>Register</button></td>
+                          <td align="left"><button type="submit" name="register" id="register"/>Register</button></td>
                         </tr>
                       </tbody>
                     </table>
@@ -523,7 +532,8 @@ error_reporting(E_ALL);
 
                     <!--Welcome Page-->
                     <div id="home" class="home">
-                      <p id="welcomeLine">Welcome to the Book.Trade! <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
+                      <p id="welcomeLine">Welcome <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
+                      <p><?php foreach($library as $lastAddedBook){ ?>
                     </div>
 
 

@@ -2,7 +2,7 @@
   function connectToDatabase(){
     try {
       global $connectionToDatabase;
-      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade', 'root', 'root');
+      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade; charset=utf8', 'root', 'root');
       $connectionToDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $connectionToDatabase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
@@ -105,11 +105,14 @@
     global $connectionToDatabase;
 
     try{
-      $addUserQuery = "INSERT INTO user (userName, userPassword, userEmail) VALUES ('$userName','$password','$email')";
-      $connectionToDatabase->exec($addUserQuery);
+      $addUserQuery = $connectionToDatabase->prepare("INSERT INTO user (userName, userPassword, userEmail) VALUES (:userName,:userPassword,:userEmail)");
+      $addUserQuery->bindParam(':userName', $userName);
+      $addUserQuery->bindParam(':userPassword', $password);
+      $addUserQuery->bindParam(':userEmail', $email);
+      $addUserQuery->execute();
       abortDatabaseConnection();
     }catch(PDOException $e){
-      echo "Registration Failed!";
+      echo $e;
       }
   }
 
@@ -117,9 +120,10 @@
     connectToDatabase();
     try{
       global $connectionToDatabase;
-      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition FROM bookList");
+      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList");
       $libraryQuery->execute();
       return $library = $libraryQuery->fetchall();
+      array_push($library['userName'], NULL, $library['bookName'], NULL, $library['bookPrice'], NULL, $library['tradeCondition'], NULL, $library['dateTimeAdded'], NULL);
       abortDatabaseConnection();
     }catch (PDOException $e) {
       echo "HAHAHAHAHA";

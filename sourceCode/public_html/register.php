@@ -1,18 +1,15 @@
 <?php
-if( isset($_POST['usernamesignup'])
-and isset($_POST['passwordsignup'])
-and isset($_POST['passwordsignup_confirm'])
-and isset($_POST['emailsignup'])) {
+if( isset($_POST['register'])) {
 
   if(!empty($_POST['usernamesignup'])
   and !empty($_POST['passwordsignup'])
   and !empty($_POST['passwordsignup_confirm'])
   and !empty($_POST['emailsignup'])){
 
-    $usernamesignup = $_POST['usernamesignup'];
-    $emailsignup = $_POST['emailsignup'];
-    $passwordsignup = $_POST['passwordsignup'];
-    $passwordsignup_confirm = $_POST['passwordsignup_confirm'];
+    $usernamesignup = stripslashes($_POST['usernamesignup']);
+    $emailsignup = stripslashes($_POST['emailsignup']);
+    $passwordsignup = stripslashes($_POST['passwordsignup']);
+    $passwordsignup_confirm = stripslashes($_POST['passwordsignup_confirm']);
 
 
     $userNameExists = doesUserNameExists($usernamesignup);

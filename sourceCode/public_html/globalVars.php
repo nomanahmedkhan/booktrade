@@ -6,7 +6,6 @@ $emptyRegisterFields = NULL;
 
 
 //Login Variables
-$loginFailed = FALSE;
 
 //Register Error Variables
 $userNameExists = NULL;
@@ -19,6 +18,7 @@ $passwordValid = NULL;
 $passwordLengthValid = NULL;
 $isMailSent = NULL;
 $isMailDone = NULL;
+$userNameInvalid = NULL;
 
 //library Variables
 $bothBookType;

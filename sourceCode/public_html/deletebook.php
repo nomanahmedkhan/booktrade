@@ -2,11 +2,11 @@
 SESSION_START();
 if(isset($_POST['delete'])){
 
-$temp1 = $_POST['delete'];
-$userName = $_SESSION["username"];
-$bookName = $bookList[$temp1][1];
-$bookPrice = $bookList[$temp1][2];
-$tradeCondition = $bookList[$temp1][3];
+$delBookTemp = $_POST['delete'];
+$userName = $bookList[$delBookTemp][0];
+$bookName = $bookList[$delBookTemp][1];
+$bookPrice = $bookList[$delBookTemp][2];
+$tradeCondition = $bookList[$delBookTemp][3];
 
 connectToDatabase();
 
