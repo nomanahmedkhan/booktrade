@@ -219,26 +219,27 @@ body {
   left: 15%;
 }
 
-
-#content div {
-  position: relative;
+#libraryContent,
+#adminPage,
+#userBooks,
+#inbox,
+#shoppingCart,
+#tradePage,
+#loginContent,
+#logoutContent ,
+#registerContent,
+#newBooks,
+#home {
   height: 0;
   overflow: hidden;
 }
+
 
 .warning {
   text-align: center;
   color: red;
   font-size: 20px;
   font-weight: bold;
-}
-
-#content div:target {
-  -webkit-transition: opacity 0.5s;
-    -moz-transition: opacity 0.5s;
-    -o-transition: opacity 0.5s;
-    transition: opacity 0.5s;
-
 }
 
 /*booklist Table*/
@@ -420,13 +421,93 @@ div:target .titleLine {
   width: 150px;
 }
 
-
 /* Home Page */
-#home:target {
-  height: 100%;
-  width: 100%;
-  padding: 20px 50px;
+#home:target{
+  height: auto;
 }
+
+#lastAddedBookSlideshow {
+  height: 200px;
+  width: 1860px;
+  background-color: red;
+  border: 2px solid red;
+  overflow: hidden;
+  margin: 5px auto;
+}
+
+.slide-wrapper{
+  height: 200px;
+  margin: 0;
+  padding: 0;
+  -webkit-animation: slide 40s ease infinite;
+  width: 6200px;
+}
+
+.slide{
+  float: left;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+  width: 620px;
+  display: inline-block;
+}
+
+.slide:nth-child(1){
+  background-color: gray;
+}
+.slide:nth-child(2){
+  background-color: white;
+}
+.slide:nth-child(3){
+  background-color: gray;
+}
+.slide:nth-child(4){
+  background-color: white;
+}
+.slide:nth-child(5){
+  background-color: gray;
+}
+.slide:nth-child(6){
+  background-color: white;
+}
+.slide:nth-child(7){
+  background-color: gray;
+}
+.slide:nth-child(8){
+  background-color: white;
+}
+.slide:nth-child(9){
+  background-color: gray;
+}
+.slide:nth-child(10){
+  background-color: white;
+}
+
+@-webkit-keyframes slide {
+  10% {margin-left: 0px;}
+  15% {margin-left: -620px;}
+  20% {margin-left: -620px;}
+  25% {margin-left: -1240px;}
+  30% {margin-left: -1240px;}
+  35% {margin-left: -1860px;}
+  40% {margin-left: -1860px;}
+  45% {margin-left: -2480px;}
+  50% {margin-left: -2480px;}
+  55% {margin-left: -3100px;}
+  60% {margin-left: -3100px;}
+  65% {margin-left: -3720px;}
+  70% {margin-left: -3720px;}
+  75% {margin-left: -4340px;}
+  80% {margin-left: -4340px;}
+  85% {margin-left: -4960px;}
+  90% {margin-left: -4960px;}
+  95% {margin-left: -5580px;}
+  98% {margin-left: -5580px;}
+  100% {margin-left: 0px;}
+}
+
+
+
 
 
 /*Sidebar Transition*/

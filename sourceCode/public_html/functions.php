@@ -136,4 +136,12 @@
     return $sendMail;
 
   }
+
+  function lastAddedBookSort($a,$b) {
+    return $a['dateTimeAdded'] < $b['dateTimeAdded'];
+  }
+
+  function librarySort($a,$b) {
+    return strcasecmp($a['bookName'], $b['bookName']) > 0;
+  }
  ?>

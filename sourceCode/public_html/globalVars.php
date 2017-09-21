@@ -32,4 +32,7 @@ $oldBookTradeCondition = array();
 
 //cart
 $isBookAlreadyInCart = FALSE;
+
+//lastAddedBooks
+$lastAddedBookCount = 0;
  ?>

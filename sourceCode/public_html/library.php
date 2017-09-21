@@ -43,11 +43,6 @@ try{
     $_SESSION['filterPosted'] = TRUE;
   }
 
-  /*usort($library, 'custom_sort');
-  function custom_sort($a,$b) {
-    return $a['dateTimeAdded']>$b['dateTimeAdded'];
-  }*/
-
 }catch (PDOException $e) {
   echo "HAHAHAHAHA";
 }

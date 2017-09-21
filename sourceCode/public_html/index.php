@@ -161,6 +161,7 @@ error_reporting(E_ALL);
 
           <tbody>
             <form method="post">
+              <?php usort($library, 'librarySort');?>
               <?php foreach ($library as $library1){ ?>
                 <tr>
 
@@ -533,7 +534,22 @@ error_reporting(E_ALL);
                     <!--Welcome Page-->
                     <div id="home" class="home">
                       <p id="welcomeLine">Welcome <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
-                      <p><?php foreach($library as $lastAddedBook){ ?>
+                      <p><?php usort($library, 'lastAddedBookSort'); ?>
+
+                        <div id="lastAddedBookSlideshow">
+                          <div class="slide-wrapper" >
+                      <?php foreach($library as $lastAddedBook){
+                        if($lastAddedBookCount < 11 ){ ?>
+                              <div class="slide">
+                                <p class="slide-content">
+                              <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
+                              $lastAddedBookCount = $lastAddedBookCount + 1;?>
+                            </p>
+                            </div>
+
+                         <?php }} ?>
+                       </div>
+                     </div>
                     </div>
 
 
