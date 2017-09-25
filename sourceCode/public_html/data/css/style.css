@@ -21,8 +21,6 @@ textarea {
   background-color: ghostwhite;
   box-shadow: 0.5px 0.5px 2px black;
   font-family: monospace;
-  margin: 0;
-
 }
 
 #bookTradeCondition {
@@ -177,7 +175,7 @@ body {
   animation-duration: 2s;
   bottom: 0;
   z-index: 1;
-  background-color: lightgray;
+  background-color: #555;
   overflow: auto;
   box-shadow: ;
 }
@@ -348,20 +346,17 @@ body {
 #inbox input:hover {
 
 }
-
+#newBooks:target,
 #shoppingCart:target,
 #tradePage:target,
 #loginContent:target,
 #logoutContent:target ,
-#registerContent:target,
-#newBooks:target {
+#registerContent:target {
   position: relative;
   opacity: 0.7;
   height: auto;
   max-width: 80%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 100px;
+  margin: 100px auto;
   background-color: black;
 }
 
@@ -380,7 +375,7 @@ div:target .titleLine {
   text-align: center;
   color: white;
   font-size: 50px;
-  margin-top: 0;
+  margin: 0 auto;
 }
 
 #shoppingCart td,
@@ -424,22 +419,31 @@ div:target .titleLine {
 /* Home Page */
 #home:target{
   height: auto;
+  padding: 10px;
+}
+
+#welcomeLine{
+  text-align: center;
+  font-size: 1.5em;
+  margin: 0;
+  font-weight: bold;
+  background-color: #444;
+  color: white;
 }
 
 #lastAddedBookSlideshow {
   height: 200px;
-  width: 1860px;
-  background-color: red;
-  border: 2px solid red;
+  max-width: 1860px;
+  background-color: black;
   overflow: hidden;
-  margin: 5px auto;
+  margin: 20px auto;
 }
 
 .slide-wrapper{
   height: 200px;
   margin: 0;
   padding: 0;
-  -webkit-animation: slide 40s ease infinite;
+  -webkit-animation: slide 50s ease infinite;
   width: 6200px;
 }
 
@@ -448,8 +452,13 @@ div:target .titleLine {
   height: 200px;
   margin: 0;
   padding: 0;
-  width: 620px;
+  max-width: 620px;
   display: inline-block;
+}
+
+.slide-content{
+  display: block;
+  min-width: 620px;
 }
 
 .slide:nth-child(1){

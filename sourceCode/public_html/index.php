@@ -25,6 +25,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,7 @@ error_reporting(E_ALL);
 </head>
 
 <body <?php if($visited === FALSE):?> onload=' location.href="#home" '<?php endif; ?>>
-<?php $_SESSION['visited'] = TRUE; ?>
+  <?php $_SESSION['visited'] = TRUE; ?>
   <!--Fixed Top Bar-->
   <div id="topBar" class="topBar">
     <a id="title" active="active" href="#home">Book.trade</a>
@@ -124,13 +125,13 @@ error_reporting(E_ALL);
           </thead>
           <tbody>
             <?php if($_SESSION['username'] === "noman"):?>
-            <?php foreach ($users as $user){ ?>
-              <tr>
-                <td ><?php echo $user['userName'];?></td>
-                <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
-              </tr>
-              <?php $count2 = $count2 + 1; }?>
-            <?php endif;?>
+              <?php foreach ($users as $user){ ?>
+                <tr>
+                  <td ><?php echo $user['userName'];?></td>
+                  <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
+                </tr>
+                <?php $count2 = $count2 + 1; }?>
+              <?php endif;?>
             </tbody>
           </table>
         </form>
@@ -176,196 +177,196 @@ error_reporting(E_ALL);
                     <?php endif;?>
 
                   <?php elseif(isset($_POST['proposalButton']) and $library1['userName'] !== NULL and $library1['bookName'] !== NULL and $library1['bookPrice'] !== NULL  and $library1['tradeCondition'] !== NULL ): ?>
-                      <td ><?php echo $library1['userName'];?></td>
-                      <td ><?php echo $library1['bookName'];?></td>
-                      <td ><?php echo $library1['bookPrice'];?></td>
-                      <td ><?php echo $library1['tradeCondition'];?></td>
+                    <td ><?php echo $library1['userName'];?></td>
+                    <td ><?php echo $library1['bookName'];?></td>
+                    <td ><?php echo $library1['bookPrice'];?></td>
+                    <td ><?php echo $library1['tradeCondition'];?></td>
 
-                      <td>
-                        <?php if($library1['bookPrice'] > 0 ):?>
-                          <button type="submit"  name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>Buy</button>
-                        <?php endif; ?>
-                      </td>
+                    <td>
+                      <?php if($library1['bookPrice'] > 0 ):?>
+                        <button type="submit"  name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>Buy</button>
+                      <?php endif; ?>
+                    </td>
 
-                      <td>
-                        <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
-                          <button <?php if($_SESSION['userLoggedin']): ?> type="submit" <?php endif; ?> name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
-                        <?php endif; ?>
-                      </td>
+                    <td>
+                      <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
+                        <button <?php if($_SESSION['userLoggedin']): ?> type="submit" <?php endif; ?> name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
+                      <?php endif; ?>
+                    </td>
 
-                    <?php elseif( $library1['bookName'] !== NULL and $library1['bookPrice'] !== NULL  and $library1['tradeCondition'] !== NULL ): ?>
-                      <td ><?php echo $library1['userName'];?></td>
-                      <td ><?php echo $library1['bookName'];?></td>
-                      <td ><?php echo $library1['bookPrice'];?></td>
-                      <td ><?php echo $library1['tradeCondition'];?></td>
+                  <?php elseif( $library1['bookName'] !== NULL and $library1['bookPrice'] !== NULL  and $library1['tradeCondition'] !== NULL ): ?>
+                    <td ><?php echo $library1['userName'];?></td>
+                    <td ><?php echo $library1['bookName'];?></td>
+                    <td ><?php echo $library1['bookPrice'];?></td>
+                    <td ><?php echo $library1['tradeCondition'];?></td>
 
-                      <td>
-                        <?php if($library1['bookPrice'] > 0 ):?>
-                          <button type="submit"  name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>Buy</button>
-                        <?php endif; ?>
-                      </td>
+                    <td>
+                      <?php if($library1['bookPrice'] > 0 ):?>
+                        <button type="submit"  name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>Buy</button>
+                      <?php endif; ?>
+                    </td>
 
-                      <td>
-                        <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
-                          <button type="submit" name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
-                        <?php endif; ?>
-                      </td>
-                    <?php endif; ?>
+                    <td>
+                      <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
+                        <button type="submit" name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
+                      <?php endif; ?>
+                    </td>
+                  <?php endif; ?>
 
-                    </tr>
-                    <?php $oldTradeBookName = $library1['bookName']; $oldTradeBookPrice = $library1['bookPrice']; $oldTradeUserName = $library1['userName']; $oldTradeTradeCondition = $library1['tradeCondition']; ?>
-                    <?php $oldTradeCount=$count3; $count3 = $count3 +1;}?>
-                  </form>
-                </tbody>
-              </table>
-            </div>
+                </tr>
+                <?php $oldTradeBookName = $library1['bookName']; $oldTradeBookPrice = $library1['bookPrice']; $oldTradeUserName = $library1['userName']; $oldTradeTradeCondition = $library1['tradeCondition']; ?>
+                <?php $oldTradeCount=$count3; $count3 = $count3 +1;}?>
+              </form>
+            </tbody>
+          </table>
+        </div>
 
-            <!-- Retrieve Proposal -->
-            <div id="inbox" class="inbox">
-              <p class="titleLine">Inbox</p>
-              <table>
-                <thead>
+        <!-- Retrieve Proposal -->
+        <div id="inbox" class="inbox">
+          <p class="titleLine">Inbox</p>
+          <table>
+            <thead>
+              <tr>
+                <?php if(isset($_POST['reply'])):?>
+                  <th>To</th>
+                  <th>Message</th>
+                  <th>Action</th>
+                <?php elseif(isset($_POST['sendReply'])):?>
+                  <th>From</th>
+                  <th>Message</th>
+                  <th colspan="2">Action</th>
+                <?php else:?>
+                  <th>From</th>
+                  <th>Message</th>
+                  <th colspan="2">Action</th>
+                <?php endif;?>
+              </tr>
+            </thead>
+
+
+            <form method="post">
+              <tbody>
+                <?php foreach ($messages as $msg) {?>
                   <tr>
                     <?php if(isset($_POST['reply'])):?>
-                      <th>To</th>
-                      <th>Message</th>
-                      <th>Action</th>
-                    <?php elseif(isset($_POST['sendReply'])):?>
-                      <th>From</th>
-                      <th>Message</th>
-                      <th colspan="2">Action</th>
-                    <?php else:?>
-                      <th>From</th>
-                      <th>Message</th>
-                      <th colspan="2">Action</th>
+                      <?php if($_POST['reply']+1  === $count5 || $_POST['reply']  === $count5):?>
+                        <td><input type="text" name="replyToUsername" id="replyToUsername"  value='<?php echo $replyToUsername[$oldCount1] ?>'/></td>
+                        <td><input type="text" name="replyMessage" id="replyMessage"/></td>
+                        <td ><button type="submit" name="sendReply" id="sendReply" value='<?php echo htmlspecialchars($count5)?>'>Send</button></td>
+                      <?php endif;?>
+
+                    <?php elseif(isset($_POST['sendReply']) and $msg['fromUsername'] !== NULL and $msg['message'] !== NULL):?>
+                      <td ><?php echo $msg['fromUsername'];?></td>
+                      <td ><?php echo $msg['message'];?></td>
+                      <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
+                      <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
+
+                    <?php elseif( $msg['fromUsername'] !== NULL and $msg['message'] !== NULL):?>
+                      <td ><?php echo $msg['fromUsername'];?></td>
+                      <td ><?php echo $msg['message'];?></td>
+                      <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
+                      <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
                     <?php endif;?>
                   </tr>
+                  <?php $replyToUsername[$count5] = $msg['fromUsername'] ?>
+                  <?php $oldCount1 = $count5; $count5=$count5+1;}?>
+                </tbody>
+              </form>
+            </table>
+          </div>
+
+
+
+          <!--Adding New Books-->
+          <div id="newBooks" class="newBooks">
+            <form  method="post">
+              <table>
+                <p class="titleLine">Add New Books</p>
+                <tbody>
+                  <tr>
+                    <td align="right">Book Name:</td>
+                    <td align="left"><input id="newBookName"type="text" name="newBookName" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right">Book Price:</td>
+                    <td align="left"> <input id="newBookPrice"type="text" name="newBookPrice" /></td>
+                  </tr>
+
+
+                  <tr>
+                    <td align="right">Book Trade Condition:</td>
+                    <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right"></td>
+                    <td align="left"><button id="addBook" type="submit" name="addBook" />Add Book</button></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </form>
+          </div>
+
+
+          <!--Login-->
+          <div id="loginContent" class="loginContent">
+            <form method="post">
+              <p id="titleLine" class="titleLine">Login</p>
+              <?php if($loginFailed===true):?><p class = "warning">Invalid credentials!</p><?php endif;?>
+              <table>
+                <thead>
                 </thead>
+                <tbody>
+                  <tr>
+                    <td align="right">Username:</td>
+                    <td align="left"><input id="username"type="text" name="username" /></td>
+                  </tr>
 
+                  <tr>
+                    <td align="right">Password:</td>
+                    <td align="left"><input id="password" type="password" name="password" /></td>
+                  </tr>
 
-                <form method="post">
+                  <tr>
+                    <td align="right"></td>
+                    <td align="left"><button type="submit" name="submit" value="Submit" >Submit</button></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </form>
+          </div>
+
+          <!--Shopping Cart-->
+          <div id="shoppingCart" class="shoppingCart">
+            <form method="post">
+              <p id="titleLine" class="titleLine">Cart</p>
+              <table>
+                <?php if(isset($_SESSION['cartArray']) and isset($_SESSION['cartPriceCount'])): ?>
+                  <thead>
+                    <th >Book </th>
+                    <th >Price</th>
+                  </thead>
                   <tbody>
-                    <?php foreach ($messages as $msg) {?>
-                      <tr>
-                        <?php if(isset($_POST['reply'])):?>
-                          <?php if($_POST['reply']+1  === $count5 || $_POST['reply']  === $count5):?>
-                            <td><input type="text" name="replyToUsername" id="replyToUsername"  value='<?php echo $replyToUsername[$oldCount1] ?>'/></td>
-                            <td><input type="text" name="replyMessage" id="replyMessage"/></td>
-                            <td ><button type="submit" name="sendReply" id="sendReply" value='<?php echo htmlspecialchars($count5)?>'>Send</button></td>
-                          <?php endif;?>
-
-                        <?php elseif(isset($_POST['sendReply']) and $msg['fromUsername'] !== NULL and $msg['message'] !== NULL):?>
-                          <td ><?php echo $msg['fromUsername'];?></td>
-                          <td ><?php echo $msg['message'];?></td>
-                          <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
-                          <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
-
-                        <?php elseif( $msg['fromUsername'] !== NULL and $msg['message'] !== NULL):?>
-                          <td ><?php echo $msg['fromUsername'];?></td>
-                          <td ><?php echo $msg['message'];?></td>
-                          <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
-                          <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
+                    <?php foreach($_SESSION['cartArray'] as $cartContent){?>
+                      <?php if(!empty($cartContent['cartBookName']) AND !empty($cartContent['cartBookPrice'])): ?>
+                        <tr>
+                          <td ><?php echo $cartContent['cartBookName']; ?></td>
+                          <td ><?php echo $cartContent['cartBookPrice']; ?></td>
+                          <td ><button type="submit" name="removeCartBook" id="removeCartBook" value='<?php echo $cartCount;?>'>Remove</button>
+                          </tr>
+                        <?php endif; ?>
+                        <?php $cartCount = $cartCount + 1;}?>
+                        <tr>
+                          <td style="color:red;font-weight:bold"> Total amount:</td>
+                          <td style="color:red;font-weight:bold"><?php echo $_SESSION['cartPriceCount']; ?></td>
+                        </tr>
+                        <tr>
+                          <td align="right"><button type="submit" name="resetCart" id="resetCart" >Reset</button></td>
+                          <td align="left"><button type="submit" name="payForCartItems" id="payForCartItems"> Pay </button></td>
                         <?php endif;?>
-                      </tr>
-                      <?php $replyToUsername[$count5] = $msg['fromUsername'] ?>
-                      <?php $oldCount1 = $count5; $count5=$count5+1;}?>
-                    </tbody>
-                  </form>
-                </table>
-              </div>
-
-
-
-              <!--Adding New Books-->
-              <div id="newBooks" class="newBooks">
-                <form id="newBooks" class="newBooks" method="post">
-                  <table>
-                    <p class="titleLine">Add New Books</p>
-                    <tbody>
-                      <tr>
-                        <td align="right">Book Name:</td>
-                        <td align="left"><input id="newBookName"type="text" name="newBookName" /></td>
-                      </tr>
-
-                      <tr>
-                        <td align="right">Book Price:</td>
-                        <td align="left"> <input id="newBookPrice"type="text" name="newBookPrice" /></td>
-                      </tr>
-
-
-                      <tr>
-                        <td align="right">Book Trade Condition:</td>
-                        <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
-                      </tr>
-
-                      <tr>
-                        <td align="right"></td>
-                        <td align="left"><button id="addBook" type="submit" name="addBook" />Add Book</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </form>
-              </div>
-
-
-              <!--Login-->
-              <div id="loginContent" class="loginContent">
-                <form method="post">
-                  <p id="titleLine" class="titleLine">Login</p>
-                  <?php if($loginFailed===true):?><p class = "warning">Invalid credentials!</p><?php endif;?>
-                  <table>
-                    <thead>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td align="right">Username:</td>
-                        <td align="left"><input id="username"type="text" name="username" /></td>
-                      </tr>
-
-                      <tr>
-                        <td align="right">Password:</td>
-                        <td align="left"><input id="password" type="password" name="password" /></td>
-                      </tr>
-
-                      <tr>
-                        <td align="right"></td>
-                        <td align="left"><button type="submit" name="submit" value="Submit" >Submit</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </form>
-              </div>
-
-              <!--Shopping Cart-->
-              <div id="shoppingCart" class="shoppingCart">
-                <form method="post">
-                  <p id="titleLine" class="titleLine">Cart</p>
-                  <table>
-                    <?php if(isset($_SESSION['cartArray']) and isset($_SESSION['cartPriceCount'])): ?>
-                    <thead>
-                      <th >Book </th>
-                      <th >Price</th>
-                    </thead>
-                    <tbody>
-                      <?php foreach($_SESSION['cartArray'] as $cartContent){?>
-                        <?php if(!empty($cartContent['cartBookName']) AND !empty($cartContent['cartBookPrice'])): ?>
-                      <tr>
-                        <td ><?php echo $cartContent['cartBookName']; ?></td>
-                        <td ><?php echo $cartContent['cartBookPrice']; ?></td>
-                        <td ><button type="submit" name="removeCartBook" id="removeCartBook" value='<?php echo $cartCount;?>'>Remove</button>
-                      </tr>
-                      <?php endif; ?>
-                      <?php $cartCount = $cartCount + 1;}?>
-                      <tr>
-                        <td style="color:red;font-weight:bold"> Total amount:</td>
-                        <td style="color:red;font-weight:bold"><?php echo $_SESSION['cartPriceCount']; ?></td>
-                      </tr>
-                      <tr>
-                        <td align="right"><button type="submit" name="resetCart" id="resetCart" >Reset</button></td>
-                        <td align="left"><button type="submit" name="payForCartItems" id="payForCartItems"> Pay </button></td>
-                      <?php endif;?>
                       </tr>
                     </tbody>
                   </table>
@@ -502,10 +503,10 @@ error_reporting(E_ALL);
                             <tr>
                               <?php if(isset($_POST['edit'])):?>
                                 <?php if($_POST['edit']+1  === $count || $_POST['edit']  === $count):?>
-                                    <td><input type="text" name="editedBookName" id="editedBookName" value='<?php echo $oldBookName[$oldCount] ?>' /></td>
-                                    <td><input type="text" name="editedBookPrice" id="editedBookPrice" value='<?php echo $oldBookPrice[$oldCount] ?>' /></td>
-                                    <td><input type="text" name="editedBookTradeCondition" id="editedBookTradeCondition" value='<?php echo $oldBookTradeCondition[$oldCount] ?>' /></td>
-                                    <td ><button type="submit" name="updateBook" id="updateBook" value='<?php echo htmlspecialchars($oldCount)?>'>Update</button></td>
+                                  <td><input type="text" name="editedBookName" id="editedBookName" value='<?php echo $oldBookName[$oldCount] ?>' /></td>
+                                  <td><input type="text" name="editedBookPrice" id="editedBookPrice" value='<?php echo $oldBookPrice[$oldCount] ?>' /></td>
+                                  <td><input type="text" name="editedBookTradeCondition" id="editedBookTradeCondition" value='<?php echo $oldBookTradeCondition[$oldCount] ?>' /></td>
+                                  <td ><button type="submit" name="updateBook" id="updateBook" value='<?php echo htmlspecialchars($oldCount)?>'>Update</button></td>
                                 <?php endif;?>
 
                               <?php elseif(isset($_POST['updateBook']) and strcmp($book['bookName'],"") !== 0 and strcmp($book['bookPrice'],"") !== 0 and strcmp($book['tradeCondition'],"") !== 0 ):?>
@@ -534,28 +535,61 @@ error_reporting(E_ALL);
                     <!--Welcome Page-->
                     <div id="home" class="home">
                       <p id="welcomeLine">Welcome <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
-                      <p><?php usort($library, 'lastAddedBookSort'); ?>
+                      <?php usort($library, 'lastAddedBookSort'); ?>
 
                         <div id="lastAddedBookSlideshow">
                           <div class="slide-wrapper" >
-                      <?php foreach($library as $lastAddedBook){
-                        if($lastAddedBookCount < 11 ){ ?>
-                              <div class="slide">
-                                <p class="slide-content">
-                              <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
-                              $lastAddedBookCount = $lastAddedBookCount + 1;?>
-                            </p>
+                            <?php foreach($library as $lastAddedBook){
+                              if($lastAddedBookCount < 11 ){ ?>
+                                <div class="slide">
+                                  <p class="slide-content">
+                                    <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
+                                    $lastAddedBookCount = $lastAddedBookCount + 1;?>
+                                  </p>
+                                </div>
+
+
+                                <?php }} ?>
+                              </div>
                             </div>
 
-                         <?php }} ?>
-                       </div>
-                     </div>
-                    </div>
+                            <div id="lastAddedBookSlideshow">
+                              <div class="slide-wrapper" >
+                                <?php foreach($library as $lastAddedBook){
+                                  if($lastAddedBookCount2 < 11 ){ ?>
+                                    <div class="slide">
+                                      <p class="slide-content">
+                                        <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
+                                        $lastAddedBookCount2 = $lastAddedBookCount2 + 1;?>
+                                      </p>
+                                    </div>
+
+
+                                    <?php }} ?>
+                                  </div>
+                                </div>
+
+                                <div id="lastAddedBookSlideshow">
+                                  <div class="slide-wrapper" >
+                                    <?php foreach($library as $lastAddedBook){
+                                      if($recommendedBookCount < 11 ){ ?>
+                                        <div class="slide">
+                                          <p class="slide-content">
+                                            <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
+                                            $recommendedBookCount = $recommendedBookCount + 1;?>
+                                          </p>
+                                        </div>
+
+
+                                        <?php }} ?>
+                                      </div>
+                                    </div>
+                                  </div>
 
 
 
 
 
-                  </div>
-                </body>
-                </html>
+                                </div>
+                              </body>
+                              </html>

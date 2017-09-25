@@ -35,4 +35,6 @@ $isBookAlreadyInCart = FALSE;
 
 //lastAddedBooks
 $lastAddedBookCount = 0;
+$recommendedBookCount = 0;
+$lastAddedBookCount2 = 0;
  ?>
