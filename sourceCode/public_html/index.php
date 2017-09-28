@@ -35,8 +35,8 @@ error_reporting(E_ALL);
   <meta name = "apple-mobile-web-app-capable" content = "yes" />
   <meta name = "description" content = "Book trading platform for students, book-lovers and bookworms. Trading books are in physical form, not an E-Book.">
   <meta name = "keywords" content = "Book, trade, book trade, Physical Books, Buy Books, Sell Books, Trade Books">
-
-  <link rel = "stylesheet" type = "text/css" href = "data/css/style.css">
+  <link rel="stylesheet" media="screen and (min-width: 700px)" href="data/css/style.css" />
+  <link rel="stylesheet" media="screen and (max-width: 700px)" href="data/css/style1.css" />
   <title>Book.trade</title>
 </head>
 
@@ -44,14 +44,14 @@ error_reporting(E_ALL);
   <?php $_SESSION['visited'] = TRUE; ?>
   <!--Fixed Top Bar-->
   <div id="topBar" class="topBar">
-    <a id="title" active="active" href="#home">Book.trade</a>
+    <a id="title" active="active" href="test.php">Book.trade</a>
     <ul>
       <li><a href="#home">Home</a></li>
-      <li><a href="#libraryContent">Library</a></li>
+      <li><a href="#libraryContent" >Library</a></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
 
 
-        <li><a href="#userBooks">Books</a>
+        <li><a>Books</a>
 
           <ul>
             <li><a href="#userBooks">Book List</a></li>
@@ -59,7 +59,7 @@ error_reporting(E_ALL);
           </ul>
 
         </li>
-        <li><a href="#logoutContent">User</a>
+        <li><a>User</a>
 
           <ul>
             <li><a href="#logoutContent">Logout</a></li>
@@ -74,7 +74,7 @@ error_reporting(E_ALL);
         <li><a href="#inbox">Inbox</a></li>
         <li><a href="#shoppingCart">Cart</a></li>
       <?php else:?>
-        <li><a href="#registerContent">Account</a>
+        <li><a>Account</a>
 
           <ul>
             <li><a href="#registerContent">Register</a></li>
@@ -88,27 +88,6 @@ error_reporting(E_ALL);
 
   </div>
 
-
-  <!--SideBar-->
-  <div id="sideBar" class="sideBar">
-
-    <!--Library filter-->
-    <div id="libraryFilter" class="libraryFilter">
-      <form id="filter" method = "post">
-        <table align="center">
-          <tr><td><h3>Filter Books</h3></td></tr>
-          <tr><td><button type="submit" name="filterLibraryAll"  > All</button></td></tr>
-          <tr><td><button type="submit" name="filterLibraryTrade" > Trade</button></td></tr>
-          <tr><td><button type="submit" name="filterLibraryBuy" > Buy</button></td></tr>
-        </table>
-      </form>
-    </div>
-
-
-
-
-  </div>
-
   <!--Scrollable Page-->
   <div id="content" class="content">
 
@@ -118,19 +97,17 @@ error_reporting(E_ALL);
       <form method = "post" >
         <table>
           <thead>
-            <tr>
-              <th >Username</th>
-              <th >Action</th>
-            </tr>
           </thead>
           <tbody>
-            <?php if($_SESSION['username'] === "noman"):?>
-              <?php foreach ($users as $user){ ?>
-                <tr>
-                  <td ><?php echo $user['userName'];?></td>
-                  <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
-                </tr>
-                <?php $count2 = $count2 + 1; }?>
+            <?php if(isset($_SESSION['username'])):?>
+              <?php if($_SESSION['username'] === "noman"):?>
+                <?php foreach ($users as $user){ ?>
+                  <tr>
+                    <td ><?php echo $user['userName'];?></td>
+                    <td ><button type="submit" name="deleteUser" id="deleteUser" value='<?php echo htmlspecialchars($count2)?>'>Delete!</button></td>
+                  </tr>
+                  <?php $count2 = $count2 + 1; }?>
+                <?php endif;?>
               <?php endif;?>
             </tbody>
           </table>
@@ -142,6 +119,39 @@ error_reporting(E_ALL);
 
       <!--Library Content-->
       <div id="libraryContent" class="libraryContent">
+
+        <!--SideBar-->
+        <div id="sideBar" class="sideBar">
+
+          <!--Library filter-->
+          <div id="sidebarWrapper" class="sideBarWrapper">
+            <p id="sidebarHandle">Books Filter</p>
+            <p>
+            <form id="filter" method = "post">
+              <table>
+                <tr>
+            <td>Books Type</td>
+            <td><button type="submit" name="filterLibraryAll"  > All</button></td>
+            <td><button type="submit" name="filterLibraryTrade" > Trade</button></td>
+            <td><button type="submit" name="filterLibraryBuy" > Buy</button></td>
+          </tr>
+
+          <!--Sort Library-->
+          <tr>
+            <td>Sort Books By:</td>
+            <td><button type="submit" name="filterLibraryAll"  >Name</button></td>
+            <td><button type="submit" name="filterLibraryTrade" >Price</button></td>
+            <td><button type="submit" name="filterLibraryBuy" >Votes</button></td>
+          </tr>
+            </table>
+            </form>
+          </p>
+          </div>
+
+        </div>
+        <div id="libraryTableWrapper">
+        <div id="libraryTable">
+
         <?php if($isBookAlreadyInCart === TRUE):?>
           <p class = "warning">Item Already In Cart</p>
         <?php endif;?>
@@ -150,14 +160,6 @@ error_reporting(E_ALL);
         <?php endif;?>
         <table>
           <thead>
-            <tr>
-              <th >User</th>
-              <th >Book Name</th>
-              <th >Book Price</th>
-              <th >Trade Condition</th>
-              <th colspan="2">Action</th>
-
-            </tr>
           </thead>
 
           <tbody>
@@ -165,84 +167,28 @@ error_reporting(E_ALL);
               <?php usort($library, 'librarySort');?>
               <?php foreach ($library as $library1){ ?>
                 <tr>
-
-                  <?php if(isset($_POST['tradeButton']) AND isset($_SESSION['username'])): ?>
-                    <?php if($_POST['tradeButton']+1  === $count3 || $_POST['tradeButton']  === $count3):?>
-                      <td ><?php echo $oldTradeUserName;?></td>
-                      <td ><?php echo $oldTradeBookName;?></td>
-                      <td ><?php echo $oldTradeBookPrice;?></td>
-                      <td ><?php echo $oldTradeTradeCondition;?></td>
-                      <td><input type="text" name="proposalMessage" id="proposalMessage"/></td>
-                      <td ><button type="submit" name="proposalButton" id="proposalButton" value='<?php echo htmlspecialchars($oldTradeCount)?>'>Send</button></td>
-                    <?php endif;?>
-
-                  <?php elseif(isset($_POST['proposalButton']) and $library1['userName'] !== NULL and $library1['bookName'] !== NULL and $library1['bookPrice'] !== NULL  and $library1['tradeCondition'] !== NULL ): ?>
-                    <td ><?php echo $library1['userName'];?></td>
-                    <td ><?php echo $library1['bookName'];?></td>
-                    <td ><?php echo $library1['bookPrice'];?></td>
-                    <td ><?php echo $library1['tradeCondition'];?></td>
-
-                    <td>
-                      <?php if($library1['bookPrice'] > 0 ):?>
-                        <button type="submit"  name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>Buy</button>
-                      <?php endif; ?>
-                    </td>
-
-                    <td>
-                      <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
-                        <button <?php if($_SESSION['userLoggedin']): ?> type="submit" <?php endif; ?> name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
-                      <?php endif; ?>
-                    </td>
-
-                  <?php elseif( $library1['bookName'] !== NULL and $library1['bookPrice'] !== NULL  and $library1['tradeCondition'] !== NULL ): ?>
-                    <td ><?php echo $library1['userName'];?></td>
-                    <td ><?php echo $library1['bookName'];?></td>
-                    <td ><?php echo $library1['bookPrice'];?></td>
-                    <td ><?php echo $library1['tradeCondition'];?></td>
-
-                    <td>
-                      <?php if($library1['bookPrice'] > 0 ):?>
-                        <button type="submit"  name="buyBook" id="buyBook" value='<?php echo htmlspecialchars($count3)?>'>Buy</button>
-                      <?php endif; ?>
-                    </td>
-
-                    <td>
-                      <?php if(strcmp($library1['tradeCondition'],"none") !== 0 ):?>
-                        <button type="submit" name="tradeButton" value='<?php echo htmlspecialchars($count3)?>'>Trade</button>
-                      <?php endif; ?>
-                    </td>
-                  <?php endif; ?>
-
+                  <td>
+                    <img src="data/images/dummybook.png" alt"<?php echo $library1['bookName'];?>" style="width:80px;height:100px;">
+                  </td>
+                  <td >
+                    <p id="libraryBookName"><?php echo $library1['bookName'];?></p>
+                    <p id="libraryBookPrice">$<?php echo $library1['bookPrice'];?></p>
+                    <p id="libraryBookUser">by <?php echo $library1['userName'];?></p>
+                  </td>
+                  <td ><p id="libraryBookTradeCondition">Description:</br><?php echo $library1['tradeCondition'];?></p></td>
                 </tr>
-                <?php $oldTradeBookName = $library1['bookName']; $oldTradeBookPrice = $library1['bookPrice']; $oldTradeUserName = $library1['userName']; $oldTradeTradeCondition = $library1['tradeCondition']; ?>
-                <?php $oldTradeCount=$count3; $count3 = $count3 +1;}?>
+                <?php $count3 = $count3 +1;}?>
               </form>
             </tbody>
           </table>
         </div>
+      </div>
+</div>
 
         <!-- Retrieve Proposal -->
         <div id="inbox" class="inbox">
           <p class="titleLine">Inbox</p>
           <table>
-            <thead>
-              <tr>
-                <?php if(isset($_POST['reply'])):?>
-                  <th>To</th>
-                  <th>Message</th>
-                  <th>Action</th>
-                <?php elseif(isset($_POST['sendReply'])):?>
-                  <th>From</th>
-                  <th>Message</th>
-                  <th colspan="2">Action</th>
-                <?php else:?>
-                  <th>From</th>
-                  <th>Message</th>
-                  <th colspan="2">Action</th>
-                <?php endif;?>
-              </tr>
-            </thead>
-
 
             <form method="post">
               <tbody>
@@ -262,8 +208,8 @@ error_reporting(E_ALL);
                       <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
 
                     <?php elseif( $msg['fromUsername'] !== NULL and $msg['message'] !== NULL):?>
-                      <td ><?php echo $msg['fromUsername'];?></td>
-                      <td ><?php echo $msg['message'];?></td>
+                      <td >From: <?php echo $msg['fromUsername'];?></td>
+                      <td >Message: <?php echo $msg['message'];?></td>
                       <td ><button type="submit" name="reply" id="reply" value='<?php echo htmlspecialchars($count5)?>'>Reply</button></td>
                       <td ><button type="submit" name="deleteMessage" id="deleteMessage" value='<?php echo htmlspecialchars($count5)?>'>Delete!</button></td>
                     <?php endif;?>
@@ -279,7 +225,7 @@ error_reporting(E_ALL);
 
           <!--Adding New Books-->
           <div id="newBooks" class="newBooks">
-            <form  method="post">
+            <form  method="post" enctype="multipart/form-data">
               <table>
                 <p class="titleLine">Add New Books</p>
                 <tbody>
@@ -297,6 +243,13 @@ error_reporting(E_ALL);
                   <tr>
                     <td align="right">Book Trade Condition:</td>
                     <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
+                  </tr>
+
+                  <tr>
+                    <td align="right">Upload Book Image:</td>
+                    <td align="left">
+                        <input type="file" class="inputFile" name="newBookImage"/>
+                    </td>
                   </tr>
 
                   <tr>
@@ -484,19 +437,6 @@ error_reporting(E_ALL);
                   <!--Current Books-->
                   <div id="userBooks" class="userBooks">
                     <table>
-                      <thead>
-                        <tr>
-                          <th >Book Name</th>
-                          <th >Book Price</th>
-                          <th >Trade Condition</th>
-                          <?php if(isset($_POST['edit'])):?>
-                            <th >Action</th>
-                          <?php else:?>
-                            <th colspan="2">Action</th>
-                          <?php endif;?>
-
-                        </tr>
-                      </thead>
                       <form method="post">
                         <tbody>
                           <?php foreach ($bookList as $book) {?>
@@ -510,16 +450,28 @@ error_reporting(E_ALL);
                                 <?php endif;?>
 
                               <?php elseif(isset($_POST['updateBook']) and strcmp($book['bookName'],"") !== 0 and strcmp($book['bookPrice'],"") !== 0 and strcmp($book['tradeCondition'],"") !== 0 ):?>
-                                <td ><?php echo $book['bookName'];?></td>
-                                <td ><?php echo $book['bookPrice'];?></td>
-                                <td ><?php echo $book['tradeCondition'];?></td>
+
+                                  <td>
+                                    <img src="data/images/booksback.jpg" alt"<?php echo $library1['bookName'];?>" style="width:80px;height:100px;">
+                                  </td>
+                                  <td >
+                                    <p id="libraryBookName"><?php echo $book['bookName'];?></p>
+                                    <p id="libraryBookPrice">$<?php echo $book['bookPrice'];?></p>
+                                  </td>
+                                  <td ><p id="libraryBookTradeCondition">Description:</br><?php echo $book['tradeCondition'];?></p></td>
+
                                 <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count)?>'>Delete</button></td>
                                 <td ><button type="submit" name="edit" id="edit" value='<?php echo htmlspecialchars($count)?>'>Edit</button></td>
 
                               <?php elseif(strcmp($book['bookName'],"") !== 0 and strcmp($book['bookPrice'],"") !== 0 and strcmp($book['tradeCondition'],"") !== 0):?>
-                                <td ><?php echo $book['bookName'];?></td>
-                                <td ><?php echo $book['bookPrice'];?></td>
-                                <td ><?php echo $book['tradeCondition'];?></td>
+
+                                <td><img src="data/images/booksback.jpg" alt"<?php echo $library1['bookName'];?>" style="width:80px;height:100px;"></td>
+                                <td>
+                                  <p id="libraryBookName"><?php echo $book['bookName'];?></p>
+                                  <p id="libraryBookPrice"><?php echo $book['bookPrice'];?>$</p>
+                                </td>
+                                <td ><p id="libraryBookTradeCondition">Description:</br><?php echo $book['tradeCondition'];?></p></td>
+
                                 <td ><button type="submit" name="delete" id="delete" value='<?php echo htmlspecialchars($count)?>'>Delete</button></td>
                                 <td ><button type="submit" name="edit" id="edit" value='<?php echo htmlspecialchars($count)?>'>Edit</button></td>
                               <?php endif;?>
@@ -532,64 +484,41 @@ error_reporting(E_ALL);
                       </table>
                     </div>
 
+
+                    <!-- bookPage -->
+                    <div id="bookPage">
+
+                    </div>
+
                     <!--Welcome Page-->
                     <div id="home" class="home">
                       <p id="welcomeLine">Welcome <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
                       <?php usort($library, 'lastAddedBookSort'); ?>
+                      <p style="color:#666;text-align:center;">New and Hot!</p>
+                      <div id="lastAddedBookSlideshow">
+                        <div class="slide-wrapper" >
+                          <?php foreach($library as $lastAddedBook){
+                            if($lastAddedBookCount < 11 ){ ?>
+                              <div class="slide">
+                              <a href="<?php echo "#lastAddedBook".$lastAddedBookCount; ?>" >
+                                <p class="slide-content">
+                                  <?php echo $lastAddedBook['bookName']."</br>"."Uploaded by: ".$lastAddedBook['userName'];
+                                  $lastAddedBookCount = $lastAddedBookCount + 1;?>
+                                </p>
+                            </a>
+                          </div>
 
-                        <div id="lastAddedBookSlideshow">
-                          <div class="slide-wrapper" >
-                            <?php foreach($library as $lastAddedBook){
-                              if($lastAddedBookCount < 11 ){ ?>
-                                <div class="slide">
-                                  <p class="slide-content">
-                                    <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
-                                    $lastAddedBookCount = $lastAddedBookCount + 1;?>
-                                  </p>
-                                </div>
 
-
-                                <?php }} ?>
-                              </div>
+                              <?php }} ?>
                             </div>
+                          </div>
 
-                            <div id="lastAddedBookSlideshow">
-                              <div class="slide-wrapper" >
-                                <?php foreach($library as $lastAddedBook){
-                                  if($lastAddedBookCount2 < 11 ){ ?>
-                                    <div class="slide">
-                                      <p class="slide-content">
-                                        <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
-                                        $lastAddedBookCount2 = $lastAddedBookCount2 + 1;?>
-                                      </p>
-                                    </div>
-
-
-                                    <?php }} ?>
-                                  </div>
-                                </div>
-
-                                <div id="lastAddedBookSlideshow">
-                                  <div class="slide-wrapper" >
-                                    <?php foreach($library as $lastAddedBook){
-                                      if($recommendedBookCount < 11 ){ ?>
-                                        <div class="slide">
-                                          <p class="slide-content">
-                                            <?php echo $lastAddedBook['bookName']." ".$lastAddedBook['dateTimeAdded']."<br>";
-                                            $recommendedBookCount = $recommendedBookCount + 1;?>
-                                          </p>
-                                        </div>
-
-
-                                        <?php }} ?>
-                                      </div>
-                                    </div>
-                                  </div>
+                        </div>
 
 
 
 
 
-                                </div>
-                              </body>
-                              </html>
+                      </div>
+                    </body>
+                    </html>

@@ -2,7 +2,7 @@
   function connectToDatabase(){
     try {
       global $connectionToDatabase;
-      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade; charset=utf8', 'root', 'root');
+      $connectionToDatabase = new PDO('mysql: host=localhost; dbname=booktrade; charset=utf8', 'root', 'Godonly1');
       $connectionToDatabase->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $connectionToDatabase->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
@@ -123,7 +123,6 @@
       $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList");
       $libraryQuery->execute();
       return $library = $libraryQuery->fetchall();
-      array_push($library['userName'], NULL, $library['bookName'], NULL, $library['bookPrice'], NULL, $library['tradeCondition'], NULL, $library['dateTimeAdded'], NULL);
       abortDatabaseConnection();
     }catch (PDOException $e) {
       echo "HAHAHAHAHA";
@@ -139,6 +138,10 @@
 
   function lastAddedBookSort($a,$b) {
     return $a['dateTimeAdded'] < $b['dateTimeAdded'];
+  }
+
+  function firstAddedBookSort($a,$b) {
+    return $a['dateTimeAdded'] > $b['dateTimeAdded'];
   }
 
   function librarySort($a,$b) {

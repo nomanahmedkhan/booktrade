@@ -6,6 +6,7 @@ $emptyRegisterFields = NULL;
 
 
 //Login Variables
+$loginFailed = False;
 
 //Register Error Variables
 $userNameExists = NULL;
