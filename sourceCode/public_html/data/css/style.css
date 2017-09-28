@@ -355,7 +355,7 @@ div:target .titleLine {
 #logoutContent td ,
 #registerContent td,
 #newBooks td {
-  color: white;
+  color: #666;
   font-size: 15px;
   text-align:;
 }
