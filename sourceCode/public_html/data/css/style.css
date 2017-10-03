@@ -1,205 +1,131 @@
-@font-face {
-  font-family: 'zekton';
-  src: url('fonts/zekton/zekton.ttf');
-}
-
-/* for ie mac*/
-/* commented backslash hack v2 \*/
-/* end hack */
-
-/*universal styling*/
-input,
-textarea {
-  border: 0;
-  background-color: #eee;
-  font-family: monospace;
-  border-radius: 2px;
-}
-/*File upload input*/
-.inputFile {
-  font-size: 15px;
-
-}
-
-#newBookImageUploadLable{
-  color: white;
-  background-color: black;
-  display: inline-block;
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
 *{
-  cursor:  default;
-  text-decoration-line: none;
-  font-family: sans-serif;
-  color: #666;
-  font-size: 20px;
   margin: 0;
   padding: 0;
-}
-
-button:hover{
-  color: black;
-}
-
-body {
-  width: 60%;
-  margin: 0 auto;
-  padding: 0;
-  background-color: #bbb;
+  text-decoration: none;
+  font-family: sans-serif;
+  color: gray;
+  cursor: default;
 }
 
 button{
   height: 20px;
-  font-size: 15px;
-  width: 80px;
+  width: 90px;
   margin: 5px;
-  background-color: #ddd;
-  color: #666;
+  background-color: #eee;
+  color: gray;
   border: 0;
-  border-radius: 1px;
+  border-radius: 5px;
   box-shadow: 1px 1px 2px gray;
 }
 
-.warning {
-  text-align: center;
-  color: red;
-  font-size: 10px;
-  font-weight: bold;
-}
-
-/* tile line*/
-#title {
-  font-family: zekton;
-  font-size: 35px;
-  line-height: 35px;
-  color: black;
-  margin: 0;
-  padding: 0;
-  padding-left: 5px;
-
-  transition: margin-left ease 0.1s;
-  -webkit-transition: margin-left ease 0.1s;
-  -moz-transition: margin-left ease 0.1s;
-  -o-transition: margin-left ease 0.1s;
-}
-
-#title:hover {
-  margin-left: 15px;
-
-  transition: margin-left ease 0.1s;
-  -webkit-transition: margin-left ease 0.1s;
-  -moz-transition: margin-left ease 0.1s;
-  -o-transition: margin-left ease 0.1s;
-}
-
-/*top bar*/
-#topBar {
-  position: relative;
-  height: auto;
-  z-index: 2;
+button:hover {
   background-color: white;
+  color: black;
 }
 
-#topBar ul {
-  border-radius: 2px;
-  margin: 0;
-  padding: 0;
+body{
+  background-color: white;
+  overflow: hidden;
+}
+
+#topBarTitle {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 20%;
+  background-color: #555;
+  text-align: center;
+  box-shadow: 2px 2px 2px black;
+}
+
+#title{
+  color: white;
+  font-size: 25px;
+  line-height: 40px;
+}
+
+#topBarMenu {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  width: 80%;
+  background-color: #222;
+  text-align: right;
+
+  box-shadow: 2px 2px 2px black;
+}
+
+#topBarMenu > ul {
+  display: inline;
   list-style: none;
   z-index: 3;
-  background-color: gray;
-  background: -webkit-linear-gradient(left, #bbb , white); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #bbb, white); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #bbb, white); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #bbb, white); /* Standard syntax */
 }
 
-#topBar ul li {
-  padding: 0;
+#topBarMenu > ul > li {
+  color: white;
   text-align: left;
   display: inline-block;
+  font-size: 25px;
+  line-height: 30px;
 }
 
-#topBar ul li ul {
+#topBarMenu ul li a{
+  padding:0 10px;
+}
+
+#topBarMenu ul li > ul {
   position: absolute;
   display: block;
   height: 0;
   opacity: 0;
   overflow: hidden;
-  padding: 0;
-  background: none;
-  background-color: #ccc;
+  background-color: #222;
 }
 
-#topBar ul li > ul li {
+#topBarMenu ul li > ul li {
+  line-height: 30px;
   display: block;
 }
 
-#topBar ul li a{
-  font-size: 20px;
-  line-height: 25px;
-  display: inline-block;
-  color: black;
-  margin: 0;
-  padding: 0 10px;
-  border-radius: 2px;
-
-}
-
-#topBar ul li a:active{
-  color: red;
-}
-
-#topBar li > a:hover{
+#topBarMenu a{
   color: white;
 }
 
-#topBar li:hover > ul {
+#topBarMenu li > p{
+  margin: 5px;
+}
+
+#topBarMenu li > p:hover{
+  background-color: #ff9900;
+  border-radius: 5px;
+}
+
+#topBarMenu li > p:hover a{
+  color: black;
+}
+
+#topBarMenu li:hover > ul {
   height: auto;
   opacity: 1;
   overflow: visible;
-  border-radius: 0px 0px 5px 5px;
 }
 
 
-#topBar ul li > ul li:hover > ul {
+#topBarMenu ul li > ul li:hover > ul {
   position: absolute;
   display: inline;
   width: 100%;
 }
 
-/*sideBar*/
-#sideBar {
-  position: relative;
-  max-height: 20px;
-  overflow: hidden;
-
-  transition: max-height ease 0.5s;
-  -webkit-transition: max-height ease 0.5s;
-  -moz-transition: max-height ease 0.5s;
-  -o-transition: max-height ease 0.5s;
-}
-
-#sideBar:hover{
-  max-height: 200px;
-  transition: max-height ease 0.5s;
-  -webkit-transition: max-height ease 0.5s;
-  -moz-transition: max-height ease 0.5s;
-  -o-transition: max-height ease 0.5s;
-}
-
 #sidebarWrapper{
+  text-align: center;
   overflow: hidden;
-  background-color: white;
   background: repeating-linear-gradient(
     -55deg,
     #eee,
-    #eee 5px,
-    #ddd 5px,
-    #ddd 10px
+    #eee 10px,
+    #ddd 10px,
+    #ddd 30px
   );
 }
 
@@ -207,25 +133,32 @@ button{
   margin:auto;
 }
 
-#sidebarWrapper table tr td{
-  margin:auto;
-  font-size: 15px;
-}
-
-#sidebarHandle{
-  text-align: center;
-  font-size: 15px;
+#sidebarHandle {
   font-weight: bold;
-  line-height: 20px;
-  color: #666;
 }
 
-/*content page*/
-#content{
-  height: 100%;
-  width: auto;
+#content {
+  position: absolute;
   overflow: auto;
-  background-color: #ddd;
+  display: block;
+  top: 40px;
+  padding: 10px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#content > div{
+  position: relative;
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+#content > div:target{
+  height: auto;
+  width: auto;
+  opacity: 1;
 }
 
 div:target .titleLine {
@@ -235,135 +168,10 @@ div:target .titleLine {
   margin: 0 auto;
 }
 
-#libraryContent,
-#adminPage,
-#userBooks,
-#inbox,
-#shoppingCart,
-#tradePage,
-#loginContent,
-#logoutContent ,
-#registerContent,
-#newBooks,
-#home {
-  height: 0;
-  width: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-#home:target{
-  height: auto;
-  width: auto;
-  overflow: auto;
-}
-
-/*booklist Table*/
-#libraryContent:target,
-#adminPage:target,
-#userBooks:target,
-#inbox:target {
-  width: 100%;
-  height: auto;
-  overflow: auto;
-}
-
-#newBooks:target,
-#shoppingCart:target,
-#tradePage:target,
-#loginContent:target,
-#logoutContent:target ,
-#registerContent:target {
-  overflow: auto;
-  height: auto;
-  width: auto;
-  margin: auto;
-}
-
-/*library page*/
-#libraryBookName{
-  color: #666;
-  font-size: 15px;
-  font-weight: bold;
-}
-
-#libraryBookPrice, #libraryBookTradeCondition, #libraryBookUser {
-  font-size: 15px;
-  color: #777
-}
-
-/*Tables*/
-#libraryTable table,
-#adminPage table,
-#userBooks table,
-#inbox table {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  background-color: #ddd;
-}
-
-#libraryTable td,
-#adminPage td,
-#userBooks td,
-#inbox td {
-  height: 150px;
-}
-
-#libraryTable td:first-child,
-#adminPage td:first-child,
-#userBooks td:first-child,
-#inbox td:first-child {
-  text-align: center;
-}
-
-#libraryTable tr:nth-child(2n+1),
-#adminPage tr:nth-child(2n+1),
-#userBooks tr:nth-child(2n+2),
-#inbox tr:nth-child(2n+1)  {
-  background-color: #eee;
-}
-
-#adminPage table{
-  text-align: center;
-}
-
-#libraryTable input,
-#adminPage input,
-#userBooks input,
-#inbox input {
-  background-color: #333;
-  border: 1px solid gray;
-  color: gray;
-  border-radius: 1px;
-}
-
-#shoppingCart table,
-#tradePage table,
-#loginContent table,
-#logoutContent table ,
-#registerContent table,
-#newBooks table{
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#shoppingCart td,
-#tradePage td,
-#loginContent td,
-#logoutContent td ,
-#registerContent td,
-#newBooks td {
-  color: #666;
-  font-size: 15px;
-  text-align:;
-}
-
 /*Home Page*/
 #welcomeLine{
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -372,13 +180,13 @@ div:target .titleLine {
   height: 200px;
   overflow: hidden;
   margin: 20px;
-  background-image: url(/data/images/booksback.jpg);
+  box-shadow: 1px 1px 1px gray;
   background: repeating-linear-gradient(
     -55deg,
     #fff,
     #fff 5px,
-    #ccc 5px,
-    #ccc 10px
+    #eee 5px,
+    #eee 15px
   );
 }
 
@@ -386,8 +194,8 @@ div:target .titleLine {
   height: 200px;
   margin: 0;
   padding: 0;
-  -webkit-animation: slide 40s ease infinite;
-  -webkit-animation-delay: 4s;
+  -webkit-animation: slide 10s ease infinite;
+  -webkit-animation-delay: 2s;
   width: 200%;
 }
 
@@ -425,4 +233,71 @@ div:target .titleLine {
   90% {margin-left: -20%;}
 }
 
-/**/
+/*Tables*/
+#libraryTable table,
+#adminPage table,
+#userBooks table,
+#inbox table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background-color: #eee;
+}
+
+#libraryTable td,
+#adminPage td,
+#userBooks td,
+#inbox td {
+  height: 150px;
+  font-size: 20px;
+}
+
+#libraryTable td:first-child,
+#adminPage td:first-child,
+#userBooks td:first-child,
+#inbox td:first-child {
+  text-align: center;
+}
+
+#libraryTable tr:nth-child(2n+1),
+#adminPage tr:nth-child(2n+1),
+#userBooks tr:nth-child(2n+2),
+#inbox tr:nth-child(2n+1)  {
+  background-color: white;
+}
+
+#adminPage table{
+  text-align: center;
+}
+
+#libraryTable input,
+#adminPage input,
+#userBooks input,
+#inbox input {
+  background-color: #333;
+  border: 1px solid gray;
+  color: gray;
+  border-radius: 1px;
+}
+
+#shoppingCart table,
+#tradePage table,
+#loginContent table,
+#logoutContent table ,
+#registerContent table,
+#newBooks table{
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#shoppingCart td,
+#tradePage td,
+#loginContent td,
+#logoutContent td ,
+#registerContent td,
+#newBooks td {
+  color: #666;
+  font-size: 15px;
+  text-align:;
+}

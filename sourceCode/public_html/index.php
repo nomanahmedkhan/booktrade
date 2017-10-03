@@ -43,49 +43,51 @@ error_reporting(E_ALL);
 <body <?php if($visited === FALSE):?> onload=' location.href="#home" '<?php endif; ?>>
   <?php $_SESSION['visited'] = TRUE; ?>
   <!--Fixed Top Bar-->
-  <div id="topBar" class="topBar">
+  <div id="topBarTitle" class="topBarTitle">
     <a id="title" active="active" href="test.php">Book.trade</a>
+  </div>
+
+    <div id="topBarMenu" class="topBarMenu">
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#libraryContent" >Library</a></li>
+      <li><p><a href="#home">HOME</a></p></li>
+      <li><p><a href="#libraryContent" >LIBRARY</a></p></li>
       <?php if(isset($_SESSION["userLoggedin"])):?>
 
 
-        <li><a>Books</a>
+        <li><p><a>BOOKS</a></p>
 
           <ul>
-            <li><a href="#userBooks">Book List</a></li>
-            <li><a href="#newBooks">New Books</a></li>
+            <li><p><a href="#userBooks">BOOK LIST</a></p></li>
+            <li><p><a href="#newBooks">NEW BOOKS</a></p></li>
           </ul>
 
         </li>
-        <li><a>User</a>
+        <li><p><a>USER</a></p>
 
           <ul>
-            <li><a href="#logoutContent">Logout</a></li>
+            <li><p><a href="#logoutContent">LOG OUT</a></p></li>
             <?php if(isset($_SESSION["username"])):?>
               <?php if($_SESSION["username"] === "noman"):?>
-                <li><a href ="#adminPage">Admin Tool</a></li>
+                <li><p><a href ="#adminPage">ADMIN TOOL</a></p></li>
               <?php endif; ?>
             <?php endif; ?>
           </ul>
 
         </li>
-        <li><a href="#inbox">Inbox</a></li>
-        <li><a href="#shoppingCart">Cart</a></li>
+        <li><p><a href="#inbox">INBOX</a></p></li>
+        <li><p><a href="#shoppingCart">CART</a></p></li>
       <?php else:?>
-        <li><a>Account</a>
+        <li><p><a>ACCOUNT</a></p>
 
           <ul>
-            <li><a href="#registerContent">Register</a></li>
-            <li><a href="#loginContent">Login</a></li>
+            <li><p><a href="#registerContent">REGISTER</a></p></li>
+            <li><p><a href="#loginContent">LOGIN</a></p></li>
           </ul>
 
         </li>
-        <li><a href="#shoppingCart">Cart</a></li>
+        <li><p><a href="#shoppingCart">CART</a></p></li>
       <?php endif;?>
     </ul>
-
   </div>
 
   <!--Scrollable Page-->
@@ -119,7 +121,6 @@ error_reporting(E_ALL);
 
       <!--Library Content-->
       <div id="libraryContent" class="libraryContent">
-
         <!--SideBar-->
         <div id="sideBar" class="sideBar">
 
@@ -147,8 +148,8 @@ error_reporting(E_ALL);
             </form>
           </p>
           </div>
-
         </div>
+
         <div id="libraryTableWrapper">
         <div id="libraryTable">
 
