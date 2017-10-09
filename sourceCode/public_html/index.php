@@ -124,8 +124,29 @@ error_reporting(E_ALL);
         <!--SideBar-->
         <div id="sideBar" class="sideBar">
 
+
+
           <!--Library filter-->
+
+
           <div id="sidebarWrapper" class="sideBarWrapper">
+            <!-- Search Library -->
+            <form id="search" method = "post">
+              <table>
+                <tr>
+
+
+            <td>Search By Title: </td>
+            <td align="left"><input id="bookTitle"type="text" name="bookTitle" /></td>
+            <td><button type="submit" name="searchTitle" > Search</button></td>
+            <td>Search By Author: </td>
+            <td align="left"><input id="bookAuthor"type="text" name="bookAuthor" /></td>
+            <td><button type="submit" name="searchAuthor" > Search</button></td>
+            <td> Search By ISBN: </td>
+            <td align="left"><input id="bookISBN"type="text" name="bookISBN" /></td>
+            <td><button type="submit" name="searchISBN" > Search</button></td>
+            
+          </tr>
             <p id="sidebarHandle">Books Filter</p>
             <p>
             <form id="filter" method = "post">
