@@ -120,7 +120,7 @@
     connectToDatabase();
     try{
       global $connectionToDatabase;
-      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList");
+      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, dateTimeAdded FROM bookList");
       $libraryQuery->execute();
       return $library = $libraryQuery->fetchall();
       abortDatabaseConnection();

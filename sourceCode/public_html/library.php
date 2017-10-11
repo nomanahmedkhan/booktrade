@@ -14,7 +14,7 @@ try{
 if(isset($_POST['searchTitle'])){
   $bookTitle = $_POST['bookTitle'];
   connectToDatabase();
-  $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList WHERE bookName = '$bookTitle'  ");
+  $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, dateTimeAdded FROM bookList WHERE bookName = '$bookTitle'  ");
   $libraryQuery->execute();
   $library = $libraryQuery->fetchall();
   $_SESSION['library'][] = array();
@@ -27,7 +27,7 @@ if(isset($_POST['searchTitle'])){
 if(isset($_POST['searchAuthor'])){
   $bookAuthor = $_POST['bookAuthor'];
   connectToDatabase();
-  $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList WHERE userName = '$bookAuthor'  ");
+  $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, dateTimeAdded FROM bookList WHERE bookAuthor = '$bookAuthor'  ");
   $libraryQuery->execute();
   $library = $libraryQuery->fetchall();
   $_SESSION['library'][] = array();
@@ -36,12 +36,11 @@ if(isset($_POST['searchAuthor'])){
   $_SESSION['filterPosted'] = TRUE;
 }
 
-//This can be commented out once the iSBN is implemented in database 
-/*
+
 if(isset($_POST['searchISBN'])){
   $bookISBN = $_POST['bookISBN'];
   connectToDatabase();
-  $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList WHERE bookISBN = '$bookISBN'  ");
+  $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, dateTimeAdded FROM bookList WHERE bookISBN = '$bookISBN'  ");
   $libraryQuery->execute();
   $library = $libraryQuery->fetchall();
   $_SESSION['library'][] = array();
@@ -49,10 +48,10 @@ if(isset($_POST['searchISBN'])){
   abortDatabaseConnection();
   $_SESSION['filterPosted'] = TRUE;
 }
-*/
+
   if(isset($_POST['filterLibraryBuy'])){
     connectToDatabase();
-    $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList WHERE bookPrice > 0 ");
+    $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, dateTimeAdded FROM bookList WHERE bookPrice > 0 ");
     $libraryQuery->execute();
     $library = $libraryQuery->fetchall();
     $_SESSION['library'][] = array();
@@ -63,7 +62,7 @@ if(isset($_POST['searchISBN'])){
 
   if(isset($_POST['filterLibraryTrade'])){
     connectToDatabase();
-    $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, dateTimeAdded FROM bookList WHERE tradeCondition != 'none' ");
+    $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, dateTimeAdded FROM bookList WHERE tradeCondition != 'none' ");
     $libraryQuery->execute();
     $library = $libraryQuery->fetchall();
     $_SESSION['library'][] = array();

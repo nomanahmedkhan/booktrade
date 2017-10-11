@@ -23,7 +23,16 @@ if(isset($_POST['addBook'])){
   }else{
     $addBookTradeCondition = $_POST['bookTradeCondition'];
   }
-
+  if($_POST['bookISBN'] === ''){
+    $addBookAuthor = "none";
+  }else{
+    $addBookISBN = $_POST['bookISBN'];
+  }
+  if($_POST['bookAuthor'] === ''){
+    $addBookAuthor = "none";
+  }else{
+    $addBookAuthor = $_POST['bookAuthor'];
+  }
   $addBookUserName = $_SESSION["username"];
 
   if(isset($_POST['uploadNewBookImage'])){
@@ -53,13 +62,15 @@ if(isset($_POST['addBook'])){
     }
   }
 
-  if($newBookImageUploaded === TRUE){
+
   try{
-    $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, bookPrice, tradeCondition) VALUES (:userName, :bookName, :bookPrice, :tradeCondition)");
+    $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor) VALUES (:userName, :bookName, :bookPrice, :tradeCondition, :bookISBN, :bookAuthor)");
     $addBookQuery->bindParam(':userName', $addBookUserName);
     $addBookQuery->bindParam(':bookName', $addBookName);
     $addBookQuery->bindParam(':bookPrice', $addBookPrice);
     $addBookQuery->bindParam(':tradeCondition', $addBookTradeCondition);
+    $addBookQuery->bindParam(':bookISBN', $addBookISBN);
+    $addBookQuery->bindParam(':bookAuthor', $addBookAuthor);
     $addBookQuery->execute();
     abortDatabaseConnection();
 
@@ -76,6 +87,6 @@ if(isset($_POST['addBook'])){
   }catch(PDOException $e){
     echo $e;
   }
-}
+
 }
 ?>

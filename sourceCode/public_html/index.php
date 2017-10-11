@@ -145,7 +145,7 @@ error_reporting(E_ALL);
             <td> Search By ISBN: </td>
             <td align="left"><input id="bookISBN"type="text" name="bookISBN" /></td>
             <td><button type="submit" name="searchISBN" > Search</button></td>
-            
+
           </tr>
             <p id="sidebarHandle">Books Filter</p>
             <p>
@@ -195,7 +195,9 @@ error_reporting(E_ALL);
                   <td >
                     <p id="libraryBookName"><?php echo $library1['bookName'];?></p>
                     <p id="libraryBookPrice">$<?php echo $library1['bookPrice'];?></p>
-                    <p id="libraryBookUser">by <?php echo $library1['userName'];?></p>
+                    <p id="libraryBookAuthor">Author: <?php echo $library1['bookAuthor'];?></p>
+                    <p id="libraryBookISBN">ISBN: <?php echo $library1['bookISBN'];?></p>
+                    <p id="libraryBookUser">added by <?php echo $library1['userName'];?></p>
                   </td>
                   <td ><p id="libraryBookTradeCondition">Description:</br><?php echo $library1['tradeCondition'];?></p></td>
                 </tr>
@@ -265,6 +267,14 @@ error_reporting(E_ALL);
                   <tr>
                     <td align="right">Book Trade Condition:</td>
                     <td align="left"><input id="bookTradeCondition" type="text"  name="bookTradeCondition" /></td>
+                  </tr>
+                  <tr>
+                    <td align="right">Book Author:</td>
+                    <td align="left"><input id="bookAuthor" type="text"  name="bookAuthor" /></td>
+                  </tr>
+                  <tr>
+                    <td align="right">Book ISBN:</td>
+                    <td align="left"><input id="bookISBN" type="text"  name="bookISBN" /></td>
                   </tr>
 
                   <tr>
