@@ -525,6 +525,14 @@ error_reporting(E_ALL);
                     <!--Welcome Page-->
                     <div id="home" class="home">
                       <p id="welcomeLine">Welcome <?php if(isset($_SESSION["username"])){echo $_SESSION["username"];}?></p><br>
+
+                      <p>Welcome to Booktrade, a platform that allows book lovers around Australia
+                        to share their experiences with other readers through trading and sharing books. Booktrade
+                        is an online community that brings people together to share what they love. We offer a wide range of books
+                        to select from. Whether you are looking for science fiction, drama, satire, classics, romance,
+                        mystery, horror or more, you've come to the right place! You can find the top rated books for free. </P>
+                      
+
                       <?php usort($library, 'lastAddedBookSort'); ?>
                       <p style="color:#666;text-align:center;">New and Hot!</p>
                       <div id="lastAddedBookSlideshow">

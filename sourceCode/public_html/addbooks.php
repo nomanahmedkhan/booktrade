@@ -64,13 +64,14 @@ if(isset($_POST['addBook'])){
 
 
   try{
-    $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor) VALUES (:userName, :bookName, :bookPrice, :tradeCondition, :bookISBN, :bookAuthor)");
+    $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, bookImageID) VALUES (:userName, :bookName, :bookPrice, :tradeCondition, :bookISBN, :bookAuthor, :bookImageID)");
     $addBookQuery->bindParam(':userName', $addBookUserName);
     $addBookQuery->bindParam(':bookName', $addBookName);
     $addBookQuery->bindParam(':bookPrice', $addBookPrice);
     $addBookQuery->bindParam(':tradeCondition', $addBookTradeCondition);
     $addBookQuery->bindParam(':bookISBN', $addBookISBN);
     $addBookQuery->bindParam(':bookAuthor', $addBookAuthor);
+    $addBookQuery->bindParam(':bookImageID', $file_name);
     $addBookQuery->execute();
     abortDatabaseConnection();
 
