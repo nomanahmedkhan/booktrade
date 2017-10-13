@@ -12,11 +12,19 @@ if(isset($_POST['addBook'])){
     $addBookName = stripslashes($_POST['newBookName']);
   }
 
+  if($_POST['bookDescription'] === ''){
+    $addBookName = "none";
+  }else{
+    $bookDescription = stripslashes($_POST['bookDescription']);
+  }
+
+  /*
   if($_POST['newBookPrice'] === ''){
     $addBookPrice = 0;
   }else{
     $addBookPrice = $_POST['newBookPrice'];
     }
+    */
 
   if($_POST['bookTradeCondition'] === ''){
     $addBookTradeCondition = "none";
@@ -35,43 +43,47 @@ if(isset($_POST['addBook'])){
   }
   $addBookUserName = $_SESSION["username"];
 
-  if(isset($_POST['uploadNewBookImage'])){
-    $uploadErrors = array();
+    $errors = array();
     $file_name = $_FILES['newBookImage']['name'];
     $file_size =$_FILES['newBookImage']['size'];
     $file_tmp =$_FILES['newBookImage']['tmp_name'];
     $file_type=$_FILES['newBookImage']['type'];
-    $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+    $file_ext=strtolower(end(explode('.',$_FILES['newBookImage']['name'])));
 
     $expensions= array("jpeg","jpg","png");
 
     if(in_array($file_ext,$expensions)=== false){
-      $uploadErrors[]="File not allowed, please choose a JPEG or PNG file.";
+      $uploadErrors[]="filetype";
     }
 
     if($file_size > 2097152){
-      $errors[]='File size limit is 2 MB';
+      $errors[]='filesize';
     }
 
-    if(empty($errors) === TRUE AND !file_exists("book_images/".$file_name)){
+    if(file_exists("book_images/".$file_name)){
+      $errors[]='filename';
+    }
+
+    if(empty($errors) === TRUE){
+      echo "uploading!!!";
       move_uploaded_file($file_tmp,"book_images/".$file_name);
       $newBookImageUploaded=TRUE;
     }else{
       $newBookImageUploaded=FALSE;
       print_r($errors);
     }
-  }
 
 
   try{
-    $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, bookImageID) VALUES (:userName, :bookName, :bookPrice, :tradeCondition, :bookISBN, :bookAuthor, :bookImageID)");
+    $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, tradeCondition, bookISBN, bookAuthor, bookImageID, bookDescription, bookCondition) VALUES (:userName, :bookName, :tradeCondition, :bookISBN, :bookAuthor, :bookImageID, :bookDescription, :bookCondition)");
     $addBookQuery->bindParam(':userName', $addBookUserName);
     $addBookQuery->bindParam(':bookName', $addBookName);
-    $addBookQuery->bindParam(':bookPrice', $addBookPrice);
     $addBookQuery->bindParam(':tradeCondition', $addBookTradeCondition);
     $addBookQuery->bindParam(':bookISBN', $addBookISBN);
     $addBookQuery->bindParam(':bookAuthor', $addBookAuthor);
     $addBookQuery->bindParam(':bookImageID', $file_name);
+    $addBookQuery->bindParam(':bookDescription', $bookDescription);
+    $addBookQuery->bindParam(':bookCondition', $_POST['bookCondition']);
     $addBookQuery->execute();
     abortDatabaseConnection();
 

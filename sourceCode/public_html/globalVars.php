@@ -27,7 +27,6 @@ $userMustLogIn = NULL;
 
 //Edit userPage variables
 $oldBookName = array();
-$oldBookPrice = array();
 $oldBookTradeCondition = array();
 
 
@@ -38,4 +37,8 @@ $isBookAlreadyInCart = FALSE;
 $lastAddedBookCount = 0;
 $recommendedBookCount = 0;
 $lastAddedBookCount2 = 0;
+
+//clickedBook
+SESSION_START();
+$_SESSION['clickedBook'] = NULL;
  ?>

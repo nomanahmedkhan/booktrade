@@ -10,7 +10,7 @@ $tradeCondition = $bookList[$delBookTemp][3];
 
 connectToDatabase();
 
-$deleteQuery = "DELETE FROM bookList WHERE userName = '$userName' and bookName = '$bookName' and bookPrice='$bookPrice' and tradeCondition='$tradeCondition'";
+$deleteQuery = "DELETE FROM bookList WHERE userName = '$userName' and bookName = '$bookName'  and tradeCondition='$tradeCondition'";
 $connectionToDatabase -> exec($deleteQuery);
 abortDatabaseConnection();
 header("Location: #userBooks");

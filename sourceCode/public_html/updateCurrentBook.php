@@ -1,16 +1,6 @@
 <?php
 SESSION_START();
 if(isset($_POST['updateBook'])){
-  echo "yes!";
-  $temp2 = $_POST['updateBook'];
-  $userNameUpdate = $bookList[$temp2][0];
-  $bookNameUpdate = $bookList[$temp2][1];
-  $bookPriceUpdate = $bookList[$temp2][2];
-  $tradeConditionUpdate = $bookList[$temp2][3];
-  $newBookName = $_POST['editedBookName'];
-  $newBookPrice = $_POST['editedBookPrice'];
-  $newBookTradeCondition = $_POST['editedBookTradeCondition'];
-
   try{
     if($newBookName !== NULL and $newBookPrice !== NULL and $newBookTradeCondition !== NULL){
       connectToDatabase();

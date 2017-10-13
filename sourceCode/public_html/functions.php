@@ -20,6 +20,10 @@
     header('Location: #home');
   }
 
+  function goToBookPage(){
+    header('Location: #bookPage');
+  }
+
   function doesUserNameExists($userName){
     connectToDatabase();
     global $connectionToDatabase;
@@ -120,7 +124,7 @@
     connectToDatabase();
     try{
       global $connectionToDatabase;
-      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, bookPrice, tradeCondition, bookISBN, bookAuthor, bookImageID, dateTimeAdded FROM bookList");
+      $libraryQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, tradeCondition, bookISBN, bookAuthor, bookImageID, dateTimeAdded, bookDescription, bookImageID FROM bookList");
       $libraryQuery->execute();
       return $library = $libraryQuery->fetchall();
       abortDatabaseConnection();

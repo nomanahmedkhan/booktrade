@@ -1,4 +1,4 @@
-<?php
+<?php /*
 $_SESSION['cartPriceCount'];
 $cartCount = 0;
 $_SESSION['oldCartTemp'];
@@ -39,5 +39,5 @@ if(isset($_POST['removeCartBook'])){
   $_SESSION['cartPriceCount'] = $_SESSION['cartPriceCount'] - $_SESSION['cartArray'][$_POST['removeCartBook']]['cartBookPrice'];
 
 }
-
+*/
 ?>
