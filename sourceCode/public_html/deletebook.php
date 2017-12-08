@@ -1,19 +1,24 @@
 <?php
 SESSION_START();
-if(isset($_POST['delete'])){
 
-$delBookTemp = $_POST['delete'];
-$userName = $bookList[$delBookTemp][0];
-$bookName = $bookList[$delBookTemp][1];
-$bookPrice = $bookList[$delBookTemp][2];
-$tradeCondition = $bookList[$delBookTemp][3];
+if(isset($_POST['deleteBook'])){
+  $delBookId = $_POST['deleteBook'];
+  $delBook[] = array();
+  $delBook = getBook($delBookId);
+  foreach($delBook as $book){
+    $path = "book_images/".$book['bookImageID'];
+    if(file_exists($path)){
+      unlink($path);
+    }
+  }
 
-connectToDatabase();
+  connectToDatabase();
+  $deleteQuery = $connectionToDatabase->prepare("DELETE FROM bookList WHERE bookId = :bookID");
+  $deleteQuery->bindParam(':bookID', $delBookId);
+  $deleteQuery->execute();
+  abortDatabaseConnection();
+  goToUserBooks();
 
-$deleteQuery = "DELETE FROM bookList WHERE userName = '$userName' and bookName = '$bookName'  and tradeCondition='$tradeCondition'";
-$connectionToDatabase -> exec($deleteQuery);
-abortDatabaseConnection();
-header("Location: #userBooks");
 }
 
- ?>
+?>

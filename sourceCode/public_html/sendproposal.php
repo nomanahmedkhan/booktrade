@@ -1,60 +1,40 @@
 <?php
 SESSION_START();
 
-if(isset($_POST["tradeButton"])){
+if(isset($_POST["sendProposal"])){
   if(isset($_SESSION['username'])){
+
     $userMustLogIn = FALSE;
+    $getBook = array();
+    $getBook = getBook($_POST['sendProposal']);
+
+    foreach($getBook as $book){
+      $toUsername = $book['userName'];
+      $fromUsername = $_SESSION['username'];
+      $message = $_POST["proposalMessage"];
+      $forBook = $book['bookName'];
+    }
+
+      try{
+        connectToDatabase();
+        $proposalQuery = $connectionToDatabase->prepare("INSERT INTO messages (toUsername, fromUsername, message, forBook) VALUES (:toUsername, :fromUserame, :message, :forBook)");
+        $proposalQuery->bindParam(':toUsername', $toUsername);
+        $proposalQuery->bindParam(':fromUserame', $fromUsername);
+        $proposalQuery->bindParam(':message', $message);
+        $proposalQuery->bindParam(':forBook', $forBook);
+        $proposalQuery->execute();
+        abortDatabaseConnection();
+
+
+        header('Location: #libraryContent');
+
+      }catch(PDOException $e){
+        echo $e;
+      }
+
   }else{
     $userMustLogIn = TRUE;
   }
-}
-
-if(isset($_POST["proposalButton"])){
-
-  $temp = $_POST['proposalButton'];
-  $toUsername = $library[$temp][0];
-  $fromUsername = $_SESSION['username'];
-  $message = $_POST["proposalMessage"];
-
-
-  connectToDatabase();
-  try{
-    $addMessageQuery =
-    "INSERT INTO messages (toUsername, fromUsername, message)
-    VALUES ('$toUsername','$fromUsername','$message')";
-    $connectionToDatabase->exec($addMessageQuery);
-    abortDatabaseConnection();
-    header('Location: #libraryContent');
-
-  }catch(PDOException $e){
-    echo "something wrong";
-  }
-}
-
-
-
-if(isset($_POST["sendReply"])){
-  $temp = $_POST['sendReply'];
-  $toUsername = $_POST['replyToUsername'];
-  $fromUsername = $_SESSION['username'];
-  $message = $_POST['replyMessage'];
-
-
-    connectToDatabase();
-    try{
-      $addMessageQuery =
-      "INSERT INTO messages (toUsername, fromUsername, message)
-      VALUES ('$toUsername','$fromUsername','$message')";
-      $connectionToDatabase->exec($addMessageQuery);
-
-      abortDatabaseConnection();
-      header('Location: #inbox');
-
-    }catch(PDOException $e){
-      echo "something wrong";
-
-    }
-
 }
 
  ?>

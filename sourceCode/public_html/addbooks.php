@@ -50,7 +50,7 @@ if(isset($_POST['addBook'])){
     $file_type=$_FILES['newBookImage']['type'];
     $file_ext=strtolower(end(explode('.',$_FILES['newBookImage']['name'])));
 
-    $expensions= array("jpeg","jpg","png");
+    $expensions= array("jpeg","jpg","png", "JPEG", "JPG", "PNG");
 
     if(in_array($file_ext,$expensions)=== false){
       $uploadErrors[]="filetype";
@@ -60,21 +60,14 @@ if(isset($_POST['addBook'])){
       $errors[]='filesize';
     }
 
-    if(file_exists("book_images/".$file_name)){
-      $errors[]='filename';
+    while(file_exists("book_images/".$file_name)){
+      $file_name = rand(1,100).$file_name;
     }
 
-    if(empty($errors) === TRUE){
-      echo "uploading!!!";
-      move_uploaded_file($file_tmp,"book_images/".$file_name);
-      $newBookImageUploaded=TRUE;
-    }else{
-      $newBookImageUploaded=FALSE;
-      print_r($errors);
-    }
 
 
   try{
+    connectToDatabase();
     $addBookQuery = $connectionToDatabase->prepare("INSERT INTO bookList (userName, bookName, tradeCondition, bookISBN, bookAuthor, bookImageID, bookDescription, bookCondition) VALUES (:userName, :bookName, :tradeCondition, :bookISBN, :bookAuthor, :bookImageID, :bookDescription, :bookCondition)");
     $addBookQuery->bindParam(':userName', $addBookUserName);
     $addBookQuery->bindParam(':bookName', $addBookName);
@@ -87,6 +80,14 @@ if(isset($_POST['addBook'])){
     $addBookQuery->execute();
     abortDatabaseConnection();
 
+    if(empty($errors) === TRUE){
+      move_uploaded_file($file_tmp,"book_images/".$file_name);
+      $newBookImageUploaded=TRUE;
+    }else{
+      $newBookImageUploaded=FALSE;
+      print_r($errors);
+    }
+    
     connectToDatabase();
     $addBookTimeQuery = "UPDATE `booktrade`.`bookList`  SET `dateTimeAdded`=?  WHERE `userName`=? AND `bookName` =?";
     $stmt = $connectionToDatabase->prepare($addBookTimeQuery);

@@ -1,113 +1,107 @@
 *{
   margin: 0;
-  padding: 0;
   text-decoration: none;
   font-family: sans-serif;
-  color: gray;
-  cursor: default;
-}
-
-button{
-  height: 20px;
-  width: 90px;
-  margin: 5px;
-  background-color: #eee;
-  color: gray;
+  color: #333;
+  font-size: 15px;
   border: 0;
-  border-radius: 5px;
-  box-shadow: 1px 1px 2px gray;
+  box-shadow: 0;
+  border-radius: 0;
 }
 
-button:hover {
-  background-color: white;
-  color: black;
+button {
+  color: white;
+  border-radius: 2px;
+  background-color: rgba(0,0,0,0);
+  margin: 5px auto;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+button:hover{
+  color: red;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+#content #home button{
+  height: 40px;
+  border-radius: 5px;
+  min-width: 100px;
+  background-color: black;
+  color: white;
+}
+
+
+input{
+  background-color: rgba(200,200,200,0.2);
+  color: white;
 }
 
 body{
-  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   overflow: hidden;
 }
 
-#topBarTitle {
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  width: 20%;
-  background-color: #555;
-  text-align: center;
-  box-shadow: 2px 2px 2px black;
+
+#topBarMenu{
+  max-height: 100px;
+  box-shadow:  0px 3px 5px black;
+}
+
+#topBarMenu, #topBarMenu *{
+  background-color: #111;
+  position: relative;
+  padding: 0;
+  color: lightgray;
+  z-index: 3;
 }
 
 #title{
-  color: white;
   font-size: 25px;
   line-height: 40px;
+  font-weight: 400;
+  color: white;
 }
 
-#topBarMenu {
-  position: absolute;
-  right: 0;
-  z-index: 2;
-  width: 80%;
-  background-color: #222;
-  text-align: right;
-
-  box-shadow: 2px 2px 2px black;
-}
-
-#topBarMenu > ul {
+#topBarMenu  ul {
+  width: 100%;
   display: inline;
   list-style: none;
   z-index: 3;
 }
 
-#topBarMenu > ul > li {
-  color: white;
-  text-align: left;
+#topBarMenu ul li {
+  text-align: center;
   display: inline-block;
-  font-size: 25px;
-  line-height: 30px;
+  min-width: 100px;
+  line-height: 40px;
 }
 
-#topBarMenu ul li a{
-  padding:0 10px;
-}
-
-#topBarMenu ul li > ul {
+#topBarMenu ul li ul {
   position: absolute;
   display: block;
-  height: 0;
-  opacity: 0;
+  max-height: 0;
   overflow: hidden;
-  background-color: #222;
+  transition: 1s max-height;
 }
 
-#topBarMenu ul li > ul li {
-  line-height: 30px;
-  display: block;
+#topBarMenu li li p a{
+  transition: 0.5s background-color, 0.5s color;
 }
 
-#topBarMenu a{
-  color: white;
-}
-
-#topBarMenu li > p{
-  margin: 5px;
-}
-
-#topBarMenu li > p:hover{
-  background-color: #ff9900;
-  border-radius: 5px;
-}
-
-#topBarMenu li > p:hover a{
-  color: black;
+#topBarMenu li:hover li:hover p a{
+  color: red;
+  transition: 0.5s background-color, 0.5s color;
 }
 
 #topBarMenu li:hover > ul {
-  height: auto;
-  opacity: 1;
+  left: 0;
+  max-height: 100px;
   overflow: visible;
+  border-radius: 5px;
 }
 
 
@@ -117,187 +111,281 @@ body{
   width: 100%;
 }
 
-#sidebarWrapper{
+#toolbarWrapper{
+  position: relative;
+  height: 40px;
+  font-weight: bold;
   text-align: center;
   overflow: hidden;
+  box-shadow: 0px 0px 5px black;
+
   background: repeating-linear-gradient(
-    -55deg,
-    #eee,
-    #eee 10px,
-    #ddd 10px,
-    #ddd 30px
-  );
+  -55deg,
+  #222,
+  #222 5px,
+  #333 5px,
+  #333 10px
+);
+
+}
+#toolbarWrapper td{
+  color: white;
 }
 
-#sidebarWrapper table{
-  margin:auto;
+#toolbarWrapper button{
+  height: 20px;
+  border-radius: 2px;
+  color: lightgray;
+  background-color: rgba(255,255,255, 0);
+  transition: 0.5s background-color, 0.5s color;
 }
 
-#sidebarHandle {
+#toolbarWrapper input{
   font-weight: bold;
+  height: 20px;
+  border-radius: 5px;
+  color: #333;
+  background-color: rgba(255,255,255, 0.5);
+  box-shadow: 0px 0px 2px black;
 }
 
-#content {
+#toolbarWrapper button:hover{
+  color: red;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+#toolbarWrapper table{
+  height: 40px;
+  margin: auto;
+}
+
+#content{
   position: absolute;
-  overflow: auto;
-  display: block;
   top: 40px;
-  padding: 10px;
   bottom: 0;
-  left: 0;
   right: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: #333;
 }
 
 #content > div{
-  position: relative;
   height: 0;
   width: 0;
   opacity: 0;
+  overflow: hidden;
 }
 
 #content > div:target{
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
   opacity: 1;
+  overflow: auto;
+}
+
+#content > div:target:not(#home){
+  padding-top: 2%;
+}
+
+.homediv{
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  background-size: cover;
+  background-blend-mode: darken;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.homediv:nth-child(2n+2) p{
+  text-align: left;
+}
+
+.homediv p{
+  padding: 10% 15%;
+  font-size: 20px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+}
+
+#homedv1{
+  background-image: url(/data/images/homediv1.jpeg);
+  animation: 30s homediv1 infinite;
+}
+
+#homedv2{
+  background-color: rgba(0,0,0,0.8);
+  background-image: url(/data/images/homediv2.jpeg);
+  animation: 30s homediv2 infinite;
+}
+
+#homedv3{
+  background-image: url(/data/images/homediv3.jpeg);
+  animation: 30s homediv3 infinite;
+}
+
+#homedv4{
+  background-image: url(/data/images/homediv4.jpeg);
+  animation: 30s homediv4 infinite;
+}
+
+#homedv5{
+  background-image: url(/data/images/homediv5.jpeg);
+  animation: 30s homediv5 infinite;
 }
 
 div:target .titleLine {
   text-align: center;
-  color: #333;
-  font-size: 15px;
-  margin: 0 auto;
-}
-
-/*Home Page*/
-#welcomeLine{
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-#lastAddedBookSlideshow {
-  position: relative;
-  height: 200px;
-  overflow: hidden;
-  margin: 20px;
-  box-shadow: 1px 1px 1px gray;
-  background: repeating-linear-gradient(
-    -55deg,
-    #fff,
-    #fff 5px,
-    #eee 5px,
-    #eee 15px
-  );
-}
-
-.slide-wrapper{
-  height: 200px;
-  margin: 0;
-  padding: 0;
-  -webkit-animation: slide 10s ease infinite;
-  -webkit-animation-delay: 2s;
-  width: 200%;
-}
-
-.slide{
-  float: left;
-  height: 200px;
-  margin: 0;
-  padding: 0;
-  width: 10%;
-  display: inline-block;
-}
-
-.slide-content{
-  display: block;
-  text-align: center;
-  margin: 50px auto;
-}
-
-.slide:nth-child(n){
-  background-color: #fff;
-}
-.slide:nth-child(2n+1){
-  background-color: #eee;
-}
-
-@-webkit-keyframes slide {
-  10% {margin-left: -20%;}
-  20% {margin-left: -40%;}
-  30% {margin-left: -60%;}
-  40% {margin-left: -80%;}
-  50% {margin-left: -100%;}
-  60% {margin-left: -80%;}
-  70% {margin-left: -60%;}
-  80% {margin-left: -40%;}
-  90% {margin-left: -20%;}
-}
-
-/*Tables*/
-#libraryTable table,
-#adminPage table,
-#userBooks table,
-#inbox table {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  background-color: #eee;
-}
-
-#libraryTable td,
-#adminPage td,
-#userBooks td,
-#inbox td {
-  height: 150px;
-  font-size: 20px;
-}
-
-#libraryTable td:first-child,
-#adminPage td:first-child,
-#userBooks td:first-child,
-#inbox td:first-child {
-  text-align: center;
-}
-
-#libraryTable tr:nth-child(2n+1),
-#adminPage tr:nth-child(2n+1),
-#userBooks tr:nth-child(2n+2),
-#inbox tr:nth-child(2n+1)  {
-  background-color: white;
-}
-
-#adminPage table{
-  text-align: center;
-}
-
-#libraryTable input,
-#adminPage input,
-#userBooks input,
-#inbox input {
-  background-color: #333;
-  border: 1px solid gray;
-  color: gray;
-  border-radius: 1px;
-}
-
-#shoppingCart table,
-#tradePage table,
-#loginContent table,
-#logoutContent table ,
-#registerContent table,
-#newBooks table{
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#shoppingCart td,
-#tradePage td,
-#loginContent td,
-#logoutContent td ,
-#registerContent td,
-#newBooks td {
   color: #666;
+  font-weight: bold;
+  font-size: 25px;
+  margin: auto auto;
+}
+
+.warning{
+  color: Darkred;
+  font-weight: bold;
+  text-align: center;
+}
+
+.listTable{
+  width: 95%;
+  border-collapse: separate;
+  margin: auto;
+}
+
+.listTable th{
+  height: 70px;
   font-size: 15px;
-  text-align:;
+  color: gray;
+  border-bottom: 5px solid #444;
+}
+
+.listTable tbody tr td {
+  padding-left: 30px;
+  height: 50px;
+  border-bottom: 2px solid #444;
+}
+
+.listTable tbody tr td p, .listTable tbody tr td {
+  color: gray;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+.listTable tbody tr:hover td, .listTable tbody tr:hover td *:not(button) {
+  color: white;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+.listTable tbody tr:last-child td {
+  height: 70px;
+  border-bottom: 0;
+}
+
+.listTable button{
+  background-color: rgba(0,0,0,0);
+  color: lightgray;
+  font-weight: bold;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+.listTable button:hover{
+  background-color: #333;
+  color: red;
+  font-weight: bold;
+  transition: 0.5s background-color, 0.5s color;
+}
+
+.flexibleTable{
+  min-width: 40%;
+  margin: 2% auto;
+  min-height: 100px;
+  padding: 3% 1%;
+  background-color: #222;
+  box-shadow: 1px 1px 5px black;
+}
+
+#bookPage .flexibleTable td +td {
+  border-bottom: 1px solid #333;
+}
+
+#bookPage .flexibleTable tr:last-child td{
+  border-bottom: 0;
+}
+
+.flexibleTable td + td{
+  text-align: left;
+  margin:0;
+  padding: 0;
+}
+
+.flexibleTable *:not(button):not(input){
+  color: gray;
+}
+
+.flexibleTable input{
+  border-radius: 2px;
+  width: 60%;
+}
+
+#userBooks  tbody td:last-child,
+#libraryContent tbody td:last-child,
+#inbox tbody td:last-child{
+  text-align: center;
+  padding: 0;
+  margin: 0 10px;
+}
+
+
+@keyframes homediv1{
+  0%      {opacity:1;}
+  16.66%  {opacity: 1;}
+  33.33%  {opacity: 0;}
+  49.99%  {opacity: 0;}
+  66.65%  {opacity: 0;}
+  83.31%  {opacity: 1;}
+  100%  {opacity: 1;}
+}
+
+@keyframes homediv2{
+  0%      {opacity:0;}
+  16.66%  {opacity: 0;}
+  33.33%  {opacity: 1;}
+  49.99%  {opacity: 0;}
+  66.65%  {opacity: 0;}
+  83.31%  {opacity: 0;}
+  100%  {opacity: 0;}
+}
+
+@keyframes homediv3{
+  0%      {opacity:0;}
+  16.66%  {opacity: 0;}
+  33.33%  {opacity: 0;}
+  49.99%  {opacity: 1;}
+  66.65%  {opacity: 0;}
+  83.31%  {opacity: 0;}
+  100%  {opacity: 0;}
+}
+
+@keyframes homediv4{
+  0%      {opacity:0;}
+  16.66%  {opacity: 0;}
+  33.33%  {opacity: 0;}
+  49.99%  {opacity: 0;}
+  66.65%  {opacity: 1;}
+  83.31%  {opacity: 0;}
+  100%  {opacity: 0;}
+}
+
+@keyframes homediv5{
+  0%      {opacity:0;}
+  16.66%  {opacity: 0;}
+  33.33%  {opacity: 0;}
+  49.99%  {opacity: 0;}
+  66.65%  {opacity: 0;}
+  83.31%  {opacity: 1;}
+  100%  {opacity: 0;}
 }

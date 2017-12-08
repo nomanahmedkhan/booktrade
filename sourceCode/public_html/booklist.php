@@ -7,13 +7,13 @@ connectToDatabase();
 try{
   $temp = $_SESSION["username"];
 
-  if($_SESSION['username'] === "noman"){
-    $bookListQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, tradeCondition, bookISBN, bookAuthor, bookImageID FROM bookList");
+  if($_SESSION['username'] === "Admin"){
+    $bookListQuery = $connectionToDatabase->prepare ("SELECT * FROM bookList");
     $bookListQuery->execute();
     $bookList = $bookListQuery->fetchall();
   }
   else{
-    $bookListQuery = $connectionToDatabase->prepare ("SELECT userName, bookName, tradeCondition, bookISBN, bookAuthor, bookImageID FROM bookList WHERE userName= '$temp' ");
+    $bookListQuery = $connectionToDatabase->prepare ("SELECT * FROM bookList WHERE userName= '$temp' ");
     $bookListQuery->execute();
     $bookList = $bookListQuery->fetchall();
   }

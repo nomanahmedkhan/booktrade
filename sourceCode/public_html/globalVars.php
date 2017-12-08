@@ -41,4 +41,10 @@ $lastAddedBookCount2 = 0;
 //clickedBook
 SESSION_START();
 $_SESSION['clickedBook'] = NULL;
+
+//PDO
+global $connectionToDatabase;
+
+//inbox
+global $messageCount;
  ?>
